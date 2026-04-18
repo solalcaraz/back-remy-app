@@ -5,11 +5,16 @@ spring:
   application:
     name: back-remy-app
   datasource:
-    url: jdbc:postgresql://localhost:5432/db-remy-app
+    url: jdbc:postgresql://localhost:5434/remy-app
     username: postgres
     password: postgres
+    driver-class-name: org.postgresql.Driver
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
