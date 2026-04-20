@@ -1,4 +1,5 @@
 package linguini.company.backremyapp.domain
+import com.fasterxml.jackson.annotation.JsonValue
 import jakarta.persistence.*
 import java.util.UUID
 
@@ -38,6 +39,7 @@ class Usuario(
     var perfilEconomico: PerfilEconomico = PerfilEconomico.INTERMEDIO
 
     @OneToMany(
+        fetch = FetchType.LAZY,
         mappedBy = "usuario",
         cascade = [CascadeType.ALL],
         orphanRemoval = true
@@ -52,8 +54,11 @@ class Usuario(
         guardarPreferencia(ingrediente, TipoPreferenciaIngrediente.EVITAR)
     }
 
-    fun quitarPreferenciaDeIngrediente(ingredienteId: Long) {
-        preferenciasIngredientes.removeIf { it.ingrediente.id == ingredienteId }
+    fun eliminarPreferenciasQueNoEstanEn(ingredientesIds: Set<Long>) {
+        preferenciasIngredientes.removeIf { preferencia ->
+            val ingredienteId = preferencia.ingrediente.id
+            ingredienteId !in ingredientesIds
+        }
     }
 
     fun ingredientesComunes(): Set<Ingrediente> {
@@ -68,12 +73,6 @@ class Usuario(
             .filter { it.tipo == TipoPreferenciaIngrediente.EVITAR }
             .map { it.ingrediente }
             .toSet()
-    }
-
-    /* A chequear este method */
-    fun actualizarNombre(nuevoNombre: String) {
-        require(nuevoNombre.isNotBlank()) { "El nombre no puede estar vacío" }
-        nombre = nuevoNombre.trim()
     }
 
     private fun guardarPreferencia(
@@ -99,30 +98,59 @@ class Usuario(
             )
         )
     }
+
+    fun cambiarTipoDieta(label: String){
+        tipoDieta = TipoDieta.entries.find { it.label == label }
+            ?: throw IllegalArgumentException("Tipo de dieta inválido: $label")
+    }
+    fun cambiarObjetivo(label: String){
+        objetivo = ObjetivoUsuario.entries.find { it.label == label }
+            ?: throw IllegalArgumentException("Tipo de objetivo inválido: $label")
+    }
+    fun cambiarNivelCocina(label: String){
+        nivelCocina = NivelCocina.entries.find { it.label == label }
+            ?: throw IllegalArgumentException("Tipo de nivel de cocina inválido: $label")
+    }
+    fun cambiarPerfilEconomico(label: String){
+        perfilEconomico = PerfilEconomico.entries.find { it.label == label }
+            ?: throw IllegalArgumentException("Tipo de perfil económico inválido: $label")
+    }
 }
 
-enum class TipoDieta {
-    OMNIVORO,
-    VEGETARIANO,
-    VEGANO,
-    CELIACO
+enum class TipoDieta(val label: String) {
+    OMNIVORO("Omnívoro"),
+    VEGETARIANO("Vegetariano"),
+    VEGANO("Vegano"),
+    CELIACO("Celíaco");
+
+    @JsonValue
+    fun toJson() = label
 }
 
-enum class ObjetivoUsuario {
-    INDIFERENTE,
-    COMER_SALUDABLE,
-    BAJAR_PESO,
-    GANAR_MASA_MUSCULAR
+enum class ObjetivoUsuario(val label: String) {
+    INDIFERENTE("Indiferente"),
+    COMER_SALUDABLE("Comer más saludable"),
+    BAJAR_PESO("Bajar de peso"),
+    GANAR_MASA_MUSCULAR("Ganar masa muscular");
+
+    @JsonValue
+    fun toJson() = label
 }
 
-enum class NivelCocina {
-    BASICO,
-    INTERMEDIO,
-    AVANZADO
+enum class NivelCocina(val label: String) {
+    BASICO("Básico"),
+    INTERMEDIO("Intermedio"),
+    AVANZADO("Avanzado");
+
+    @JsonValue
+    fun toJson() = label
 }
 
-enum class PerfilEconomico {
-    BAJO_PRESUPUESTO,
-    INTERMEDIO,
-    FLEXIBLE
+enum class PerfilEconomico(val label: String) {
+    BAJO_PRESUPUESTO("Bajo presupuesto"),
+    INTERMEDIO("Intermedio"),
+    FLEXIBLE("Flexible");
+
+    @JsonValue
+    fun toJson() = label
 }
