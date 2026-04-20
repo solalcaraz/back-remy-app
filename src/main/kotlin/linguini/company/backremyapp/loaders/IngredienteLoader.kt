@@ -10,11 +10,11 @@ import org.springframework.stereotype.Component
 @Order(1)
 class IngredienteLoader(private val ingredienteRepository: IngredienteRepository) : CommandLineRunner {
     override fun run(vararg args: String) {
-        ingredienteRepository.save(Ingrediente(nombre = "Cebolla"))
-        ingredienteRepository.save(Ingrediente(nombre = "Queso"))
-        ingredienteRepository.save(Ingrediente(nombre = "Morrón"))
-        ingredienteRepository.save(Ingrediente(nombre = "Ajo"))
-        ingredienteRepository.save(Ingrediente(nombre = "Pimienta"))
-        ingredienteRepository.save(Ingrediente(nombre = "Azúcar"))
+        ingredienteRepository.save(Ingrediente(nombre = "cebolla"))
+        ingredienteRepository.save(Ingrediente(nombre = "queso"))
+        ingredienteRepository.save(Ingrediente(nombre = "morrón"))
+        ingredienteRepository.save(Ingrediente(nombre = "ajo"))
+        ingredienteRepository.save(Ingrediente(nombre = "pimienta"))
+        ingredienteRepository.save(Ingrediente(nombre = "azúcar"))
     }
 }
