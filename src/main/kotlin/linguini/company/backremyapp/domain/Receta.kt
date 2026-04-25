@@ -30,7 +30,10 @@ class Receta(
     var pasos: MutableList<Paso> = mutableListOf(),
 
     @ElementCollection
-    var tags: MutableSet<String> = mutableSetOf()
+    var tags: MutableSet<String> = mutableSetOf(),
+
+    @Enumerated(EnumType.STRING)
+    var tipoDieta: TipoDieta
 ) {
     fun agregarIngrediente(ingrediente: RecetaIngrediente) {
         ingredientes.add(ingrediente)
