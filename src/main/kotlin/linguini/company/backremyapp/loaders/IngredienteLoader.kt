@@ -16,5 +16,9 @@ class IngredienteLoader(private val ingredienteRepository: IngredienteRepository
         ingredienteRepository.save(Ingrediente(nombre = "ajo"))
         ingredienteRepository.save(Ingrediente(nombre = "pimienta"))
         ingredienteRepository.save(Ingrediente(nombre = "azúcar"))
+
+        ingredienteRepository.save(Ingrediente(nombre = "pollo"))
+        ingredienteRepository.save(Ingrediente(nombre = "arroz"))
+        ingredienteRepository.save(Ingrediente(nombre = "brócoli"))
     }
 }

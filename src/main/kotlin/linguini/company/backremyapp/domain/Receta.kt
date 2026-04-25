@@ -64,8 +64,6 @@ class Receta(
         }
     }
 
-//    @PrePersist
-//    @PreUpdate
 //    fun determinarTipoDieta(): TipoDieta {
 //        val ingredientesList = ingredientes.map { it.ingrediente }
 //
@@ -77,4 +75,8 @@ class Receta(
 //            else -> TipoDieta.OMNIVORO
 //        }
 //    }
+fun agregarIngrediente(ingrediente: RecetaIngrediente) {
+        ingredientes.add(ingrediente)
+        ingrediente.receta = this
+    }
 }
