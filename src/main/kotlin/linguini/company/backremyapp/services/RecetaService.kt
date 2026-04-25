@@ -10,9 +10,11 @@ import java.util.UUID
 class RecetaService (
     private val recetaRepository: RecetaRepository
 ) {
-    fun getRecetaById(id: UUID): Receta {
-        val receta = recetaRepository.findRecetaById(id).orElseThrow { NotFoundException("Receta no encontrada") }
+    fun getRecetaCompletaById(id: UUID): Receta {
+        val receta = recetaRepository.findWithDetailsById(id).orElseThrow { NotFoundException("Receta no encontrada") }
 
         return receta
     }
+
+    //fun findAllByTipoDietaAndDificultad(tipoDieta: TipoDieta, dificultad: NivelCocina): List<Receta>
 }

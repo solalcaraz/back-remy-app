@@ -1,5 +1,7 @@
 package linguini.company.backremyapp.controllers
 
+import linguini.company.backremyapp.dto.RecetaCompletaDTO
+import linguini.company.backremyapp.helpers.RecetaMapper
 import linguini.company.backremyapp.services.RecetaService
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
@@ -11,10 +13,10 @@ import java.util.UUID
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/receta")
-class RecetaController(val recetaService: RecetaService) {
+class RecetaController(val recetaService: RecetaService, val recetaMapper: RecetaMapper) {
     @GetMapping("/{id}")
-    fun getReceta(@PathVariable id: UUID): RecetaCompletaDTO {
-        val receta = recetaService.getRecetaById(id)
+    fun getRecetaCompleta(@PathVariable id: UUID): RecetaCompletaDTO {
+        val receta = recetaService.getRecetaCompletaById(id)
 
         return recetaMapper.toFullDTO(receta)
     }
