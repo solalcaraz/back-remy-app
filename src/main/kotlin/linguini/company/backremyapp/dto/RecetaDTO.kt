@@ -1,14 +1,14 @@
 package linguini.company.backremyapp.dto
 
-import java.util.UUID
-
 data class IngredienteRecetaDTO(
+    val id: Long?,
     val nombre: String,
     val cantidad: Double,
     val unidadMedida: String
 )
 
 data class ResumenPasoDTO(
+    val id: Long?,
     val orden: Int,
     val titulo: String,
     val descripcion: String,
@@ -16,7 +16,7 @@ data class ResumenPasoDTO(
 )
 
 data class RecetaCompletaDTO(
-    val id: UUID?,
+    val id: Long?,
     val nombre: String,
     val tiempoEnMinutos: Int,
     val porciones: Int,

@@ -20,7 +20,7 @@ class Receta(
     // Pensar en grupo: lógica para que se calculen solas por el peso de la comida
 
     @Enumerated(EnumType.STRING)
-    var dificultad: NivelCocina, // Declarado en Usuario
+    var dificultad: NivelCocina = NivelCocina.INTERMEDIO, // Declarado en Usuario
     // Pensar en grupo: lógica para que se determine solo por cantidad de pasos, rareza de ingredientes, tiempo de cocina
 
     @OneToMany(mappedBy = "receta", cascade = [CascadeType.ALL], orphanRemoval = true)
@@ -28,13 +28,13 @@ class Receta(
 
     @OneToMany(mappedBy = "receta", cascade = [CascadeType.ALL], orphanRemoval = true)
     @OrderBy("orden ASC")
-    var pasos: MutableList<Paso> = mutableListOf(),
+    var pasos: MutableSet<Paso> = mutableSetOf(),
 
     @ElementCollection
     var tags: MutableSet<String> = mutableSetOf(),
 
     @Enumerated(EnumType.STRING)
-    var tipoDieta: TipoDieta // Declarado en Usuario
+    var tipoDieta: TipoDieta = TipoDieta.OMNIVORO // Declarado en Usuario
     // Pensar en grupo: lógica para que se determine solo por tipo de ingredientes
 ) {
     @PrePersist
