@@ -1,14 +1,13 @@
 package linguini.company.backremyapp.domain
 
 import jakarta.persistence.*
-import java.util.UUID
 
 @Entity
 @Table(name = "recetas")
 class Receta(
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    var id: UUID? = null,
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long? = null,
 
     @Column(nullable = false, length = 100)
     var nombre: String,
@@ -42,14 +41,14 @@ class Receta(
     @PreUpdate
     fun sincronizarDatosAutomaticos() {
         this.tiempoEnMinutos = calcularTiempo()
-        this.porciones = calcularPorciones()
+        //this.porciones = calcularPorciones()
         this.dificultad = calcularDificultad()
         //this.tipoDieta = determinarTipoDieta()
     }
 
     fun calcularTiempo() : Int = pasos.sumOf { it.tiempoEstimadoMinutos }
 
-    fun calcularPorciones() : Int = 0
+    //fun calcularPorciones() : Int = 0
     // Pensar en grupo regla de negocio.
     // Si es por el peso de los ingredientes, tener en cuenta un margen de error; además solo contar sólidos
 
@@ -75,8 +74,14 @@ class Receta(
 //            else -> TipoDieta.OMNIVORO
 //        }
 //    }
-fun agregarIngrediente(ingrediente: RecetaIngrediente) {
+
+    fun agregarIngrediente(ingrediente: RecetaIngrediente) {
         ingredientes.add(ingrediente)
         ingrediente.receta = this
+    }
+
+    fun agregarPaso(paso: Paso) {
+        pasos.add(paso)
+        paso.receta = this
     }
 }

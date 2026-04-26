@@ -49,7 +49,7 @@ class RecetaLoader (
             )
         )
 
-        receta1.pasos.add(
+        receta1.agregarPaso(
             Paso(
                 orden = 1,
                 titulo = "Hervir",
@@ -58,7 +58,7 @@ class RecetaLoader (
                 receta = receta1
             )
         )
-        receta1.pasos.add(
+        receta1.agregarPaso(
             Paso(
                 orden = 2,
                 titulo = "Cocinar",
@@ -76,9 +76,9 @@ class RecetaLoader (
         receta2.agregarIngrediente(RecetaIngrediente(ingrediente = ajo, cantidad = 25.0, unidadMedida = "gramos", receta = receta2))
         receta2.agregarIngrediente(RecetaIngrediente(ingrediente = morron, cantidad = 100.0, unidadMedida = "gramos", receta = receta2))
 
-        receta2.pasos.add(Paso(orden = 1, titulo = "Cortar", descripcion = "Cortar brócoli", tiempoEstimadoMinutos = 5, receta = receta2))
-        receta2.pasos.add(Paso(orden = 2, titulo = "Picar", descripcion = "Picar cebolla, ajo y morrón", tiempoEstimadoMinutos = 10, receta = receta2))
-        receta2.pasos.add(Paso(orden = 3, titulo = "Saltear", descripcion = "Saltear a fuego fuerte", tiempoEstimadoMinutos = 8, receta = receta2))
+        receta2.agregarPaso(Paso(orden = 1, titulo = "Cortar", descripcion = "Cortar brócoli", tiempoEstimadoMinutos = 5, receta = receta2))
+        receta2.agregarPaso(Paso(orden = 2, titulo = "Picar", descripcion = "Picar cebolla, ajo y morrón", tiempoEstimadoMinutos = 10, receta = receta2))
+        receta2.agregarPaso(Paso(orden = 3, titulo = "Saltear", descripcion = "Saltear a fuego fuerte", tiempoEstimadoMinutos = 8, receta = receta2))
 
         recetaRepository.save(receta2)
 
