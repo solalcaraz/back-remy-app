@@ -17,7 +17,7 @@ class Usuario(
     var email: String,
 
     @Column(nullable = false)
-    private var password: String,
+    var password: String,
 ) {
     @Column(name = "foto_url")
     var fotoUrl: String? = null
