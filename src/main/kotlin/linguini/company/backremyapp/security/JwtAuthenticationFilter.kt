@@ -1,4 +1,4 @@
-package ar.edu.unsam.phm.security
+package linguini.company.backremyapp.security
 
 import io.jsonwebtoken.ExpiredJwtException
 import jakarta.servlet.FilterChain

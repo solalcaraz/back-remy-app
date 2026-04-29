@@ -1,6 +1,5 @@
 package linguini.company.backremyapp.security
 
-import ar.edu.unsam.phm.security.JwtAuthenticationFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
@@ -12,11 +11,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.DefaultSecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import linguini.company.backremyapp.security.JwtAuthenticationFilter
+
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-class `SecurityConfiguration.kt`(
+class SecurityConfiguration(
     private val authenticationProvider: AuthenticationProvider
 ) {
     @Bean
