@@ -1,0 +1,36 @@
+package linguini.company.backremyapp.security
+
+import linguini.company.backremyapp.domain.Usuario
+import linguini.company.backremyapp.repositories.UsuarioRepository
+import org.springframework.security.core.userdetails.User
+import org.springframework.security.core.userdetails.UserDetails
+import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.security.core.userdetails.UsernameNotFoundException
+import org.springframework.stereotype.Service
+
+/* UserDetails representa la información core del Usuario del dominio, Spring no trabaja con nuestro
+dominio, sino con su propio modelo. Entonces necesita un adapter que convierta nuestro usuario en algo
+que spring entienda */
+/* UserDetailsService es una interfaz que se encarga de justamente eso, le estamos
+diciendo a Spring: cuando necesites un usuario, busca en mi DB usando este repo y adaptalo a tu modelo */
+/* Spring Security la usa para interactuar con nuestra fuente de datos y validar usuarios
+durante la autenticación */
+
+@Service
+class CustomUserDetailsService(
+    private val usuarioRepository: UsuarioRepository
+) : UserDetailsService {
+    override fun loadUserByUsername(username: String): UserDetails =
+        usuarioRepository.findByEmail(username)
+            ?.mapToUserDetails() // extension method implementado abajo
+            ?: throw UsernameNotFoundException("User not found") // misma guarda implementada en los services
+
+    private fun Usuario.mapToUserDetails(): UserDetails =
+        User.builder()
+            // usamos el id como username interno para que authentication.name sea el id
+            // aunque la búsqueda inicial se haga por email en loadUserByUsername(...)
+            .username(this.id.toString())
+            .password(this.password)
+            .roles("USER")
+            .build()
+}
