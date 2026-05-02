@@ -30,6 +30,13 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	/*Seguridad*/
+	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.bouncycastle:bcprov-jdk18on:1.83")
+	val jwtVersion = "0.13.0"
+	implementation("io.jsonwebtoken:jjwt-api:$jwtVersion")
+	implementation("io.jsonwebtoken:jjwt-impl:$jwtVersion")
+	implementation("io.jsonwebtoken:jjwt-jackson:$jwtVersion")
 }
 
 kotlin {
