@@ -26,3 +26,13 @@ data class RecetaCompletaDTO(
     val tags: Set<String>,
     val tipoDieta: String
 )
+
+data class ResumenRecetaDTO(
+    val id: Long?,
+    val titulo: String,
+    val descripcion: String,
+    val tiempoEstimadoMinutos: Int,
+    val tipoReceta: String,
+    val img: String,
+    val favorito: Boolean,
+)

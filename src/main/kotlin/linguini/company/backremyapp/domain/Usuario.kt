@@ -1,6 +1,8 @@
 package linguini.company.backremyapp.domain
 import com.fasterxml.jackson.annotation.JsonValue
 import jakarta.persistence.*
+import linguini.company.backremyapp.exceptions.NotFoundException
+import java.time.LocalDateTime
 import java.util.UUID
 
 @Entity
@@ -37,6 +39,22 @@ class Usuario(
     @Enumerated(EnumType.STRING)
     @Column(name = "perfil_economico", nullable = false)
     var perfilEconomico: PerfilEconomico = PerfilEconomico.INTERMEDIO
+
+    @OneToMany(
+        fetch = FetchType.LAZY,
+        mappedBy = "usuario",
+        cascade = [CascadeType.ALL],
+        orphanRemoval = true
+    )
+    var favoritos: MutableSet<FavoritoReceta> = mutableSetOf()
+
+    @OneToMany(
+        fetch = FetchType.LAZY,
+        mappedBy = "usuario",
+        cascade = [CascadeType.ALL],
+        orphanRemoval = true
+    )
+    var historial: MutableList<HistorialReceta> = mutableListOf()
 
     @OneToMany(
         fetch = FetchType.LAZY,
@@ -114,6 +132,35 @@ class Usuario(
     fun cambiarPerfilEconomico(label: String){
         perfilEconomico = PerfilEconomico.entries.find { it.label == label }
             ?: throw IllegalArgumentException("Tipo de perfil económico inválido: $label")
+    }
+
+    fun agregarFavorito(receta: Receta) {
+        if (favoritos.any { it.receta.id == receta.id }) {
+            return
+        }
+        favoritos.add( FavoritoReceta( usuario = this, receta = receta ))
+    }
+
+    fun eliminarFavorito(receta: Receta) {
+        val favorito = favoritos.find { it.receta.id == receta.id }
+            ?: throw NotFoundException("La receta no está en favoritos")
+        favoritos.remove(favorito)
+    }
+
+    fun comenzarReceta(receta: Receta) {
+        val historialExistente = historial.find { it.receta.id == receta.id }
+
+        if (historialExistente != null) {
+            historialExistente.fechaInicio = LocalDateTime.now()
+        } else {
+            historial.add(
+                HistorialReceta(
+                    usuario = this,
+                    receta = receta,
+                    fechaInicio = LocalDateTime.now()
+                )
+            )
+        }
     }
 }
 
