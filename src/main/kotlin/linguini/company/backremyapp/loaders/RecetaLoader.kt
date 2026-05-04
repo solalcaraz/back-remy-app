@@ -31,7 +31,10 @@ class RecetaLoader (
             porciones = 2,
             dificultad = NivelCocina.BASICO,
             tipoDieta = TipoDieta.OMNIVORO
-        )
+        ).apply {
+            descripcion = "Lo mejor para el invierno, ademas es fitness. Que mas queres?"
+            imgUrl = "https://images.unsplash.com/photo-1604909052743-94e838986d24"
+        }
         receta1.agregarIngrediente(
             RecetaIngrediente(
                 ingrediente = pollo,
@@ -70,7 +73,15 @@ class RecetaLoader (
 
         recetaRepository.save(receta1)
 
-        val receta2 = Receta(nombre = "Wok de Vegetales", porciones = 1, dificultad = NivelCocina.INTERMEDIO, tipoDieta = TipoDieta.VEGANO)
+        val receta2 = Receta(
+            nombre = "Wok de Vegetales",
+            porciones = 1,
+            dificultad = NivelCocina.INTERMEDIO,
+            tipoDieta = TipoDieta.VEGANO
+        ).apply {
+            descripcion = "Vegetales salteados con muchos condimentos de origen natural."
+            imgUrl = "https://images.unsplash.com/photo-1512058564366-18510be2db19"
+        }
         receta2.agregarIngrediente(RecetaIngrediente(ingrediente = brocoli, cantidad = 300.0, unidadMedida = "gramos", receta = receta2))
         receta2.agregarIngrediente(RecetaIngrediente(ingrediente = cebolla, cantidad = 250.0, unidadMedida = "gramos", receta = receta2))
         receta2.agregarIngrediente(RecetaIngrediente(ingrediente = ajo, cantidad = 25.0, unidadMedida = "gramos", receta = receta2))

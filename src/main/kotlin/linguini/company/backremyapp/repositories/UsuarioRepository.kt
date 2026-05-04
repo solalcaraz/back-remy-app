@@ -14,4 +14,10 @@ interface UsuarioRepository : JpaRepository<Usuario, UUID> {
     fun findPerfilById(@Param("id") id: UUID): Optional<Usuario>
 
     fun findByEmail(email: String): Usuario?
+
+    @EntityGraph(attributePaths = ["favoritos", "favoritos.receta"])
+    fun findWithFavoritosById(id: UUID): Optional<Usuario>
+
+    @EntityGraph(attributePaths = ["historial", "historial.receta"])
+    fun findWithHistorialById(id: UUID): Optional<Usuario>
 }

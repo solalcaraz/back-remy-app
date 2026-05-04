@@ -37,6 +37,12 @@ class Receta(
     var tipoDieta: TipoDieta = TipoDieta.OMNIVORO // Declarado en Usuario
     // Pensar en grupo: lógica para que se determine solo por tipo de ingredientes
 ) {
+    @Column(nullable = false, length = 500)
+    var descripcion: String = ""
+
+    @Column(name = "img_url", nullable = false)
+    var imgUrl: String = ""
+
     @PrePersist
     @PreUpdate
     fun sincronizarDatosAutomaticos() {
