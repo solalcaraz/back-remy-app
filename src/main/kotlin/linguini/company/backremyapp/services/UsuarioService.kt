@@ -1,20 +1,26 @@
 package linguini.company.backremyapp.services
 
 import linguini.company.backremyapp.domain.Usuario
+import linguini.company.backremyapp.dto.FotoPatchResponse
 import linguini.company.backremyapp.dto.UsuarioPatchRequest
 import linguini.company.backremyapp.exceptions.NotFoundException
 import linguini.company.backremyapp.helpers.UsuarioMapper
 import linguini.company.backremyapp.repositories.IngredienteRepository
 import linguini.company.backremyapp.repositories.UsuarioRepository
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import org.springframework.web.multipart.MultipartFile
 import java.util.UUID
 
 @Service
 class UsuarioService(
     private val usuarioRepository: UsuarioRepository,
     private val usuarioMapper: UsuarioMapper,
-    private val ingredienteRepository: IngredienteRepository
+    private val fileStorageService: FileStorageService,
+    private val ingredienteRepository: IngredienteRepository,
+    @Value("\${app.base-url}")
+    private val baseUrl: String
 ) {
     fun getUsuarioById(id: UUID): Usuario {
         val usuario = usuarioRepository.findPerfilById(id).orElseThrow { NotFoundException("Usuario no encontrado") }
@@ -30,6 +36,19 @@ class UsuarioService(
         actualizarPreferenciasIngredientes(usuarioPatch, usuario)
 
         usuarioRepository.save(usuario)
+    }
+
+    @Transactional
+    fun updateFotoUsuario(id: UUID, foto: MultipartFile): FotoPatchResponse {
+        val usuario = usuarioRepository.findById(id).orElseThrow { NotFoundException("Usuario no encontrado") }
+
+        val fotoUrl = fileStorageService.guardarFotoUsuario(id, foto)
+
+        usuario.fotoUrl = fotoUrl
+
+        return FotoPatchResponse(
+            foto = fotoUrl.let { "$baseUrl$it" }
+        )
     }
 
     private fun actualizarPreferenciasIngredientes(

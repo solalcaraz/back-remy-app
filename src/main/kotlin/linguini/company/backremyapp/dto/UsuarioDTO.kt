@@ -26,3 +26,7 @@ data class UsuarioPatchRequest(
     val ingredientesComunes: Set<String>?,
     val ingredientesAEvitar: Set<String>?
 )
+
+data class FotoPatchResponse(
+    val foto: String,
+)
