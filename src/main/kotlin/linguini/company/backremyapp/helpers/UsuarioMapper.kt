@@ -3,6 +3,7 @@ package linguini.company.backremyapp.helpers
 import linguini.company.backremyapp.domain.Usuario
 import linguini.company.backremyapp.dto.UsuarioCompletoDTO
 import linguini.company.backremyapp.dto.UsuarioPatchRequest
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 
 interface UsuarioAdapter {
@@ -11,13 +12,16 @@ interface UsuarioAdapter {
 }
 
 @Service
-class UsuarioMapper: UsuarioAdapter {
+class UsuarioMapper(
+    @Value("\${app.base-url}")
+    private val baseUrl: String
+): UsuarioAdapter {
     override fun toFullDTO(usuario: Usuario): UsuarioCompletoDTO {
         return UsuarioCompletoDTO(
             id = usuario.id,
             nombre = usuario.nombre,
             email = usuario.email,
-            foto = usuario.fotoUrl,
+            foto = buildFotoUrl(usuario.fotoUrl),
             tipoDieta = usuario.tipoDieta.label,
             objetivo = usuario.objetivo.label,
             nivelCocina = usuario.nivelCocina.label,
@@ -25,6 +29,16 @@ class UsuarioMapper: UsuarioAdapter {
             ingredientesComunes = usuario.ingredientesComunes(),
             ingredientesAEvitar = usuario.ingredientesAEvitar(),
         )
+    }
+
+    private fun buildFotoUrl(fotoUrl: String?): String? {
+        if (fotoUrl == null) return null
+
+        return if (fotoUrl.startsWith("http")) {
+            fotoUrl
+        } else {
+            "$baseUrl$fotoUrl"
+        }
     }
 
     override fun fromDTO(usuarioPatch: UsuarioPatchRequest, usuario: Usuario) {

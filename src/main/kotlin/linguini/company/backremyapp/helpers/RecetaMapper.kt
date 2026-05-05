@@ -4,10 +4,13 @@ import linguini.company.backremyapp.domain.Receta
 import linguini.company.backremyapp.dto.IngredienteRecetaDTO
 import linguini.company.backremyapp.dto.RecetaCompletaDTO
 import linguini.company.backremyapp.dto.ResumenPasoDTO
+import linguini.company.backremyapp.dto.ResumenRecetaDTO
 import org.springframework.stereotype.Service
 
 interface RecetaAdapter {
     fun toFullDTO(receta: Receta): RecetaCompletaDTO
+
+    fun toRecetaResumenDTO(recetas: List<Receta>, favoritosIds: Set<Long>?): List<ResumenRecetaDTO>
 }
 
 @Service
@@ -28,5 +31,20 @@ class RecetaMapper: RecetaAdapter {
             tags = receta.tags,
             tipoDieta = receta.tipoDieta.label
         )
+    }
+
+    override fun toRecetaResumenDTO(recetas: List<Receta>, favoritosIds: Set<Long>?): List<ResumenRecetaDTO> {
+        return recetas.map { receta ->
+            val favorito = favoritosIds?.let { ids -> receta.id in ids} ?: true
+            ResumenRecetaDTO(
+                id = receta.id,
+                titulo = receta.nombre,
+                descripcion = receta.descripcion,
+                tiempoEstimadoMinutos = receta.tiempoEnMinutos,
+                tipoReceta = receta.tipoDieta.label,
+                img = receta.imgUrl,
+                favorito
+            )
+        }
     }
 }
