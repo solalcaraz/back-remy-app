@@ -69,17 +69,39 @@ class Receta(
         }
     }
 
-//    fun determinarTipoDieta(): TipoDieta {
-//        val ingredientesList = ingredientes.map { it.ingrediente }
-//
-        // Habría que agregar en Ingrediente la categoría y que lo determine en función de eso
-//        return when {
-//            ingredientesList.all { it.esVegano } -> TipoDieta.VEGANO
-//            ingredientesList.all { it.esVegetariano } -> TipoDieta.VEGETARIANO
-//            ingredientesList.all { it.esLibreGluten } -> TipoDieta.CELIACO
-//            else -> TipoDieta.OMNIVORO
-//        }
-//    }
+    fun caloriasTotales(): Double = ingredientes.sumOf { it.caloriasEstimadas() }
+
+    fun grasasTotales(): Double = ingredientes.sumOf { it.grasasEstimadas() }
+
+    fun proteinasTotales(): Double = ingredientes.sumOf { it.proteinasEstimadas() }
+
+    fun fibrasTotales(): Double = ingredientes.sumOf { it.fibrasEstimadas() }
+
+
+    /*fun caloriasPorPorcion(): Double = caloriasTotales() / porciones*/
+
+    fun esCompatibleConObjetivo(objetivo: ObjetivoUsuario): Boolean {
+        val kcal = caloriasTotales()
+        val proteina = proteinasTotales()
+
+        return when (objetivo) {
+            ObjetivoUsuario.BAJAR_PESO -> kcal <= 500
+            ObjetivoUsuario.GANAR_MASA_MUSCULAR -> proteina >= 25
+            ObjetivoUsuario.COMER_SALUDABLE -> grasasTotales() <= 20 && fibrasTotales() >= 5
+            ObjetivoUsuario.INDIFERENTE -> true
+        }
+    }
+
+    /*fun esCompatibleConDieta(dieta: TipoDieta): Boolean {
+        val ingredientesList = ingredientes.map { it.ingrediente }
+
+        return when (dieta) {
+            TipoDieta.VEGANO -> ingredientesList.all { it.esVegano() }
+            TipoDieta.CELIACO -> ingredientesList.all { it.esVegano() }
+            TipoDieta.VEGETARIANO -> ingredientesList.all { it.esVegano() }
+            TipoDieta.OMNIVORO -> true
+        }
+    }*/
 
     fun agregarIngrediente(ingrediente: RecetaIngrediente) {
         ingredientes.add(ingrediente)
