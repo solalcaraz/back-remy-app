@@ -6,6 +6,7 @@ import linguini.company.backremyapp.dto.UsuarioPatchRequest
 import linguini.company.backremyapp.exceptions.NotFoundException
 import linguini.company.backremyapp.helpers.UsuarioMapper
 import linguini.company.backremyapp.repositories.IngredienteRepository
+import linguini.company.backremyapp.repositories.RestriccionAlimentariaRepository
 import linguini.company.backremyapp.repositories.UsuarioRepository
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
@@ -19,6 +20,7 @@ class UsuarioService(
     private val usuarioMapper: UsuarioMapper,
     private val fileStorageService: FileStorageService,
     private val ingredienteRepository: IngredienteRepository,
+    private val restriccionAlimentariaRepository: RestriccionAlimentariaRepository,
     @Value("\${app.base-url}")
     private val baseUrl: String
 ) {
@@ -33,6 +35,7 @@ class UsuarioService(
         val usuario = usuarioRepository.findPerfilById(id).orElseThrow { NotFoundException("Usuario no encontrado") }
 
         usuarioMapper.fromDTO(usuarioPatch, usuario)
+        actualizarRestriccionesAlimentarias(usuarioPatch, usuario)
         actualizarPreferenciasIngredientes(usuarioPatch, usuario)
 
         usuarioRepository.save(usuario)
@@ -110,5 +113,34 @@ class UsuarioService(
             .toSet()
 
         usuario.eliminarPreferenciasQueNoEstanEn(ingredientesFinalesIds)
+    }
+
+    private fun actualizarRestriccionesAlimentarias(
+        usuarioPatch: UsuarioPatchRequest,
+        usuario: Usuario
+    ) {
+        val nombresRestricciones = usuarioPatch.restriccionesAlimentarias
+            ?.map { it.trim() }
+            ?.filter { it.isNotBlank() }
+            ?.distinct()
+            ?: emptyList()
+
+        if (nombresRestricciones.isEmpty()) {
+            usuario.cambiarRestriccionesAlimentarias(emptyList())
+            return
+        }
+
+        val restricciones = restriccionAlimentariaRepository.findByNombreIn(nombresRestricciones)
+
+        if (restricciones.size != nombresRestricciones.size) {
+            val encontradas = restricciones.map { it.nombre }.toSet()
+            val faltantes = nombresRestricciones.filterNot { it in encontradas }
+
+            throw NotFoundException(
+                "No se encontraron las siguientes restricciones alimentarias: ${faltantes.joinToString(", ")}"
+            )
+        }
+
+        usuario.cambiarRestriccionesAlimentarias(restricciones)
     }
 }

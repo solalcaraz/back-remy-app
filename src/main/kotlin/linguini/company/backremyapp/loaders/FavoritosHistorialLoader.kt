@@ -2,6 +2,8 @@ package linguini.company.backremyapp.loaders
 
 import linguini.company.backremyapp.domain.FavoritoReceta
 import linguini.company.backremyapp.domain.HistorialReceta
+import linguini.company.backremyapp.domain.Receta
+import linguini.company.backremyapp.domain.Usuario
 import linguini.company.backremyapp.exceptions.NotFoundException
 import linguini.company.backremyapp.repositories.FavoritoRecetaRepository
 import linguini.company.backremyapp.repositories.HistorialRecetaRepository
@@ -12,7 +14,7 @@ import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
 
 @Component
-@Order(4)
+@Order(5)
 class FavoritosHistorialLoader(
     private val usuarioRepository: UsuarioRepository,
     private val recetaRepository: RecetaRepository,
@@ -20,28 +22,62 @@ class FavoritosHistorialLoader(
     private val historialRecetaRepository: HistorialRecetaRepository
 ) : CommandLineRunner {
     override fun run(vararg args: String) {
+        if (favoritoRecetaRepository.count() > 0 && historialRecetaRepository.count() > 0) return
 
-        val usuario = usuarioRepository.findByEmail("diego@maradona.com")
-            ?: throw NotFoundException("Usuario no encontrado")
-        val receta = recetaRepository.findByNombre("Arroz con Pollo")
-            ?: throw NotFoundException("Receta no encontrada")
-        val receta2 = recetaRepository.findByNombre("Wok de Vegetales")
-            ?: throw NotFoundException("Receta no encontrada")
+        val diego = usuario("diego@maradona.com")
+        val ana = usuario("ana@remy.app")
+        val martina = usuario("martina@remy.app")
+        val lucas = usuario("lucas@remy.app")
 
-        favoritoRecetaRepository.save(
-            FavoritoReceta(
-                usuario = usuario,
-                receta = receta
+        val arrozConPollo = receta("Arroz con Pollo")
+        val wok = receta("Wok de Vegetales")
+        val guiso = receta("Guiso de Lentejas")
+        val omelette = receta("Omelette con Queso")
+        val avena = receta("Avena con Yogur")
+        val ensalada = receta("Ensalada Tibia de Papa")
+        val carne = receta("Carne con Pure")
+        val arrozBrocoli = receta("Arroz con Brocoli")
+
+        if (favoritoRecetaRepository.count() == 0L) {
+            favoritoRecetaRepository.saveAll(
+                listOf(
+                    FavoritoReceta(usuario = diego, receta = arrozConPollo),
+                    FavoritoReceta(usuario = diego, receta = omelette),
+                    FavoritoReceta(usuario = ana, receta = wok),
+                    FavoritoReceta(usuario = ana, receta = guiso),
+                    FavoritoReceta(usuario = martina, receta = arrozConPollo),
+                    FavoritoReceta(usuario = martina, receta = carne),
+                    FavoritoReceta(usuario = lucas, receta = avena),
+                    FavoritoReceta(usuario = lucas, receta = ensalada)
+                )
             )
-        )
+        }
 
-        historialRecetaRepository.save(
-            HistorialReceta(
-                usuario = usuario,
-                receta = receta2
+        if (historialRecetaRepository.count() == 0L) {
+            historialRecetaRepository.saveAll(
+                listOf(
+                    HistorialReceta(usuario = diego, receta = wok),
+                    HistorialReceta(usuario = diego, receta = carne),
+                    HistorialReceta(usuario = ana, receta = arrozBrocoli),
+                    HistorialReceta(usuario = ana, receta = avena),
+                    HistorialReceta(usuario = martina, receta = omelette),
+                    HistorialReceta(usuario = martina, receta = arrozConPollo),
+                    HistorialReceta(usuario = lucas, receta = ensalada),
+                    HistorialReceta(usuario = lucas, receta = guiso)
+                )
             )
-        )
+        }
 
-        println("Favoritos e Historial cargados en Postgres")
+        println("Favoritos e historial cargados en Postgres")
+    }
+
+    private fun usuario(email: String): Usuario {
+        return usuarioRepository.findByEmail(email)
+            ?: throw NotFoundException("Usuario no encontrado: $email")
+    }
+
+    private fun receta(nombre: String): Receta {
+        return recetaRepository.findByNombre(nombre)
+            ?: throw NotFoundException("Receta no encontrada: $nombre")
     }
 }

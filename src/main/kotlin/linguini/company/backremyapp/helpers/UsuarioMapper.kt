@@ -22,7 +22,7 @@ class UsuarioMapper(
             nombre = usuario.nombre,
             email = usuario.email,
             foto = buildFotoUrl(usuario.fotoUrl),
-            tipoDieta = usuario.tipoDieta.label,
+            restriccionesAlimentarias = usuario.restriccionesAlimentarias.map { it.nombre }.toSet(),
             objetivo = usuario.objetivo.label,
             nivelCocina = usuario.nivelCocina.label,
             perfilEconomico = usuario.perfilEconomico.label,
@@ -44,7 +44,6 @@ class UsuarioMapper(
     override fun fromDTO(usuarioPatch: UsuarioPatchRequest, usuario: Usuario) {
         usuario.nombre = usuarioPatch.nombre
         usuario.fotoUrl = usuarioPatch.foto
-        usuario.cambiarTipoDieta(usuarioPatch.tipoDieta)
         usuario.cambiarObjetivo(usuarioPatch.objetivo)
         usuario.cambiarNivelCocina(usuarioPatch.nivelCocina)
         usuario.cambiarPerfilEconomico(usuarioPatch.perfilEconomico)

@@ -1,5 +1,18 @@
 package linguini.company.backremyapp.domain
-import jakarta.persistence.*
+
+import jakarta.persistence.Column
+import jakarta.persistence.Embedded
+import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
+import jakarta.persistence.FetchType
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
+import jakarta.persistence.JoinColumn
+import jakarta.persistence.JoinTable
+import jakarta.persistence.ManyToMany
+import jakarta.persistence.Table
 
 @Entity
 @Table(name = "ingredientes")
@@ -11,21 +24,28 @@ class Ingrediente(
     @Column(nullable = false, unique = true, length = 100)
     var nombre: String,
 
-    @Column
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     val unidadBase: UnidadMedida,
 
-    @OneToOne(cascade = [CascadeType.ALL])
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "ingredientes_restricciones_alimentarias",
+        joinColumns = [JoinColumn(name = "ingrediente_id")],
+        inverseJoinColumns = [JoinColumn(name = "restriccion_alimentaria_id")]
+    )
+    var restriccionesAlimentarias: MutableSet<RestriccionAlimentaria> = mutableSetOf(),
+
+    @Embedded
     var infoNutricional: InfoNutricional? = null
-    // Para cuando hagamos la lógica de intercambio de ingredientes
-    // var categoria: String?
-)
+) {
+    fun cumpleRestriccion(restriccion: RestriccionAlimentaria): Boolean {
+        return restriccionesAlimentarias.any { it.id == restriccion.id }
+    }
+}
 
 enum class UnidadMedida(val label: String) {
     GRAMOS("gramos"),
     MILILITROS("militros"),
     UNIDAD("unidad"),
 }
-    /* El slug sería una versión normalizada del nombre para evitar duplicados semánticos,
-    búsquedas, integración con IA, URL, pero todavía no lo necesitamos creo */
-    /*@Column(nullable = false, unique = true, length = 120)
-    var slug: String*/

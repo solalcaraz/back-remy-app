@@ -1,6 +1,19 @@
 package linguini.company.backremyapp.domain
 
-import jakarta.persistence.*
+import jakarta.persistence.CascadeType
+import jakarta.persistence.Column
+import jakarta.persistence.ElementCollection
+import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
+import jakarta.persistence.OneToMany
+import jakarta.persistence.OrderBy
+import jakarta.persistence.PrePersist
+import jakarta.persistence.PreUpdate
+import jakarta.persistence.Table
 
 @Entity
 @Table(name = "recetas")
@@ -17,11 +30,9 @@ class Receta(
 
     @Column(nullable = false)
     var porciones: Int = 0,
-    // Pensar en grupo: lógica para que se calculen solas por el peso de la comida
 
     @Enumerated(EnumType.STRING)
-    var dificultad: NivelCocina = NivelCocina.INTERMEDIO, // Declarado en Usuario
-    // Pensar en grupo: lógica para que se determine solo por cantidad de pasos, rareza de ingredientes, tiempo de cocina
+    var dificultad: NivelCocina = NivelCocina.INTERMEDIO,
 
     @OneToMany(mappedBy = "receta", cascade = [CascadeType.ALL], orphanRemoval = true)
     var ingredientes: MutableSet<RecetaIngrediente> = mutableSetOf(),
@@ -32,10 +43,6 @@ class Receta(
 
     @ElementCollection
     var tags: MutableSet<String> = mutableSetOf(),
-
-    @Enumerated(EnumType.STRING)
-    var tipoDieta: TipoDieta = TipoDieta.OMNIVORO // Declarado en Usuario
-    // Pensar en grupo: lógica para que se determine solo por tipo de ingredientes
 ) {
     @Column(nullable = false, length = 500)
     var descripcion: String = ""
@@ -47,19 +54,12 @@ class Receta(
     @PreUpdate
     fun sincronizarDatosAutomaticos() {
         this.tiempoEnMinutos = calcularTiempo()
-        //this.porciones = calcularPorciones()
         this.dificultad = calcularDificultad()
-        //this.tipoDieta = determinarTipoDieta()
     }
 
-    fun calcularTiempo() : Int = pasos.sumOf { it.tiempoEstimadoMinutos }
-
-    //fun calcularPorciones() : Int = 0
-    // Pensar en grupo regla de negocio.
-    // Si es por el peso de los ingredientes, tener en cuenta un margen de error; además solo contar sólidos
+    fun calcularTiempo(): Int = pasos.sumOf { it.tiempoEstimadoMinutos }
 
     fun calcularDificultad(): NivelCocina {
-        // Pensar en grupo regla de negocio. Por ahora:
         val puntaje = (pasos.size * 2) + (ingredientes.size * 1.5) + (tiempoEnMinutos / 10)
 
         return when {
@@ -77,8 +77,64 @@ class Receta(
 
     fun fibrasTotales(): Double = ingredientes.sumOf { it.fibrasEstimadas() }
 
+    fun restriccionesAlimentariasCumplidas(): Set<RestriccionAlimentaria> {
+        if (ingredientes.isEmpty()) return emptySet()
 
-    /*fun caloriasPorPorcion(): Double = caloriasTotales() / porciones*/
+        return ingredientes
+            .map { it.ingrediente.restriccionesAlimentarias.toSet() }
+            .reduce { acumuladas, restriccionesIngrediente ->
+                acumuladas.intersect(restriccionesIngrediente)
+            }
+    }
+
+    fun cumpleRestricciones(restricciones: Collection<RestriccionAlimentaria>): Boolean {
+        return restricciones.all { restriccion ->
+            ingredientes.all { recetaIngrediente ->
+                recetaIngrediente.ingrediente.cumpleRestriccion(restriccion)
+            }
+        }
+    }
+
+    fun contieneIngredienteAEvitar(usuario: Usuario): Boolean {
+        val ingredientesAEvitarIds = usuario.ingredientesAEvitar()
+            .mapNotNull { it.id }
+            .toSet()
+
+        if (ingredientesAEvitarIds.isEmpty()) return false
+
+        return ingredientes.any { recetaIngrediente ->
+            recetaIngrediente.ingrediente.id in ingredientesAEvitarIds
+        }
+    }
+
+    fun ingredientesCoincidentesCon(usuario: Usuario): Set<Ingrediente> {
+        val ingredientesComunesIds = usuario.ingredientesComunes()
+            .mapNotNull { it.id }
+            .toSet()
+
+        return ingredientes
+            .map { it.ingrediente }
+            .filter { it.id in ingredientesComunesIds }
+            .toSet()
+    }
+
+    fun ingredientesFaltantesPara(usuario: Usuario): Set<Ingrediente> {
+        val ingredientesComunesIds = usuario.ingredientesComunes()
+            .mapNotNull { it.id }
+            .toSet()
+
+        return ingredientes
+            .map { it.ingrediente }
+            .filter { it.id !in ingredientesComunesIds }
+            .toSet()
+    }
+
+    fun esCompatibleCon(usuario: Usuario): Boolean {
+        return cumpleRestricciones(usuario.restriccionesAlimentarias) &&
+            esCompatibleConObjetivo(usuario.objetivo) &&
+            dificultad.ordinal <= usuario.nivelCocina.ordinal &&
+            !contieneIngredienteAEvitar(usuario)
+    }
 
     fun esCompatibleConObjetivo(objetivo: ObjetivoUsuario): Boolean {
         val kcal = caloriasTotales()
@@ -91,17 +147,6 @@ class Receta(
             ObjetivoUsuario.INDIFERENTE -> true
         }
     }
-
-    /*fun esCompatibleConDieta(dieta: TipoDieta): Boolean {
-        val ingredientesList = ingredientes.map { it.ingrediente }
-
-        return when (dieta) {
-            TipoDieta.VEGANO -> ingredientesList.all { it.esVegano() }
-            TipoDieta.CELIACO -> ingredientesList.all { it.esVegano() }
-            TipoDieta.VEGETARIANO -> ingredientesList.all { it.esVegano() }
-            TipoDieta.OMNIVORO -> true
-        }
-    }*/
 
     fun agregarIngrediente(ingrediente: RecetaIngrediente) {
         ingredientes.add(ingrediente)

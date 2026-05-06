@@ -1,7 +1,6 @@
 package linguini.company.backremyapp.repositories
 
 import linguini.company.backremyapp.domain.Receta
-import linguini.company.backremyapp.domain.TipoDieta
 import org.springframework.data.jpa.repository.EntityGraph
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
@@ -9,8 +8,11 @@ import org.springframework.data.repository.query.Param
 import java.util.Optional
 
 interface RecetaRepository : JpaRepository<Receta, Long> {
-    @EntityGraph(attributePaths = ["ingredientes", "ingredientes.ingrediente", "pasos", "tags"])
+    @EntityGraph(attributePaths = ["ingredientes", "ingredientes.ingrediente", "ingredientes.ingrediente.restriccionesAlimentarias", "pasos", "tags"])
     fun findWithDetailsById(id: Long): Optional<Receta>
+
+    @EntityGraph(attributePaths = ["ingredientes", "ingredientes.ingrediente", "ingredientes.ingrediente.restriccionesAlimentarias", "pasos", "tags"])
+    fun findAllWithDetailsBy(): List<Receta>
 
     fun findByNombre(nombre: String): Receta?
 
@@ -25,7 +27,6 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
         JOIN r.ingredientes ri
         JOIN ri.ingrediente i
         WHERE LOWER(i.nombre) IN :disponibles
-          AND (:tipoDieta IS NULL OR r.tipoDieta = :tipoDieta)
           AND (:tiempoMaximo IS NULL OR r.tiempoEnMinutos <= :tiempoMaximo)
           AND NOT EXISTS (
               SELECT ri2 FROM RecetaIngrediente ri2
@@ -40,7 +41,6 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
     """)
     fun findConTodosLosIngredientes(
         @Param("disponibles") disponibles: List<String>,
-        @Param("tipoDieta") tipoDieta: TipoDieta?,
         @Param("tiempoMaximo") tiempoMaximo: Int?,
         @Param("aEvitar") aEvitar: List<String>
     ): List<Receta>
@@ -55,7 +55,6 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
         JOIN r.ingredientes ri
         JOIN ri.ingrediente i
         WHERE LOWER(i.nombre) IN :disponibles
-          AND (:tipoDieta IS NULL OR r.tipoDieta = :tipoDieta)
           AND (:tiempoMaximo IS NULL OR r.tiempoEnMinutos <= :tiempoMaximo)
           AND NOT EXISTS (
               SELECT ri2 FROM RecetaIngrediente ri2
@@ -65,7 +64,6 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
     """)
     fun findConAlgunIngrediente(
         @Param("disponibles") disponibles: List<String>,
-        @Param("tipoDieta") tipoDieta: TipoDieta?,
         @Param("tiempoMaximo") tiempoMaximo: Int?,
         @Param("aEvitar") aEvitar: List<String>
     ): List<Receta>

@@ -30,7 +30,7 @@ class RecetaService (
         return receta
     }
 
-    //fun findAllByTipoDietaAndDificultad(tipoDieta: TipoDieta, dificultad: NivelCocina): List<Receta>
+    //fun findAllByRestriccionesAlimentariasAndDificultad(...)
 
     @Transactional(readOnly = true)
     fun buscarRecetas(req: RecetaBusquedaRequest, id: UUID): RecetaBusquedaResponse {

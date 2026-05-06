@@ -3,8 +3,10 @@ package linguini.company.backremyapp.controllers
 import linguini.company.backremyapp.dto.RecetaBusquedaRequest
 import linguini.company.backremyapp.dto.RecetaBusquedaResponse
 import linguini.company.backremyapp.dto.RecetaCompletaDTO
+import linguini.company.backremyapp.dto.RecomendacionRecetaDTO
 import linguini.company.backremyapp.dto.ResumenRecetaDTO
 import linguini.company.backremyapp.helpers.RecetaMapper
+import linguini.company.backremyapp.services.RecomendacionService
 import linguini.company.backremyapp.services.RecetaService
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.CrossOrigin
@@ -21,7 +23,11 @@ import java.util.UUID
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/receta")
-class RecetaController(val recetaService: RecetaService, val recetaMapper: RecetaMapper) {
+class RecetaController(
+    val recetaService: RecetaService,
+    val recomendacionService: RecomendacionService,
+    val recetaMapper: RecetaMapper
+) {
     @GetMapping("/{id}")
     fun getRecetaCompleta(@PathVariable id: Long): RecetaCompletaDTO {
         val receta = recetaService.getRecetaCompletaById(id)
@@ -59,6 +65,14 @@ class RecetaController(val recetaService: RecetaService, val recetaMapper: Recet
         val recetas = recetaService.getFavoritos(usuarioId)
 
         return recetaMapper.toRecetaResumenDTO(recetas, null)
+    }
+
+    @GetMapping("/recomendaciones")
+    fun getRecomendaciones(
+        @RequestParam usuarioId: UUID,
+        @RequestParam(defaultValue = "10") limite: Int
+    ): List<RecomendacionRecetaDTO> {
+        return recomendacionService.recomendarRecetas(usuarioId, limite)
     }
 
     @PostMapping("/favorito/{id}")

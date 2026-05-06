@@ -1,6 +1,20 @@
 package linguini.company.backremyapp.domain
+
 import com.fasterxml.jackson.annotation.JsonValue
-import jakarta.persistence.*
+import jakarta.persistence.CascadeType
+import jakarta.persistence.Column
+import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
+import jakarta.persistence.FetchType
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
+import jakarta.persistence.JoinColumn
+import jakarta.persistence.JoinTable
+import jakarta.persistence.ManyToMany
+import jakarta.persistence.OneToMany
+import jakarta.persistence.Table
 import linguini.company.backremyapp.exceptions.NotFoundException
 import java.time.LocalDateTime
 import java.util.UUID
@@ -24,9 +38,13 @@ class Usuario(
     @Column(name = "foto_url")
     var fotoUrl: String? = null
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "tipo_dieta", nullable = false)
-    var tipoDieta: TipoDieta = TipoDieta.OMNIVORO
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "usuarios_restricciones_alimentarias",
+        joinColumns = [JoinColumn(name = "usuario_id")],
+        inverseJoinColumns = [JoinColumn(name = "restriccion_alimentaria_id")]
+    )
+    var restriccionesAlimentarias: MutableSet<RestriccionAlimentaria> = mutableSetOf()
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -100,14 +118,11 @@ class Usuario(
         val preferenciaExistente = preferenciasIngredientes
             .find { it.ingrediente.id == ingrediente.id }
 
-        /* Si ya tenía una preferencia de ese ingrediente,
-        le actualizo el tipo nada más */
         if (preferenciaExistente != null) {
             preferenciaExistente.tipo = tipo
             return
         }
 
-        /* Si no, la creo */
         preferenciasIngredientes.add(
             PreferenciaIngredienteUsuario(
                 usuario = this,
@@ -117,33 +132,36 @@ class Usuario(
         )
     }
 
-    fun cambiarTipoDieta(label: String){
-        tipoDieta = TipoDieta.entries.find { it.label == label }
-            ?: throw IllegalArgumentException("Tipo de dieta inválido: $label")
+    fun cambiarRestriccionesAlimentarias(restricciones: Collection<RestriccionAlimentaria>) {
+        restriccionesAlimentarias.clear()
+        restriccionesAlimentarias.addAll(restricciones)
     }
-    fun cambiarObjetivo(label: String){
+
+    fun cambiarObjetivo(label: String) {
         objetivo = ObjetivoUsuario.entries.find { it.label == label }
-            ?: throw IllegalArgumentException("Tipo de objetivo inválido: $label")
+            ?: throw IllegalArgumentException("Tipo de objetivo invalido: $label")
     }
-    fun cambiarNivelCocina(label: String){
+
+    fun cambiarNivelCocina(label: String) {
         nivelCocina = NivelCocina.entries.find { it.label == label }
-            ?: throw IllegalArgumentException("Tipo de nivel de cocina inválido: $label")
+            ?: throw IllegalArgumentException("Tipo de nivel de cocina invalido: $label")
     }
-    fun cambiarPerfilEconomico(label: String){
+
+    fun cambiarPerfilEconomico(label: String) {
         perfilEconomico = PerfilEconomico.entries.find { it.label == label }
-            ?: throw IllegalArgumentException("Tipo de perfil económico inválido: $label")
+            ?: throw IllegalArgumentException("Tipo de perfil economico invalido: $label")
     }
 
     fun agregarFavorito(receta: Receta) {
         if (favoritos.any { it.receta.id == receta.id }) {
             return
         }
-        favoritos.add( FavoritoReceta( usuario = this, receta = receta ))
+        favoritos.add(FavoritoReceta(usuario = this, receta = receta))
     }
 
     fun eliminarFavorito(receta: Receta) {
         val favorito = favoritos.find { it.receta.id == receta.id }
-            ?: throw NotFoundException("La receta no está en favoritos")
+            ?: throw NotFoundException("La receta no esta en favoritos")
         favoritos.remove(favorito)
     }
 
@@ -164,19 +182,9 @@ class Usuario(
     }
 }
 
-enum class TipoDieta(val label: String) {
-    OMNIVORO("Omnívoro"),
-    VEGETARIANO("Vegetariano"),
-    VEGANO("Vegano"),
-    CELIACO("Celíaco");
-
-    @JsonValue
-    fun toJson() = label
-}
-
 enum class ObjetivoUsuario(val label: String) {
     INDIFERENTE("Indiferente"),
-    COMER_SALUDABLE("Comer más saludable"),
+    COMER_SALUDABLE("Comer mas saludable"),
     BAJAR_PESO("Bajar de peso"),
     GANAR_MASA_MUSCULAR("Ganar masa muscular");
 
@@ -185,7 +193,7 @@ enum class ObjetivoUsuario(val label: String) {
 }
 
 enum class NivelCocina(val label: String) {
-    BASICO("Básico"),
+    BASICO("Basico"),
     INTERMEDIO("Intermedio"),
     AVANZADO("Avanzado");
 
