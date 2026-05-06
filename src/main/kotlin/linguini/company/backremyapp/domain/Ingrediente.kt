@@ -20,10 +20,10 @@ class Ingrediente(
     // var categoria: String?
 )
 
-enum class UnidadMedida {
-    GRAMOS,
-    MILILITROS,
-    UNIDAD
+enum class UnidadMedida(val label: String) {
+    GRAMOS("gramos"),
+    MILILITROS("militros"),
+    UNIDAD("unidad"),
 }
     /* El slug sería una versión normalizada del nombre para evitar duplicados semánticos,
     búsquedas, integración con IA, URL, pero todavía no lo necesitamos creo */
