@@ -32,7 +32,7 @@ class SecurityConfiguration(
                 it.csrfTokenRequestHandler(SpaCsrfTokenRequestHandler())
                 it.ignoringRequestMatchers("/auth/login", "/auth/register", "/error")*/
             }
-            /*.cors{ cors -> cors.configurationSource(corsConfigurationSource()) }*/
+            .cors(Customizer.withDefaults())
             .authorizeHttpRequests {
                 // Queremos que cualquier persona se pueda loguear y mostrar errores
                 // Importante: no definirlo solo para el method POST
@@ -41,6 +41,7 @@ class SecurityConfiguration(
                     .requestMatchers("/auth/register", "/auth/login", "/error", "/auth/refresh")
                     .permitAll() // agregar refresh token endpoint
                     .requestMatchers("/imagenes/**").permitAll()
+                    .requestMatchers("/uploads/**").permitAll()
 
                     //Todo: setear roles en receta
                     .requestMatchers("/paso/**").permitAll()

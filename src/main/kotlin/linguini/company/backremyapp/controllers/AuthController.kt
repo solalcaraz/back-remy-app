@@ -6,6 +6,7 @@ import linguini.company.backremyapp.dto.RefreshTokenRequest
 import linguini.company.backremyapp.dto.RefreshTokenResponse
 import linguini.company.backremyapp.dto.RegisterRequest
 import linguini.company.backremyapp.dto.RegisterResponseDTO
+import linguini.company.backremyapp.exceptions.ForbiddenException
 import linguini.company.backremyapp.services.AuthService
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.PostMapping
@@ -34,6 +35,11 @@ class AuthController(
     }
 
     @PostMapping("/refresh")
-    fun refresh(@RequestBody request: RefreshTokenRequest): RefreshTokenResponse =
-        RefreshTokenResponse(token = authService.refreshToken(request.token))
+    fun refresh(@RequestBody request: RefreshTokenRequest): RefreshTokenResponse {
+        println(request)
+        return authService.refreshToken(request.token)?.maptoTokenResponse()?: throw ForbiddenException("Refresh token invalido")
+    }
+
+    private fun String.maptoTokenResponse(): RefreshTokenResponse =
+        RefreshTokenResponse(token = this)
 }

@@ -5,6 +5,7 @@ import linguini.company.backremyapp.dto.UsuarioPatchRequest
 import linguini.company.backremyapp.helpers.UsuarioMapper
 import linguini.company.backremyapp.services.UsuarioService
 import org.springframework.http.MediaType
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
@@ -20,23 +21,37 @@ import java.util.UUID
 @CrossOrigin("*")
 @RequestMapping("/usuario")
 class UsuarioController(val usuarioService: UsuarioService, val usuarioMapper: UsuarioMapper) {
-    @GetMapping("/{id}")
-    fun getUsuario(@PathVariable id: UUID): UsuarioCompletoDTO {
-        val user = usuarioService.getUsuarioById(id)
+    @GetMapping("/me")
+    fun getUsuario(): UsuarioCompletoDTO {
+        val userId = SecurityContextHolder
+            .getContext()
+            .authentication
+            ?.name.toString()
+
+        val user = usuarioService.getUsuarioById(UUID.fromString(userId))
 
         return usuarioMapper.toFullDTO(user)
     }
 
-    @PatchMapping("/{id}")
-    fun updateUsuario(@PathVariable id: UUID, @RequestBody userPatch: UsuarioPatchRequest) {
-        return usuarioService.updateUsuario(id, userPatch)
+    @PatchMapping("/me")
+    fun updateUsuario(@RequestBody userPatch: UsuarioPatchRequest) {
+        val userId = SecurityContextHolder
+            .getContext()
+            .authentication
+            ?.name.toString()
+
+        return usuarioService.updateUsuario(UUID.fromString(userId), userPatch)
     }
 
-    @PatchMapping("/{id}/foto", consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
+    @PatchMapping("/me/foto", consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
     fun updateFotoUsuario(
-        @PathVariable id: UUID,
         @RequestParam("foto") foto: MultipartFile
     ): FotoPatchResponse {
-        return usuarioService.updateFotoUsuario(id, foto)
+        val userId = SecurityContextHolder
+            .getContext()
+            .authentication
+            ?.name.toString()
+
+        return usuarioService.updateFotoUsuario(UUID.fromString(userId), foto)
     }
 }

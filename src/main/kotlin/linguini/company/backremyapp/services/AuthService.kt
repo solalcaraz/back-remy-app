@@ -59,7 +59,7 @@ class AuthService(
         return usuarioRepository.save(nuevoUsuario)
     }
 
-    fun refreshToken(token: String): String {
+    fun refreshToken(token: String): String? {
         if (tokenHelper.isExpired(token)) {
             throw UnauthorizedException("Refresh token expirado")
         }

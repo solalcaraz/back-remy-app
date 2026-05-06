@@ -57,12 +57,15 @@ class TokenHelper(
             .signWith(secretKey)
             .compact()
 
-    fun extractUserId(token: String): UUID? =
-        try {
-            UUID.fromString(getAllClaims(token).subject)
-        } catch (e: Exception) {
+    fun extractUserId(token: String): UUID? {
+        val subject = getAllClaims(token).subject ?: return null
+
+        return try {
+            UUID.fromString(subject)
+        } catch (e: IllegalArgumentException) {
             null
         }
+    }
 
     fun isExpired(token: String) : Boolean =
         getAllClaims(token).expiration.before(Date(System.currentTimeMillis()))
