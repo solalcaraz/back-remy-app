@@ -23,25 +23,25 @@ class RecetaMapper: RecetaAdapter {
             porciones = receta.porciones,
             dificultad = receta.dificultad.label,
             ingredientes = receta.ingredientes.map {
-                IngredienteRecetaDTO(it.id, it.ingrediente.nombre, it.cantidad, it.unidadMedida)
+                IngredienteRecetaDTO(it.id, it.ingrediente.nombre, it.cantidad, it.unidadMedida.name)
             },
             pasos = receta.pasos.map {
                 ResumenPasoDTO(it.id, it.orden, it.titulo, it.descripcion, it.tiempoEstimadoMinutos)
             },
             tags = receta.tags,
-            tipoDieta = receta.tipoDieta.label
+            restriccionesAlimentarias = receta.restriccionesAlimentariasCumplidas().map { it.nombre }.toSet()
         )
     }
 
     override fun toRecetaResumenDTO(recetas: List<Receta>, favoritosIds: Set<Long>?): List<ResumenRecetaDTO> {
         return recetas.map { receta ->
-            val favorito = favoritosIds?.let { ids -> receta.id in ids} ?: true
+            val favorito = favoritosIds?.let { ids -> receta.id?.let { it in ids } == true } ?: true
             ResumenRecetaDTO(
                 id = receta.id,
                 titulo = receta.nombre,
                 descripcion = receta.descripcion,
                 tiempoEstimadoMinutos = receta.tiempoEnMinutos,
-                tipoReceta = receta.tipoDieta.label,
+                tipoReceta = "General",
                 img = receta.imgUrl,
                 favorito
             )

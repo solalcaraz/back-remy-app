@@ -25,7 +25,7 @@ class RecetaService (
         return receta
     }
 
-    //fun findAllByTipoDietaAndDificultad(tipoDieta: TipoDieta, dificultad: NivelCocina): List<Receta>
+    //fun findAllByRestriccionesAlimentariasAndDificultad(...)
 
     @Transactional(readOnly = true)
     fun getHistorial(usuarioId: UUID): List<Receta> {

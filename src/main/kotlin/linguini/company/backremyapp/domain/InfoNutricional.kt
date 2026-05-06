@@ -1,13 +1,11 @@
 package linguini.company.backremyapp.domain
 
-import jakarta.persistence.*
+import jakarta.persistence.Embeddable
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
 
-@Entity
+@Embeddable
 class InfoNutricional(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null,
-
     var calorias: Double,
     var proteinas: Double,
     var carbohidratos: Double,
