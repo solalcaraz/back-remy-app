@@ -6,6 +6,7 @@ import linguini.company.backremyapp.dto.RecetaCompletaDTO
 import linguini.company.backremyapp.dto.ResumenRecetaDTO
 import linguini.company.backremyapp.helpers.RecetaMapper
 import linguini.company.backremyapp.services.RecetaService
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -30,7 +31,12 @@ class RecetaController(val recetaService: RecetaService, val recetaMapper: Recet
 
     @PostMapping("/buscar")
     fun buscarRecetas(@RequestBody req: RecetaBusquedaRequest): RecetaBusquedaResponse {
-        return recetaService.buscarRecetas(req)
+        val id = SecurityContextHolder
+            .getContext()
+            .authentication
+            ?.name.toString()
+
+        return recetaService.buscarRecetas(req, UUID.fromString(id))
     }
 
     @GetMapping("/historial")

@@ -4,7 +4,6 @@ data class RecetaBusquedaRequest(
     val ingredientes: List<String>,
     val tiempoMaximo: Int? = null,
     val puedeComprar: Boolean = false,
-    val usuarioId: String? = null
 )
 
 data class RecetaBusquedaResponse(

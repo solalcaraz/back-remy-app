@@ -33,12 +33,10 @@ class RecetaService (
     //fun findAllByTipoDietaAndDificultad(tipoDieta: TipoDieta, dificultad: NivelCocina): List<Receta>
 
     @Transactional(readOnly = true)
-    fun buscarRecetas(req: RecetaBusquedaRequest): RecetaBusquedaResponse {
-        val ingredientesBuscados = req.ingredientes.map { it.trim().lowercase() }
+    fun buscarRecetas(req: RecetaBusquedaRequest, id: UUID): RecetaBusquedaResponse {
+        val usuario = usuarioRepository.findPerfilById(id).orElseThrow { NotFoundException("Usuario no encontrado") }
 
-        val usuario = req.usuarioId
-            ?.let { runCatching { UUID.fromString(it) }.getOrNull() }
-            ?.let { usuarioRepository.findPerfilById(it).orElse(null) }
+        val ingredientesBuscados = req.ingredientes.map { it.trim().lowercase() }
 
         // Los ingredientes "comunes" de la despensa del usuario cuentan como disponibles
         val ingredientesDespensa = usuario
