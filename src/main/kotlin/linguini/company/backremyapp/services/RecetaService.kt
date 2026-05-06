@@ -6,6 +6,7 @@ import linguini.company.backremyapp.dto.RecetaBusquedaRequest
 import linguini.company.backremyapp.dto.RecetaBusquedaResponse
 import linguini.company.backremyapp.dto.ResumenRecetaDTO
 import linguini.company.backremyapp.domain.Usuario
+import linguini.company.backremyapp.dto.BusquedaRecetaDTO
 import linguini.company.backremyapp.exceptions.NotFoundException
 import linguini.company.backremyapp.repositories.FavoritoRecetaRepository
 import linguini.company.backremyapp.repositories.HistorialRecetaRepository
@@ -33,67 +34,69 @@ class RecetaService (
 
     @Transactional(readOnly = true)
     fun buscarRecetas(req: RecetaBusquedaRequest): RecetaBusquedaResponse {
-        val ingredientesNormalizados = req.ingredientes.map { it.trim().lowercase() }
-        val tipoDieta = req.tipoDieta?.let { label ->
-            TipoDieta.entries.find { it.label == label }
+        val ingredientesBuscados = req.ingredientes.map { it.trim().lowercase() }
+
+        val usuario = req.usuarioId
+            ?.let { runCatching { UUID.fromString(it) }.getOrNull() }
+            ?.let { usuarioRepository.findPerfilById(it).orElse(null) }
+
+        // Los ingredientes "comunes" de la despensa del usuario cuentan como disponibles
+        val ingredientesDespensa = usuario
+            ?.ingredientesComunes()
+            ?.map { it.nombre.lowercase() }
+            ?: emptyList()
+
+        val todosLosDisponibles = (ingredientesBuscados + ingredientesDespensa).distinct()
+
+        // Ingredientes que el usuario configuró como "a evitar": los usamos para filtrar recetas
+        val ingredientesAEvitar = usuario
+            ?.ingredientesAEvitar()
+            ?.map { it.nombre.lowercase() }
+            ?: emptyList()
+
+        val tipoDieta = usuario?.tipoDieta
+
+        val recetasEncontradas = if (req.puedeComprar) {
+            recetaRepository.findConAlgunIngrediente(todosLosDisponibles, tipoDieta, req.tiempoMaximo, ingredientesAEvitar)
+        } else {
+            recetaRepository.findConTodosLosIngredientes(todosLosDisponibles, tipoDieta, req.tiempoMaximo, ingredientesAEvitar)
         }
 
-        val recetasEncontradas = recetaRepository.findByIngredientesAndFiltros(
-            nombresIngredientes = ingredientesNormalizados,
-            tipoDieta = tipoDieta,
-            tiempoMaximo = req.tiempoMaximo
-        )
-
-        val recetasOrdenadas = recetasEncontradas
-            .map { receta -> calcularMatch(receta, ingredientesNormalizados, req.puedeComprar) }
+        val resultados = recetasEncontradas
+            .map { receta -> calcularMatch(receta, todosLosDisponibles) }
             .filter { it.porcentajeMatch > 0 }
             .sortedByDescending { it.porcentajeMatch }
 
         return RecetaBusquedaResponse(
-            recetas = recetasOrdenadas,
-            totalResultados = recetasOrdenadas.size,
-            busquedaId = UUID.randomUUID().toString()
+            recetas = resultados,
+            totalResultados = resultados.size,
         )
     }
 
-    /*
-     * Calcula qué porcentaje de los ingredientes de la receta están
-     * cubiertos por lo que el usuario tiene disponible.
-     *
-     * Ejemplo: receta tiene 5 ingredientes, el usuario tiene 3 → 60%.
-     * Si puedeComprar = true, los faltantes no penalizan tanto (se considera
-     * que los puede conseguir), por eso el match sube al 80% mínimo si ya
-     * tiene al menos uno. Esto es una regla de negocio provisional: ajustar
-     * con el grupo según el criterio que definan.
-     */
     private fun calcularMatch(
         receta: Receta,
         ingredientesDisponibles: List<String>,
-        puedeComprar: Boolean
-    ): ResumenRecetaDTO {
+    ): BusquedaRecetaDTO {
         val nombresReceta = receta.ingredientes.map { it.ingrediente.nombre.lowercase() }
         val faltantes = nombresReceta.filter { it !in ingredientesDisponibles }
         val coincidencias = nombresReceta.size - faltantes.size
 
-        val porcentajeBase = if (nombresReceta.isEmpty()) 0
-        else (coincidencias * 100) / nombresReceta.size
+        // cuántos ingredientes de la receta tiene el usuario sobre el total de la receta
+        val porcentajeMatch = if (nombresReceta.isEmpty()) 0
+            else (coincidencias * 100) / nombresReceta.size
 
-        val porcentajeFinal = when {
-            puedeComprar && coincidencias > 0 -> maxOf(porcentajeBase, 80)
-            else -> porcentajeBase
-        }
-
-        return ResumenRecetaDTO(
+        return BusquedaRecetaDTO(
             id = receta.id,
             nombre = receta.nombre,
-            descripcion = "",                          // campo pendiente en el dominio
+            descripcion = receta.descripcion,
             tiempoEnMinutos = receta.tiempoEnMinutos,
             dificultad = receta.dificultad.label,
+            tipoDieta = receta.tipoDieta.label,
+            img = receta.imgUrl,
             cantidadIngredientes = nombresReceta.size,
-            porcentajeMatch = porcentajeFinal,
+            porcentajeMatch = porcentajeMatch,
             ingredientesFaltantes = faltantes,
-            tags = receta.tags,
-            tipoDieta = receta.tipoDieta.label
+            tags = receta.tags
         )
     }
 

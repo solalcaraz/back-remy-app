@@ -17,28 +17,56 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
     //fun findAllByTiempoEnMinutosLessThan(minutos: Int): List<Receta>
 
     /*
-     * Trae todas las recetas que contienen AL MENOS UNO de los ingredientes buscados,
-     * con todos los datos necesarios para calcular el match en el servicio.
-     *
-     * El filtro de tipoDieta es opcional: si se pasa null, no filtra por dieta.
-     * El filtro de tiempoMaximo también es opcional.
-     *
-     * Nota: el cálculo del porcentajeMatch y el ordenamiento se hacen en memoria
-     * en RecetaService porque involucran lógica de negocio (ingredientes faltantes,
-     * preferencias del usuario, etc.) que no corresponde a la query.
+    puedeComprar = false, entonces solo recetas con TODOS los ingredientes disponibles tanto en despensa como en el input de la busqueda
      */
     @EntityGraph(attributePaths = ["ingredientes", "ingredientes.ingrediente", "tags"])
     @Query("""
         SELECT DISTINCT r FROM Receta r
         JOIN r.ingredientes ri
         JOIN ri.ingrediente i
-        WHERE LOWER(i.nombre) IN :nombresIngredientes
+        WHERE LOWER(i.nombre) IN :disponibles
           AND (:tipoDieta IS NULL OR r.tipoDieta = :tipoDieta)
           AND (:tiempoMaximo IS NULL OR r.tiempoEnMinutos <= :tiempoMaximo)
+          AND NOT EXISTS (
+              SELECT ri2 FROM RecetaIngrediente ri2
+              WHERE ri2.receta = r
+              AND LOWER(ri2.ingrediente.nombre) NOT IN :disponibles
+          )
+          AND NOT EXISTS (
+              SELECT ri3 FROM RecetaIngrediente ri3
+              WHERE ri3.receta = r
+              AND LOWER(ri3.ingrediente.nombre) IN :aEvitar
+      )
     """)
-    fun findByIngredientesAndFiltros(
-        @Param("nombresIngredientes") nombresIngredientes: List<String>,
+    fun findConTodosLosIngredientes(
+        @Param("disponibles") disponibles: List<String>,
         @Param("tipoDieta") tipoDieta: TipoDieta?,
-        @Param("tiempoMaximo") tiempoMaximo: Int?
+        @Param("tiempoMaximo") tiempoMaximo: Int?,
+        @Param("aEvitar") aEvitar: List<String>
+    ): List<Receta>
+
+    /*
+    puedeComprar = true entonces recetas que tengan al menos uno de los ingredinetes disponibles
+    se excluyen solamente los ing a evitar
+    */
+    @EntityGraph(attributePaths = ["ingredientes", "ingredientes.ingrediente", "tags"])
+    @Query("""
+        SELECT DISTINCT r FROM Receta r
+        JOIN r.ingredientes ri
+        JOIN ri.ingrediente i
+        WHERE LOWER(i.nombre) IN :disponibles
+          AND (:tipoDieta IS NULL OR r.tipoDieta = :tipoDieta)
+          AND (:tiempoMaximo IS NULL OR r.tiempoEnMinutos <= :tiempoMaximo)
+          AND NOT EXISTS (
+              SELECT ri2 FROM RecetaIngrediente ri2
+              WHERE ri2.receta = r
+              AND LOWER(ri2.ingrediente.nombre) IN :aEvitar
+        )
+    """)
+    fun findConAlgunIngrediente(
+        @Param("disponibles") disponibles: List<String>,
+        @Param("tipoDieta") tipoDieta: TipoDieta?,
+        @Param("tiempoMaximo") tiempoMaximo: Int?,
+        @Param("aEvitar") aEvitar: List<String>
     ): List<Receta>
 }
