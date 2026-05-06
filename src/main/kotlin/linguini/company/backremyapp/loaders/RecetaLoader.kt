@@ -32,6 +32,8 @@ class RecetaLoader(
             carneConPure(),
             arrozConBrocoli()
         )
+        fun ing(nombre: String) = ingredienteRepository.findByNombre(nombre)
+            ?: throw NotFoundException("Ingrediente no encontrado: $nombre")
 
         recetaRepository.saveAll(recetas)
         println("Recetas cargadas en Postgres")

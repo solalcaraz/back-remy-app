@@ -44,8 +44,8 @@ class Ingrediente(
     }
 }
 
-enum class UnidadMedida {
-    GRAMOS,
-    MILILITROS,
-    UNIDAD
+enum class UnidadMedida(val label: String) {
+    GRAMOS("gramos"),
+    MILILITROS("militros"),
+    UNIDAD("unidad"),
 }

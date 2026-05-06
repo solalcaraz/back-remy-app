@@ -1,5 +1,7 @@
 package linguini.company.backremyapp.controllers
 
+import linguini.company.backremyapp.dto.RecetaBusquedaRequest
+import linguini.company.backremyapp.dto.RecetaBusquedaResponse
 import linguini.company.backremyapp.dto.RecetaCompletaDTO
 import linguini.company.backremyapp.dto.RecomendacionRecetaDTO
 import linguini.company.backremyapp.dto.ResumenRecetaDTO
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.util.UUID
@@ -29,6 +32,11 @@ class RecetaController(
         val receta = recetaService.getRecetaCompletaById(id)
 
         return recetaMapper.toFullDTO(receta)
+    }
+
+    @PostMapping("/buscar")
+    fun buscarRecetas(@RequestBody req: RecetaBusquedaRequest): RecetaBusquedaResponse {
+        return recetaService.buscarRecetas(req)
     }
 
     @GetMapping("/historial")
