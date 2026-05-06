@@ -1,6 +1,7 @@
 package linguini.company.backremyapp.security
 
 import io.jsonwebtoken.ExpiredJwtException
+import io.jsonwebtoken.JwtException
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
@@ -40,7 +41,12 @@ class JwtAuthenticationFilter(
             val jwtToken = authHeader!!.extractTokenValue()
             val userId = tokenHelper.extractUserId(jwtToken)
 
-            if (userId != null && SecurityContextHolder.getContext().authentication == null) {
+            if (userId == null) {
+                writeUnauthorizedResponse(response, "Invalid token", "El token no es valido")
+                return
+            }
+
+            if (SecurityContextHolder.getContext().authentication == null) {
                 val usuario = usuarioRepository.findById(userId)
                     .orElseThrow { NotFoundException("Usuario no encontrado") }
 
@@ -49,18 +55,33 @@ class JwtAuthenticationFilter(
                 if (tokenHelper.isValid(jwtToken, usuario.id!!)) {
                     updateContext(foundUser, request)
                 }
-
-                filterChain.doFilter(request, response)
             }
 
+            filterChain.doFilter(request, response)
         } catch (e: ExpiredJwtException) {
             // Captura la excepción de token expirado y devuelve el status code adecuado (401-Unauthorized)
             logger.warn(e.message)
-            response.status = HttpServletResponse.SC_UNAUTHORIZED
-            response.contentType = "application/json"
-            response.writer.write("{\"error\":\"Token expired\",\"message\":\"${e.message}\"}")
+            writeUnauthorizedResponse(response, "Token expired", e.message ?: "El token expiro")
+        } catch (e: JwtException) {
+            logger.warn(e.message)
+            writeUnauthorizedResponse(response, "Invalid token", e.message ?: "El token no es valido")
+        } catch (e: NotFoundException) {
+            logger.warn(e.message)
+            writeUnauthorizedResponse(response, "Invalid token", e.message ?: "Usuario no encontrado")
         }
 
+    }
+
+    private fun writeUnauthorizedResponse(
+        response: HttpServletResponse,
+        error: String,
+        message: String
+    ) {
+        SecurityContextHolder.clearContext()
+        response.status = HttpServletResponse.SC_UNAUTHORIZED
+        response.contentType = "application/json"
+        response.characterEncoding = "UTF-8"
+        response.writer.write("{\"error\":\"${error.escapeJson()}\",\"message\":\"${message.escapeJson()}\"}")
     }
 
     private fun updateContext(foundUser: UserDetails, request: HttpServletRequest) {
@@ -82,4 +103,7 @@ class JwtAuthenticationFilter(
 
     private fun String.extractTokenValue(): String =
         this.substringAfter("Bearer ")
+
+    private fun String.escapeJson(): String =
+        this.replace("\\", "\\\\").replace("\"", "\\\"")
 }

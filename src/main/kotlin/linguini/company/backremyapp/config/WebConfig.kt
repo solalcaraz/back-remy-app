@@ -3,9 +3,8 @@ package linguini.company.backremyapp.config
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.CorsConfigurationSource
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
-import org.springframework.web.filter.CorsFilter
-import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
@@ -22,7 +21,7 @@ class WebConfig : WebMvcConfigurer {
 class CorsConfig {
 
     @Bean
-    fun corsFilter(): CorsFilter {
+    fun corsConfigurationSource(): CorsConfigurationSource {
         val config = CorsConfiguration()
 
         config.allowedOrigins = listOf("http://localhost:5173")
@@ -34,6 +33,6 @@ class CorsConfig {
         val source = UrlBasedCorsConfigurationSource()
         source.registerCorsConfiguration("/**", config)
 
-        return CorsFilter(source)
+        return source
     }
 }
