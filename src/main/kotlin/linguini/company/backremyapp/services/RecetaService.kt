@@ -1,10 +1,8 @@
 package linguini.company.backremyapp.services
 
 import linguini.company.backremyapp.domain.Receta
-import linguini.company.backremyapp.domain.TipoDieta
 import linguini.company.backremyapp.dto.RecetaBusquedaRequest
 import linguini.company.backremyapp.dto.RecetaBusquedaResponse
-import linguini.company.backremyapp.dto.ResumenRecetaDTO
 import linguini.company.backremyapp.domain.Usuario
 import linguini.company.backremyapp.dto.BusquedaRecetaDTO
 import linguini.company.backremyapp.exceptions.NotFoundException
@@ -52,12 +50,12 @@ class RecetaService (
             ?.map { it.nombre.lowercase() }
             ?: emptyList()
 
-        val tipoDieta = usuario?.tipoDieta
+        /*val tipoDieta = usuario?.tipoDieta*/
 
         val recetasEncontradas = if (req.puedeComprar) {
-            recetaRepository.findConAlgunIngrediente(todosLosDisponibles, tipoDieta, req.tiempoMaximo, ingredientesAEvitar)
+            recetaRepository.findConAlgunIngrediente(todosLosDisponibles, /*tipoDieta*/ req.tiempoMaximo, ingredientesAEvitar)
         } else {
-            recetaRepository.findConTodosLosIngredientes(todosLosDisponibles, tipoDieta, req.tiempoMaximo, ingredientesAEvitar)
+            recetaRepository.findConTodosLosIngredientes(todosLosDisponibles, /*tipoDieta*/ req.tiempoMaximo, ingredientesAEvitar)
         }
 
         val resultados = recetasEncontradas
@@ -89,7 +87,7 @@ class RecetaService (
             descripcion = receta.descripcion,
             tiempoEnMinutos = receta.tiempoEnMinutos,
             dificultad = receta.dificultad.label,
-            tipoDieta = receta.tipoDieta.label,
+            /*tipoDieta = receta.tipoDieta.label,*/
             img = receta.imgUrl,
             cantidadIngredientes = nombresReceta.size,
             porcentajeMatch = porcentajeMatch,

@@ -26,8 +26,8 @@ class UsuarioMapper(
             objetivo = usuario.objetivo.label,
             nivelCocina = usuario.nivelCocina.label,
             perfilEconomico = usuario.perfilEconomico.label,
-            ingredientesComunes = usuario.ingredientesComunes(),
-            ingredientesAEvitar = usuario.ingredientesAEvitar(),
+            ingredientesComunes = usuario.ingredientesComunes().map { it.nombre }.toSet(),
+            ingredientesAEvitar = usuario.ingredientesAEvitar().map { it.nombre }.toSet(),
         )
     }
 
