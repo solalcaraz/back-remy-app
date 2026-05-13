@@ -29,7 +29,8 @@ class RecetaMapper: RecetaAdapter {
                 ResumenPasoDTO(it.id, it.orden, it.titulo, it.descripcion, it.tiempoEstimadoMinutos)
             },
             tags = receta.tags,
-            restriccionesAlimentarias = receta.restriccionesAlimentariasCumplidas().map { it.nombre }.toSet()
+            restriccionesAlimentarias = receta.restriccionesAlimentariasCumplidas().map { it.nombre }.toSet(),
+            imgUrl = receta.imgUrl
         )
     }
 

@@ -24,7 +24,8 @@ data class RecetaCompletaDTO(
     val ingredientes: List<IngredienteRecetaDTO>,
     val pasos: List<ResumenPasoDTO>,
     val tags: Set<String>,
-    val restriccionesAlimentarias: Set<String>
+    val restriccionesAlimentarias: Set<String>,
+    val imgUrl: String
 )
 
 data class ResumenRecetaDTO(
