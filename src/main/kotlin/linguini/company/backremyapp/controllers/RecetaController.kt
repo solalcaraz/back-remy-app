@@ -69,10 +69,14 @@ class RecetaController(
 
     @GetMapping("/recomendaciones")
     fun getRecomendaciones(
-        @RequestParam usuarioId: UUID,
         @RequestParam(defaultValue = "10") limite: Int
     ): List<RecomendacionRecetaDTO> {
-        return recomendacionService.recomendarRecetas(usuarioId, limite)
+        val userId = SecurityContextHolder
+            .getContext()
+            .authentication
+            ?.name.toString()
+
+        return recomendacionService.recomendarRecetas(UUID.fromString(userId), limite)
     }
 
     @PostMapping("/favorito/{id}")

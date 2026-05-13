@@ -31,5 +31,5 @@ app:
 
 security:
   key: "tu-clave-secreta-super-segura-de-al-menos-256-bits-o-32-caracteres"
-  access-token-expiration: 60000
+  access-token-expiration: 600000000
   refresh-token-expiration: 604800000

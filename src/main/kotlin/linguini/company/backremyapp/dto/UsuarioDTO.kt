@@ -1,6 +1,5 @@
 package linguini.company.backremyapp.dto
 
-import linguini.company.backremyapp.domain.Ingrediente
 import java.util.UUID
 
 data class UsuarioCompletoDTO(
@@ -12,8 +11,8 @@ data class UsuarioCompletoDTO(
     val objetivo: String,
     val nivelCocina: String,
     val perfilEconomico: String,
-    val ingredientesComunes: Set<Ingrediente>,
-    val ingredientesAEvitar: Set<Ingrediente>
+    val ingredientesComunes: Set<String>,
+    val ingredientesAEvitar: Set<String>
 )
 
 data class UsuarioPatchRequest(

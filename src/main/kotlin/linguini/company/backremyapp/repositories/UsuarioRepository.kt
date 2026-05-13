@@ -9,7 +9,11 @@ import java.util.UUID
 
 /* @Component */
 interface UsuarioRepository : JpaRepository<Usuario, UUID> {
-    @EntityGraph(attributePaths = ["restriccionesAlimentarias", "preferenciasIngredientes", "preferenciasIngredientes.ingrediente"])
+    @EntityGraph(attributePaths = [
+        "restriccionesAlimentarias",
+        "preferenciasIngredientes",
+        "preferenciasIngredientes.ingrediente"
+    ])
     @Query("select u from Usuario u where u.id = :id")
     fun findPerfilById(@Param("id") id: UUID): Optional<Usuario>
 

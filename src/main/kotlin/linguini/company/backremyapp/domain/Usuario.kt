@@ -184,7 +184,7 @@ class Usuario(
 
 enum class ObjetivoUsuario(val label: String) {
     INDIFERENTE("Indiferente"),
-    COMER_SALUDABLE("Comer mas saludable"),
+    COMER_SALUDABLE("Comer más saludable"),
     BAJAR_PESO("Bajar de peso"),
     GANAR_MASA_MUSCULAR("Ganar masa muscular");
 

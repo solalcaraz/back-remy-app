@@ -17,7 +17,7 @@ data class BusquedaRecetaDTO(
     val descripcion: String,
     val tiempoEnMinutos: Int,
     val dificultad: String,
-    val tipoDieta: String,
+    /*val tipoDieta: String,*/
     val img: String,
     val cantidadIngredientes: Int,
     val porcentajeMatch: Int,

@@ -1,6 +1,7 @@
 package linguini.company.backremyapp.repositories
 
 import linguini.company.backremyapp.domain.Receta
+import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.EntityGraph
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
@@ -13,6 +14,28 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
 
     @EntityGraph(attributePaths = ["ingredientes", "ingredientes.ingrediente", "ingredientes.ingrediente.restriccionesAlimentarias", "pasos", "tags"])
     fun findAllWithDetailsBy(): List<Receta>
+
+    @Query("""
+        SELECT r.id
+        FROM Receta r
+        LEFT JOIN r.ingredientes ri
+        LEFT JOIN ri.ingrediente i
+        GROUP BY r.id, r.tiempoEnMinutos
+        ORDER BY
+            SUM(CASE WHEN i.id IN :ingredientesComunesIds THEN 1 ELSE 0 END) DESC,
+            SUM(CASE WHEN i.id IN :ingredientesAEvitarIds THEN 1 ELSE 0 END) ASC,
+            r.tiempoEnMinutos ASC,
+            r.id ASC
+    """)
+    fun findIdsCandidatasParaRecomendacion(
+        @Param("ingredientesComunesIds") ingredientesComunesIds: List<Long>,
+        @Param("ingredientesAEvitarIds") ingredientesAEvitarIds: List<Long>,
+        pageable: Pageable
+    ): List<Long>
+
+    @EntityGraph(attributePaths = ["ingredientes", "ingredientes.ingrediente", "ingredientes.ingrediente.restriccionesAlimentarias", "pasos", "tags"])
+    @Query("SELECT DISTINCT r FROM Receta r WHERE r.id IN :ids")
+    fun findAllWithDetailsByIdIn(@Param("ids") ids: List<Long>): List<Receta>
 
     fun findByNombre(nombre: String): Receta?
 
