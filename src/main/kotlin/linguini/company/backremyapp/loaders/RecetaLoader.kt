@@ -45,7 +45,7 @@ class RecetaLoader(
         dificultad = NivelCocina.BASICO,
         descripcion = "Plato simple, rendidor y alto en proteina.",
         imgUrl = "https://images.unsplash.com/photo-1604909052743-94e838986d24",
-        tags = setOf("proteico", "sin gluten", "economico"),
+        tags = setOf("proteico", "economico"), // En el front tiene que salir también sin gluten
         ingredientes = listOf(
             item("pollo", 500.0),
             item("arroz", 200.0),
@@ -65,7 +65,7 @@ class RecetaLoader(
         dificultad = NivelCocina.INTERMEDIO,
         descripcion = "Vegetales salteados, rapido y liviano.",
         imgUrl = "https://images.unsplash.com/photo-1512058564366-18510be2db19",
-        tags = setOf("vegano", "saludable", "sin gluten"),
+        tags = setOf("saludable"), // En el front tienen que salir también vegano y sin gluten
         ingredientes = listOf(
             item("brocoli", 300.0),
             item("cebolla", 150.0),
@@ -86,7 +86,7 @@ class RecetaLoader(
         dificultad = NivelCocina.INTERMEDIO,
         descripcion = "Guiso vegetal con buena fibra y proteina.",
         imgUrl = "https://images.unsplash.com/photo-1547592166-23ac45744acd",
-        tags = setOf("vegano", "alto en fibra", "economico"),
+        tags = setOf("alto en fibra", "economico"), // En el front tienen que salir también vegano
         ingredientes = listOf(
             item("lentejas", 300.0),
             item("tomate", 200.0),
@@ -107,7 +107,7 @@ class RecetaLoader(
         dificultad = NivelCocina.BASICO,
         descripcion = "Comida rapida, simple y rica en proteina.",
         imgUrl = "https://images.unsplash.com/photo-1525351484163-7529414344d8",
-        tags = setOf("vegetariano", "rapido", "proteico"),
+        tags = setOf("rapido", "proteico"), // En el front tiene que salir también vegetariano
         ingredientes = listOf(
             item("huevo", 2.0, UnidadMedida.UNIDAD),
             item("queso", 60.0),
@@ -144,7 +144,7 @@ class RecetaLoader(
         dificultad = NivelCocina.BASICO,
         descripcion = "Guarnicion economica con vegetales y huevo.",
         imgUrl = "https://images.unsplash.com/photo-1512621776951-a57141f2eefd",
-        tags = setOf("vegetariano", "economico", "simple"),
+        tags = setOf("economico", "simple"), // En el front tiene que salir también vegetariano
         ingredientes = listOf(
             item("papa", 350.0),
             item("huevo", 2.0, UnidadMedida.UNIDAD),
@@ -164,7 +164,7 @@ class RecetaLoader(
         dificultad = NivelCocina.INTERMEDIO,
         descripcion = "Plato clasico, contundente y alto en proteina.",
         imgUrl = "https://images.unsplash.com/photo-1544025162-d76694265947",
-        tags = setOf("proteico", "clasico", "sin gluten"),
+        tags = setOf("proteico", "clasico"), // En el front tiene que salir también sin gluten
         ingredientes = listOf(
             item("carne vacuna", 350.0),
             item("papa", 400.0),
@@ -184,7 +184,7 @@ class RecetaLoader(
         dificultad = NivelCocina.BASICO,
         descripcion = "Base vegetal barata, liviana y apta para varias restricciones.",
         imgUrl = "https://images.unsplash.com/photo-1603133872878-684f208fb84b",
-        tags = setOf("vegano", "sin gluten", "economico"),
+        tags = setOf("economico"), // En el front tiene que salir también vegano
         ingredientes = listOf(
             item("arroz", 220.0),
             item("brocoli", 220.0),
