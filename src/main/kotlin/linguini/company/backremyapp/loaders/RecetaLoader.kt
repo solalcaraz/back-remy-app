@@ -53,9 +53,9 @@ class RecetaLoader(
             item("ajo", 10.0)
         ),
         pasos = listOf(
-            paso(1, "Hervir el arroz", "Cocinar el arroz en agua con sal.", 15),
-            paso(2, "Saltear el pollo", "Dorar el pollo en cubos con cebolla y ajo.", 12),
-            paso(3, "Unir y servir", "Mezclar arroz y pollo, ajustar condimentos.", 3)
+            paso(1, "Hervir el arroz", "Cocinar el arroz en agua con sal.", 15, "https://images.unsplash.com/photo-1536304929831-ee1ca9d44906"),
+            paso(2, "Saltear el pollo", "Dorar el pollo en cubos con cebolla y ajo.", 12, "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d"),
+            paso(3, "Unir y servir", "Mezclar arroz y pollo, ajustar condimentos.", 3, "https://images.unsplash.com/photo-1604909052743-94e838986d24")
         )
     )
 
@@ -74,9 +74,9 @@ class RecetaLoader(
             item("aceite de oliva", 15.0, UnidadMedida.MILILITROS)
         ),
         pasos = listOf(
-            paso(1, "Cortar vegetales", "Separar el brocoli y cortar cebolla y morron.", 10),
-            paso(2, "Calentar wok", "Calentar el wok con aceite de oliva.", 2),
-            paso(3, "Saltear", "Saltear los vegetales a fuego fuerte.", 8)
+            paso(1, "Cortar vegetales", "Separar el brocoli y cortar cebolla y morron.", 10, "https://images.unsplash.com/photo-1583663848850-46af132dc08e"),
+            paso(2, "Calentar wok", "Calentar el wok con aceite de oliva.", 2, "https://images.unsplash.com/photo-1585608674996-54522f25fc25"),
+            paso(3, "Saltear", "Saltear los vegetales a fuego fuerte.", 8, "https://images.unsplash.com/photo-1512058564366-18510be2db19")
         )
     )
 
@@ -95,9 +95,9 @@ class RecetaLoader(
             item("papa", 180.0)
         ),
         pasos = listOf(
-            paso(1, "Remojar lentejas", "Enjuagar y remojar las lentejas si hace falta.", 5),
-            paso(2, "Sofreir base", "Cocinar cebolla, tomate y zanahoria.", 10),
-            paso(3, "Cocinar guiso", "Agregar lentejas, papa y agua hasta tiernizar.", 35)
+            paso(1, "Remojar lentejas", "Enjuagar y remojar las lentejas si hace falta.", 5, "https://images.unsplash.com/photo-1620021650702-8ee700c2f826"),
+            paso(2, "Sofreir base", "Cocinar cebolla, tomate y zanahoria.", 10, "https://images.unsplash.com/photo-1594964648792-6d2745a557b7"),
+            paso(3, "Cocinar guiso", "Agregar lentejas, papa y agua hasta tiernizar.", 35, "https://images.unsplash.com/photo-1547592166-23ac45744acd")
         )
     )
 
@@ -114,9 +114,9 @@ class RecetaLoader(
             item("pimienta", 1.0)
         ),
         pasos = listOf(
-            paso(1, "Batir huevos", "Batir huevos con una pizca de pimienta.", 2),
-            paso(2, "Cocinar", "Volcar en sarten caliente y agregar queso.", 6),
-            paso(3, "Doblar", "Doblar el omelette y terminar la coccion.", 2)
+            paso(1, "Batir huevos", "Batir huevos con una pizca de pimienta.", 2, "https://images.unsplash.com/photo-1582169296194-e4d644c460ca"),
+            paso(2, "Cocinar", "Volcar en sarten caliente y agregar queso.", 6, "https://images.unsplash.com/photo-1601000938259-9e92002320b2"),
+            paso(3, "Doblar", "Doblar el omelette y terminar la coccion.", 2, "https://images.unsplash.com/photo-1525351484163-7529414344d8")
         )
     )
 
@@ -133,8 +133,8 @@ class RecetaLoader(
             item("azucar", 8.0)
         ),
         pasos = listOf(
-            paso(1, "Mezclar", "Mezclar avena, yogur y azucar.", 3),
-            paso(2, "Reposar", "Dejar reposar para hidratar la avena.", 10)
+            paso(1, "Mezclar", "Mezclar avena, yogur y azucar.", 3, "https://images.unsplash.com/photo-1495460596396-039cff98fc86"),
+            paso(2, "Reposar", "Dejar reposar para hidratar la avena.", 10, "https://images.unsplash.com/photo-1517673132405-a56a62b18caf")
         )
     )
 
@@ -152,9 +152,9 @@ class RecetaLoader(
             item("aceite de oliva", 12.0, UnidadMedida.MILILITROS)
         ),
         pasos = listOf(
-            paso(1, "Hervir papa", "Cocinar la papa en cubos hasta que este tierna.", 18),
-            paso(2, "Hervir huevos", "Cocinar los huevos y pelarlos.", 10),
-            paso(3, "Armar", "Mezclar papa, huevo, cebolla y aceite.", 4)
+            paso(1, "Hervir papa", "Cocinar la papa en cubos hasta que este tierna.", 18, "https://images.unsplash.com/photo-1582298538104-12ec82944f38"),
+            paso(2, "Hervir huevos", "Cocinar los huevos y pelarlos.", 10, "https://images.unsplash.com/photo-1569263989123-289569cecb36"),
+            paso(3, "Armar", "Mezclar papa, huevo, cebolla y aceite.", 4, "https://images.unsplash.com/photo-1512621776951-a57141f2eefd")
         )
     )
 
@@ -172,9 +172,9 @@ class RecetaLoader(
             item("ajo", 6.0)
         ),
         pasos = listOf(
-            paso(1, "Hervir papas", "Cocinar las papas hasta que esten blandas.", 20),
-            paso(2, "Cocinar carne", "Dorar la carne en sarten caliente.", 12),
-            paso(3, "Pisar pure", "Pisar papa con leche y servir.", 5)
+            paso(1, "Hervir papas", "Cocinar las papas hasta que esten blandas.", 20, "https://images.unsplash.com/photo-1518977676601-b53f82aba655"),
+            paso(2, "Cocinar carne", "Dorar la carne en sarten caliente.", 12, "https://images.unsplash.com/photo-1600891964092-4316c288032e"),
+            paso(3, "Pisar pure", "Pisar papa con leche y servir.", 5, "https://images.unsplash.com/photo-1544025162-d76694265947")
         )
     )
 
@@ -192,9 +192,9 @@ class RecetaLoader(
             item("aceite de oliva", 10.0, UnidadMedida.MILILITROS)
         ),
         pasos = listOf(
-            paso(1, "Cocinar arroz", "Hervir el arroz hasta que este a punto.", 15),
-            paso(2, "Cocinar vegetales", "Saltear brocoli y zanahoria.", 8),
-            paso(3, "Integrar", "Mezclar todo y ajustar condimentos.", 2)
+            paso(1, "Cocinar arroz", "Hervir el arroz hasta que este a punto.", 15, "https://images.unsplash.com/photo-1536304929831-ee1ca9d44906"),
+            paso(2, "Cocinar vegetales", "Saltear brocoli y zanahoria.", 8, "https://images.unsplash.com/photo-1556040220-4096d522378d"),
+            paso(3, "Integrar", "Mezclar todo y ajustar condimentos.", 2, "https://images.unsplash.com/photo-1603133872878-684f208fb84b")
         )
     )
 
@@ -229,14 +229,20 @@ class RecetaLoader(
         unidadMedida = unidad
     )
 
-    private fun paso(orden: Int, titulo: String, descripcion: String, minutos: Int) = Paso(
+    private fun paso(
+        orden: Int,
+        titulo: String,
+        descripcion: String,
+        minutos: Int,
+        imagenUrl: String? = null
+    ) = Paso(
         orden = orden,
         titulo = titulo,
         descripcion = descripcion,
         detalle = descripcion,
         tiempoEstimadoMinutos = minutos,
         tip = null,
-        imagenUrl = null
+        imagenUrl = imagenUrl
     )
 
     private fun ingrediente(nombre: String): Ingrediente {
