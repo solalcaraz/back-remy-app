@@ -45,6 +45,8 @@ class SecurityConfiguration(
 
                     //Todo: setear roles en receta
                     .requestMatchers("/paso/**").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/receta/**").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/ingrediente/**").permitAll()
                     // Permisos de admin para modificar
                     // Solo los que pueden reservar (lector) acceden a este endpoint
                     //---------------------------
