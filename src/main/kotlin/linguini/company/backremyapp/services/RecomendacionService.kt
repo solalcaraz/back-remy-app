@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import kotlin.math.roundToInt
 import java.util.UUID
+import kotlin.math.cos
 
 @Service
 class RecomendacionService(
@@ -75,7 +76,8 @@ class RecomendacionService(
                     receta = recetasResumenMap[receta.id]!!,
                     puntaje = evaluacion.puntaje,
                     costoAproximado = costoAproximado,
-                    motivos = evaluacion.motivos,
+                    motivosPositivos = evaluacion.motivosPositivos,
+                    motivosNegativos = evaluacion.motivosNegativos,
                     ingredientesCoincidentes = receta.ingredientesCoincidentesCon(usuario).map { it.nombre }.toSet(),
                     ingredientesFaltantes = receta.ingredientesFaltantesPara(usuario).map { it.nombre }.toSet()
                 )
@@ -181,7 +183,6 @@ class RecomendacionService(
         var puntaje = 0
         val motivosPositivos = mutableListOf<String>()
         val motivosNegativos = mutableListOf<String>()
-        var motivoCostoMsg = ""
 
 //        val coincidencias = receta.ingredientesCoincidentesCon(usuario)
 //        val faltantes = receta.ingredientesFaltantesPara(usuario)
@@ -247,14 +248,15 @@ class RecomendacionService(
         }
 
         // dificultad
-        if (receta.dificultad.ordinal <= usuario.nivelCocina.ordinal) {
+        val diferenciaDificultad = receta.dificultad.ordinal - usuario.nivelCocina.ordinal
+        if (diferenciaDificultad <= 0) {
             puntaje += PUNTOS_DIFICULTAD
             motivosPositivos.add("La dificultad es adecuada para tu nivel")
         } else {
-            val diferenciaDificultad = receta.dificultad.ordinal - usuario.nivelCocina.ordinal
             puntaje += (PUNTOS_DIFICULTAD - diferenciaDificultad * PENALIZACION_DIFICULTAD).coerceAtLeast(0)
             motivosNegativos.add("Puede ser mas dificil que tu nivel de cocina actual")
         }
+
 
         // si contiene o no ing a evitar
         if (!receta.contieneIngredienteAEvitar(usuario)) {
@@ -265,7 +267,7 @@ class RecomendacionService(
 
         // costo
         puntaje += puntosPorCosto(costoAproximado, usuario.perfilEconomico)
-        motivoCostoMsg = motivoCosto(costoAproximado, usuario.perfilEconomico)
+        motivoCosto(costoAproximado, usuario.perfilEconomico, motivosPositivos, motivosNegativos)
 
         // modificadores de historial y fav
         if (receta.id?.let { it in favoritosIds } == true) {
@@ -286,9 +288,8 @@ class RecomendacionService(
 
         // puntaje normalizado y motivos finales
         val puntajeNormalizado = ((puntaje.toDouble() / MAX_SCORE_TEORICO) * 100).roundToInt().coerceIn(0, 100)
-        val motivosFinales = motivosPositivos.take(2) + motivosNegativos.take(2) + listOfNotNull(motivoCostoMsg.ifBlank { null })
 
-        return EvaluacionRecomendacion(puntajeNormalizado, motivosFinales)
+        return EvaluacionRecomendacion(puntajeNormalizado, motivosPositivos, motivosNegativos)
     }
 
     private fun puntosPorIngredientes(
@@ -343,13 +344,24 @@ class RecomendacionService(
         }
     }
 
-    private fun motivoCosto(costoAproximado: Double, perfilEconomico: PerfilEconomico): String {
+    private fun motivoCosto(costoAproximado: Double, perfilEconomico: PerfilEconomico, motivosPositivos: MutableList<String>, motivosNegativos: MutableList<String>) {
         val costo = "${'$'}${costoAproximado.roundToInt()}"
 
-        return when (perfilEconomico) {
-            PerfilEconomico.BAJO_PRESUPUESTO -> "Costo aproximado $costo considerado para perfil de bajo presupuesto"
-            PerfilEconomico.INTERMEDIO -> "Costo aproximado $costo considerado para perfil intermedio"
-            PerfilEconomico.FLEXIBLE -> "Costo aproximado $costo considerado para perfil flexible"
+        when (perfilEconomico) {
+            PerfilEconomico.BAJO_PRESUPUESTO -> when {
+                costoAproximado <= 1500.0 -> motivosPositivos.add("Costo accesible para tu presupuesto ($costo)")
+                costoAproximado <= 2500.0 -> motivosPositivos.add("Costo ajustado a tu presupuesto ($costo)")
+                else -> motivosNegativos.add("Costo elevado para tu presupuesto ($costo)")
+            }
+            PerfilEconomico.INTERMEDIO -> when {
+                costoAproximado <= 2500.0 -> motivosPositivos.add("Buen costo para tu perfil ($costo)")
+                costoAproximado <= 4500.0 -> motivosPositivos.add("Costo moderado para tu perfil ($costo)")
+                else -> motivosNegativos.add("Costo elevado para tu perfil ($costo)")
+            }
+            PerfilEconomico.FLEXIBLE -> when {
+                costoAproximado <= 5000.0 -> motivosPositivos.add("Costo dentro de tu rango ($costo)")
+                else -> motivosNegativos.add("Costo por encima de tu rango habitual ($costo)")
+            }
         }
     }
 
@@ -452,5 +464,6 @@ class RecomendacionService(
 
 private data class EvaluacionRecomendacion(
     val puntaje: Int,
-    val motivos: List<String>
+    val motivosPositivos: List<String>,
+    val motivosNegativos: List<String>
 )
