@@ -4,6 +4,7 @@ import linguini.company.backremyapp.dto.RecetaCompletaDTO
 import linguini.company.backremyapp.dto.RecomendacionRecetaDTO
 import linguini.company.backremyapp.dto.RecomendacionRequest
 import linguini.company.backremyapp.dto.ResumenRecetaDTO
+import linguini.company.backremyapp.dto.SugerenciaDiariaDTO
 import linguini.company.backremyapp.helpers.RecetaMapper
 import linguini.company.backremyapp.services.RecomendacionService
 import linguini.company.backremyapp.services.RecetaService
@@ -68,6 +69,12 @@ class RecetaController(
             ?.name.toString()
 
         return recomendacionService.recomendarRecetas(UUID.fromString(userId), req)
+    }
+
+    @GetMapping("/sugerencia-diaria")
+    fun getSugerenciaDiaria(): SugerenciaDiariaDTO {
+        val userId = SecurityContextHolder.getContext().authentication?.name.toString()
+        return recomendacionService.sugerenciaDiaria(UUID.fromString(userId))
     }
 
     @PostMapping("/favorito/{id}")

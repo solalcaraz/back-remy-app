@@ -16,3 +16,8 @@ data class RecomendacionRequest(
         }
     }
 }
+
+data class SugerenciaDiariaDTO(
+    val receta: ResumenRecetaDTO,
+    val motivosPositivos: List<String>
+)
