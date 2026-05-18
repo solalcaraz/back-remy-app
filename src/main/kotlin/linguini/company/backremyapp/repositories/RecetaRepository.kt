@@ -20,6 +20,22 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
         FROM Receta r
         LEFT JOIN r.ingredientes ri
         LEFT JOIN ri.ingrediente i
+        WHERE (:tiempoMaximo IS NULL OR r.tiempoEnMinutos <= :tiempoMaximo)
+          AND NOT EXISTS (
+              SELECT ri2 FROM RecetaIngrediente ri2
+              WHERE ri2.receta = r
+              AND ri2.ingrediente.id IN :ingredientesAEvitarIds
+          )
+          AND (
+              :restriccionesIds IS NULL OR NOT EXISTS (
+                  SELECT ri3 FROM RecetaIngrediente ri3
+                  WHERE ri3.receta = r
+                  AND NOT EXISTS (
+                      SELECT ra FROM ri3.ingrediente.restriccionesAlimentarias ra
+                      WHERE ra.id IN :restriccionesIds
+                  )
+              )
+          )
         GROUP BY r.id, r.tiempoEnMinutos
         ORDER BY
             SUM(CASE WHEN i.id IN :ingredientesComunesIds THEN 1 ELSE 0 END) DESC,
@@ -30,6 +46,8 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
     fun findIdsCandidatasParaRecomendacion(
         @Param("ingredientesComunesIds") ingredientesComunesIds: List<Long>,
         @Param("ingredientesAEvitarIds") ingredientesAEvitarIds: List<Long>,
+        @Param("restriccionesIds") restriccionesIds: List<Long>,
+        @Param("tiempoMaximo") tiempoMaximo: Int?,
         pageable: Pageable
     ): List<Long>
 
@@ -41,10 +59,12 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
 
     //fun findAllByTiempoEnMinutosLessThan(minutos: Int): List<Receta>
 
-    /*
-    puedeComprar = false, entonces solo recetas con TODOS los ingredientes disponibles tanto en despensa como en el input de la busqueda
+    /* busquedaActiva = true y puedeComprar = false,
+    entonces solo recetas con TODOS los ingredientes disponibles tanto en despensa como en el input de la busqueda
+    no contiene ing a evitar y cumple las restricciones del user
+    y pageable para no traer recetas sin limite
      */
-    @EntityGraph(attributePaths = ["ingredientes", "ingredientes.ingrediente", "tags"])
+    @EntityGraph(attributePaths = ["ingredientes", "ingredientes.ingrediente", "ingredientes.ingrediente.restriccionesAlimentarias", "pasos", "tags"])
     @Query("""
         SELECT DISTINCT r FROM Receta r
         JOIN r.ingredientes ri
@@ -60,19 +80,32 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
               SELECT ri3 FROM RecetaIngrediente ri3
               WHERE ri3.receta = r
               AND LOWER(ri3.ingrediente.nombre) IN :aEvitar
-      )
+          )
+          AND (
+            :restriccionesIds IS NULL OR NOT EXISTS (
+                SELECT ri4 FROM RecetaIngrediente ri4
+                WHERE ri4.receta = r
+                AND NOT EXISTS (
+                    SELECT ri4 FROM ri4.ingrediente.restriccionesAlimentarias ra
+                    WHERE ra.id IN :restriccionesIds
+                )
+            )
+          )
     """)
     fun findConTodosLosIngredientes(
         @Param("disponibles") disponibles: List<String>,
         @Param("tiempoMaximo") tiempoMaximo: Int?,
-        @Param("aEvitar") aEvitar: List<String>
+        @Param("aEvitar") aEvitar: List<String>,
+        @Param("restriccionesIds") restriccionesIds: List<Long>,
+        pageable: Pageable
     ): List<Receta>
 
-    /*
-    puedeComprar = true entonces recetas que tengan al menos uno de los ingredinetes disponibles
-    se excluyen solamente los ing a evitar
+    /* busquedaActiva=true y puedeComprar = true
+    entonces recetas que tengan al menos uno de los ingredinetes disponibles
+    se excluyen solamente los ing a evitar y tambien cumple las restricciones alimentarias
+    y pageable para no traer recetas sin limite
     */
-    @EntityGraph(attributePaths = ["ingredientes", "ingredientes.ingrediente", "tags"])
+    @EntityGraph(attributePaths = ["ingredientes", "ingredientes.ingrediente", "ingredientes.ingrediente.restriccionesAlimentarias", "pasos", "tags"])
     @Query("""
         SELECT DISTINCT r FROM Receta r
         JOIN r.ingredientes ri
@@ -83,11 +116,23 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
               SELECT ri2 FROM RecetaIngrediente ri2
               WHERE ri2.receta = r
               AND LOWER(ri2.ingrediente.nombre) IN :aEvitar
-        )
+          )
+          AND (
+            :restriccionesIds IS NULL OR NOT EXISTS (
+                SELECT ri3 FROM RecetaIngrediente ri3
+                WHERE ri3.receta = r
+                AND NOT EXISTS (
+                    SELECT ra FROM ri3.ingrediente.restriccionesAlimentarias ra
+                    WHERE ra.id IN :restriccionesIds
+                )
+            )
+          )
     """)
     fun findConAlgunIngrediente(
         @Param("disponibles") disponibles: List<String>,
         @Param("tiempoMaximo") tiempoMaximo: Int?,
-        @Param("aEvitar") aEvitar: List<String>
+        @Param("aEvitar") aEvitar: List<String>,
+        @Param("restriccionesIds") restriccionesIds: List<Long>,
+        pageable: Pageable
     ): List<Receta>
 }

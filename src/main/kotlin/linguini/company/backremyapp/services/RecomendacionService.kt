@@ -30,10 +30,6 @@ class RecomendacionService(
     private val historialRecetaRepository: HistorialRecetaRepository,
     private val recetaMapper: RecetaMapper
 ) {
-    /* Así encaró el tema de la recomendación codex, no está teniendo en cuenta los inputs del home porque no sabe
-    el contexto del front salvo el de mi vista, agregale la logica de tus inputs y condimentalo como vos quieras @Sol */
-    /* Lo de devolver el objeto con puntaje y lista de badges me pareció genial, pero esta hecho con zaraza creo */
-    /* No sé cómo va a ser llevar esto a SQL, veamos si es facil si no lo dejamos asi chupando todas las recetas */
     @Transactional(readOnly = true)
     fun recomendarRecetas(usuarioId: UUID, req: RecomendacionRequest): List<RecomendacionRecetaDTO> {
         val usuario = usuarioRepository.findPerfilById(usuarioId)
@@ -51,7 +47,11 @@ class RecomendacionService(
         // flag para determinar si se usan ing comunes o tambien del input
         val busquedaActiva = req.ingredientesExtra.isNotEmpty()
 
-        val recetas = buscarCandidatas(usuario, ingredientesDisponibles, ingredinetesAEvitar, req.tiempoMaximo, req.puedeComprar, busquedaActiva, limiteNormalizado)
+        // restricciones, se resuelve en el service con los id q pesan menos y se pasan a la query
+        val restriccionesIds = idsParaQuery(usuario.restriccionesAlimentarias.mapNotNull { it.id })
+
+        val recetas = buscarCandidatas(usuario, ingredientesDisponibles, ingredinetesAEvitar, restriccionesIds,
+            req.tiempoMaximo, req.puedeComprar, busquedaActiva, limiteNormalizado)
 
         if (recetas.isEmpty()) return  emptyList()
 
@@ -88,18 +88,19 @@ class RecomendacionService(
 
     private fun buscarCandidatas(
         usuario: Usuario, ingredientesDisponibles: List<String>, ingredientesAEvitar: List<String>,
-        tiempoMaximo: Int?, puedeComprar: Boolean, busquedaActiva: Boolean, limite: Int
+        restriccionesIds: List<Long>, tiempoMaximo: Int?, puedeComprar: Boolean, busquedaActiva: Boolean, limite: Int
     ): List<Receta> {
         val cantidadCandidatas = (limite * MULTIPLICADOR_CANDIDATAS).coerceAtLeast(MINIMO_CANDIDATAS)
+        val pageable = PageRequest.of(0, cantidadCandidatas)
 
         // busqueda de las recetas teniendo en cuenta: tiempo, ing a evitar y comun (preferencias del user)
         // la query ordena por coincidencia con los ing dispo, pero el sist de scrore refina el orden
         val recetas: List<Receta> = if (busquedaActiva) {  //o sea si el user ingreso ing en el input o solo quiere recetas con los ing que marco como comun
             // si puede comprar la busqueda de recetas se amplia, basta con que tenga algunos de los ing dispo
             if (puedeComprar) {
-                recetaRepository.findConAlgunIngrediente(ingredientesDisponibles, tiempoMaximo, ingredientesAEvitar)
+                recetaRepository.findConAlgunIngrediente(ingredientesDisponibles, tiempoMaximo, ingredientesAEvitar, restriccionesIds, pageable)
             } else { // si no puede comprar la busqueda se limita a recetas que tenga todos los ing disponibles
-                recetaRepository.findConTodosLosIngredientes(ingredientesDisponibles, tiempoMaximo, ingredientesAEvitar)
+                recetaRepository.findConTodosLosIngredientes(ingredientesDisponibles, tiempoMaximo, ingredientesAEvitar, restriccionesIds, pageable)
             }
         } else { // si no tiene ingredinetes extra en el input, la busqueda se ajusta solo a las preferencias del user
             val ingredientesComunesIds = idsParaQuery(usuario.ingredientesComunes().mapNotNull { it.id })
@@ -108,7 +109,9 @@ class RecomendacionService(
             val candidatasIds = recetaRepository.findIdsCandidatasParaRecomendacion(
                 ingredientesComunesIds = ingredientesComunesIds,
                 ingredientesAEvitarIds = ingredientesAEvitarIds,
-                pageable = PageRequest.of(0, cantidadCandidatas)
+                restriccionesIds = restriccionesIds,
+                tiempoMaximo = tiempoMaximo,
+                pageable = pageable
             )
 
             if (candidatasIds.isEmpty()) return emptyList()
@@ -119,21 +122,24 @@ class RecomendacionService(
                 .sortedBy { receta -> ordenPorId[receta.id] ?: Int.MAX_VALUE }
         }
 
+        return if (!puedeComprar && !busquedaActiva) {
+            recetas.filter { r -> r.ingredientes.all { it.ingrediente.nombre.lowercase() in ingredientesDisponibles } }
+        } else { recetas }
         // filtro en memoria sobre lo que haya encontrado, CAMBIAR A UNA CONSULTA SQL
-        return recetas.filter { receta ->
-            // se filtra por tiempo si aplico el filtro pero no ingreso ingredientes
-            val cumpleTiempo = tiempoMaximo == null || receta.tiempoEnMinutos <= tiempoMaximo
-
-            // se filtra por restricciones aliminatarias
-            val cumpleRestricciones = receta.cumpleRestricciones(usuario.restriccionesAlimentarias)
-
-            // si no ingresa ing en input pero puede comprar, no se contempla ese filtro
-            val disponibilidadTotal = puedeComprar || receta.ingredientes.all {
-                it.ingrediente.nombre.lowercase() in ingredientesDisponibles
-            }
-
-            cumpleRestricciones && cumpleTiempo && disponibilidadTotal
-        }
+//        return recetas.filter { receta ->
+//            // se filtra por tiempo si aplico el filtro pero no ingreso ingredientes
+//            val cumpleTiempo = tiempoMaximo == null || receta.tiempoEnMinutos <= tiempoMaximo
+//
+//            // se filtra por restricciones aliminatarias
+//            val cumpleRestricciones = receta.cumpleRestricciones(usuario.restriccionesAlimentarias)
+//
+//            // si no ingresa ing en input pero puede comprar, no se contempla ese filtro
+//            val disponibilidadTotal = puedeComprar || receta.ingredientes.all {
+//                it.ingrediente.nombre.lowercase() in ingredientesDisponibles
+//            }
+//
+//            cumpleRestricciones && cumpleTiempo && disponibilidadTotal
+//        }
     }
 
     private fun idsParaQuery(ids: List<Long>): List<Long> {
