@@ -34,15 +34,13 @@ class RecetaService (
     }
 
     @Transactional
-    fun comenzarReceta(usuarioId: UUID, recetaId: Long): Receta {
+    fun comenzarReceta(usuarioId: UUID, recetaId: Long) {
         val usuario = buscarUsuarioConHistorial(usuarioId)
         val receta = recetaRepository.findWithDetailsById(recetaId)
             .orElseThrow { NotFoundException("Receta no encontrada") }
 
         usuario.comenzarReceta(receta)
         usuarioRepository.save(usuario)
-
-        return receta
     }
 
     @Transactional(readOnly = true)

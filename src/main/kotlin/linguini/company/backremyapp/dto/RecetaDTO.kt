@@ -30,11 +30,11 @@ data class RecetaCompletaDTO(
 
 data class ResumenRecetaDTO(
     val id: Long?,
-    val titulo: String,
+    val nombre: String,
     val descripcion: String,
-    val tiempoEstimadoMinutos: Int,
+    val tiempoEnMinutos: Int,
     val tipoReceta: String,
-    val img: String,
+    val imgUrl: String,
     val favorito: Boolean,
 )
 
