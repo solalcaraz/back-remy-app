@@ -44,10 +44,8 @@ class RecetaController(
     }
 
     @PostMapping("/comenzar/{id}")
-    fun comenzarReceta(@PathVariable id: Long, @RequestParam usuarioId: UUID): RecetaCompletaDTO {
-        val receta = recetaService.comenzarReceta(usuarioId, id)
-
-        return recetaMapper.toFullDTO(receta)
+    fun comenzarReceta(@PathVariable id: Long, @RequestParam usuarioId: UUID) {
+        recetaService.comenzarReceta(usuarioId, id)
     }
 
     @GetMapping("/favoritos")

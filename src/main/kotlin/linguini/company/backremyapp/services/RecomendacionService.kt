@@ -82,7 +82,7 @@ class RecomendacionService(
                     ingredientesFaltantes = receta.ingredientesFaltantesPara(usuario).map { it.nombre }.toSet()
                 )
             }
-            .sortedWith(compareByDescending<RecomendacionRecetaDTO> { it.puntaje }.thenBy { it.receta.tiempoEstimadoMinutos })
+            .sortedWith(compareByDescending<RecomendacionRecetaDTO> { it.puntaje }.thenBy { it.receta.tiempoEnMinutos })
             .take(limiteNormalizado)
     }
 

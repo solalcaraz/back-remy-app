@@ -39,11 +39,11 @@ class RecetaMapper: RecetaAdapter {
             val favorito = favoritosIds?.let { ids -> receta.id?.let { it in ids } == true } ?: true
             ResumenRecetaDTO(
                 id = receta.id,
-                titulo = receta.nombre,
+                nombre = receta.nombre,
                 descripcion = receta.descripcion,
-                tiempoEstimadoMinutos = receta.tiempoEnMinutos,
+                tiempoEnMinutos = receta.tiempoEnMinutos,
                 tipoReceta = "General",
-                img = receta.imgUrl,
+                imgUrl = receta.imgUrl,
                 favorito
             )
         }
