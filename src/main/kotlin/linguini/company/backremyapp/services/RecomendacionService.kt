@@ -7,6 +7,7 @@ import linguini.company.backremyapp.domain.Receta
 import linguini.company.backremyapp.domain.Usuario
 import linguini.company.backremyapp.dto.RecomendacionRecetaDTO
 import linguini.company.backremyapp.dto.RecomendacionRequest
+import linguini.company.backremyapp.dto.SugerenciaDiariaDTO
 import linguini.company.backremyapp.helpers.RecetaMapper
 import linguini.company.backremyapp.repositories.FavoritoRecetaRepository
 import linguini.company.backremyapp.repositories.HistorialRecetaRepository
@@ -30,10 +31,6 @@ class RecomendacionService(
     private val historialRecetaRepository: HistorialRecetaRepository,
     private val recetaMapper: RecetaMapper
 ) {
-    /* Así encaró el tema de la recomendación codex, no está teniendo en cuenta los inputs del home porque no sabe
-    el contexto del front salvo el de mi vista, agregale la logica de tus inputs y condimentalo como vos quieras @Sol */
-    /* Lo de devolver el objeto con puntaje y lista de badges me pareció genial, pero esta hecho con zaraza creo */
-    /* No sé cómo va a ser llevar esto a SQL, veamos si es facil si no lo dejamos asi chupando todas las recetas */
     @Transactional(readOnly = true)
     fun recomendarRecetas(usuarioId: UUID, req: RecomendacionRequest): List<RecomendacionRecetaDTO> {
         val usuario = usuarioRepository.findPerfilById(usuarioId)
@@ -51,7 +48,11 @@ class RecomendacionService(
         // flag para determinar si se usan ing comunes o tambien del input
         val busquedaActiva = req.ingredientesExtra.isNotEmpty()
 
-        val recetas = buscarCandidatas(usuario, ingredientesDisponibles, ingredinetesAEvitar, req.tiempoMaximo, req.puedeComprar, busquedaActiva, limiteNormalizado)
+        // restricciones, se resuelve en el service con los id q pesan menos y se pasan a la query
+        val restriccionesIds = idsParaQuery(usuario.restriccionesAlimentarias.mapNotNull { it.id })
+
+        val recetas = buscarCandidatas(usuario, ingredientesDisponibles, ingredinetesAEvitar, restriccionesIds,
+            req.tiempoMaximo, req.puedeComprar, busquedaActiva, limiteNormalizado)
 
         if (recetas.isEmpty()) return  emptyList()
 
@@ -86,53 +87,105 @@ class RecomendacionService(
             .take(limiteNormalizado)
     }
 
+    @Transactional(readOnly = true)
+    fun sugerenciaDiaria(usuarioId: UUID): SugerenciaDiariaDTO {
+        val usuario = usuarioRepository.findPerfilById(usuarioId).orElseThrow { NotFoundException("Usuario no encontrado") }
+
+        val ingredientesDisponibles = usuario.ingredientesComunes().map { it.nombre.lowercase() }
+        val ingredientesAEvitar = usuario.ingredientesAEvitar().map { it.nombre.lowercase() }
+        val restriccionesIds = idsParaQuery(usuario.restriccionesAlimentarias.mapNotNull { it.id })
+
+        val recetas = buscarCandidatas(
+            usuario, ingredientesDisponibles, ingredientesAEvitar, restriccionesIds,
+            null, true, false, LIMITE_SUGERENCIA_DIARIA
+        )
+
+        // deberia traer una cualquiera y en el front sugerir que ajuste su perfil ?
+        if(recetas.isEmpty()) throw NotFoundException("No hay recetas disponibles para tu perfil")
+
+        val favoritosIds = favoritoRecetaRepository.findRecetaIdsByUsuarioId(usuarioId)
+        val historialIds = historialRecetaRepository.findRecetasByUsuarioId(usuarioId)
+            .mapNotNull { it.id }.toSet()
+        val preciosPorIngredienteId = buscarPreciosPorIngrediente(recetas)
+
+        // Se puntúan todas, se toman las TOP_N mejor rankeadas y se elige una al azar entre ellas.
+        // Así la sugerencia varía en cada visita pero siempre es una receta relevante.
+        val candidatasTop = recetas
+            .map { receta ->
+                val costo = costoAproximado(receta, preciosPorIngredienteId)
+                val evaluacion = evaluarReceta(
+                    receta, usuario, ingredientesDisponibles, emptyList(),
+                    favoritosIds, historialIds, costo, puedeComprar = true, busquedaActiva = false
+                )
+                Pair(receta, evaluacion)
+            }
+            .sortedByDescending { (_, eval) -> eval.puntaje }
+            .take(TOP_SUGERENCIAS_RANDOM)
+
+        val (recetaElegida, evaluacion) = candidatasTop.random()
+
+        val resumen = recetaMapper.toRecetaResumenDTO(listOf(recetaElegida), favoritosIds).first()
+
+        return SugerenciaDiariaDTO(
+            receta = resumen,
+            motivosPositivos = evaluacion.motivosPositivos
+        )
+    }
+
     private fun buscarCandidatas(
         usuario: Usuario, ingredientesDisponibles: List<String>, ingredientesAEvitar: List<String>,
-        tiempoMaximo: Int?, puedeComprar: Boolean, busquedaActiva: Boolean, limite: Int
+        restriccionesIds: List<Long>, tiempoMaximo: Int?, puedeComprar: Boolean, busquedaActiva: Boolean, limite: Int
     ): List<Receta> {
         val cantidadCandidatas = (limite * MULTIPLICADOR_CANDIDATAS).coerceAtLeast(MINIMO_CANDIDATAS)
+        val pageable = PageRequest.of(0, cantidadCandidatas)
 
         // busqueda de las recetas teniendo en cuenta: tiempo, ing a evitar y comun (preferencias del user)
         // la query ordena por coincidencia con los ing dispo, pero el sist de scrore refina el orden
-        val recetas: List<Receta> = if (busquedaActiva) {  //o sea si el user ingreso ing en el input o solo quiere recetas con los ing que marco como comun
-            // si puede comprar la busqueda de recetas se amplia, basta con que tenga algunos de los ing dispo
-            if (puedeComprar) {
-                recetaRepository.findConAlgunIngrediente(ingredientesDisponibles, tiempoMaximo, ingredientesAEvitar)
-            } else { // si no puede comprar la busqueda se limita a recetas que tenga todos los ing disponibles
-                recetaRepository.findConTodosLosIngredientes(ingredientesDisponibles, tiempoMaximo, ingredientesAEvitar)
+        val recetas: List<Receta> =
+            if (busquedaActiva) {  //o sea si el user ingreso ing en el input o solo quiere recetas con los ing que marco como comun
+                // si puede comprar la busqueda de recetas se amplia, basta con que tenga algunos de los ing dispo
+                if (puedeComprar) {
+                    recetaRepository.findConAlgunIngrediente(
+                        ingredientesDisponibles,
+                        tiempoMaximo,
+                        ingredientesAEvitar,
+                        restriccionesIds,
+                        pageable
+                    )
+                } else { // si no puede comprar la busqueda se limita a recetas que tenga todos los ing disponibles
+                    recetaRepository.findConTodosLosIngredientes(
+                        ingredientesDisponibles,
+                        tiempoMaximo,
+                        ingredientesAEvitar,
+                        restriccionesIds,
+                        pageable
+                    )
+                }
+            } else { // si no tiene ingredinetes extra en el input, la busqueda se ajusta solo a las preferencias del user
+                val ingredientesComunesIds = idsParaQuery(usuario.ingredientesComunes().mapNotNull { it.id })
+                val ingredientesAEvitarIds = idsParaQuery(usuario.ingredientesAEvitar().mapNotNull { it.id })
+
+                val candidatasIds = recetaRepository.findIdsCandidatasParaRecomendacion(
+                    ingredientesComunesIds = ingredientesComunesIds,
+                    ingredientesAEvitarIds = ingredientesAEvitarIds,
+                    restriccionesIds = restriccionesIds,
+                    tiempoMaximo = tiempoMaximo,
+                    pageable = pageable
+                )
+
+                if (candidatasIds.isEmpty()) return emptyList()
+
+                val ordenPorId = candidatasIds.withIndex().associate { it.value to it.index }
+
+                recetaRepository.findAllWithDetailsByIdIn(candidatasIds)
+                    .sortedBy { receta -> ordenPorId[receta.id] ?: Int.MAX_VALUE }
             }
-        } else { // si no tiene ingredinetes extra en el input, la busqueda se ajusta solo a las preferencias del user
-            val ingredientesComunesIds = idsParaQuery(usuario.ingredientesComunes().mapNotNull { it.id })
-            val ingredientesAEvitarIds = idsParaQuery(usuario.ingredientesAEvitar().mapNotNull { it.id })
 
-            val candidatasIds = recetaRepository.findIdsCandidatasParaRecomendacion(
-                ingredientesComunesIds = ingredientesComunesIds,
-                ingredientesAEvitarIds = ingredientesAEvitarIds,
-                pageable = PageRequest.of(0, cantidadCandidatas)
-            )
-
-            if (candidatasIds.isEmpty()) return emptyList()
-
-            val ordenPorId = candidatasIds.withIndex().associate { it.value to it.index }
-
-            recetaRepository.findAllWithDetailsByIdIn(candidatasIds)
-                .sortedBy { receta -> ordenPorId[receta.id] ?: Int.MAX_VALUE }
-        }
-
-        // filtro en memoria sobre lo que haya encontrado, CAMBIAR A UNA CONSULTA SQL
-        return recetas.filter { receta ->
-            // se filtra por tiempo si aplico el filtro pero no ingreso ingredientes
-            val cumpleTiempo = tiempoMaximo == null || receta.tiempoEnMinutos <= tiempoMaximo
-
-            // se filtra por restricciones aliminatarias
-            val cumpleRestricciones = receta.cumpleRestricciones(usuario.restriccionesAlimentarias)
-
-            // si no ingresa ing en input pero puede comprar, no se contempla ese filtro
-            val disponibilidadTotal = puedeComprar || receta.ingredientes.all {
-                it.ingrediente.nombre.lowercase() in ingredientesDisponibles
-            }
-
-            cumpleRestricciones && cumpleTiempo && disponibilidadTotal
+        // TODO: este filtro es bastante chico por eso no me parece mal dejarlo aca, pero quizas se deberia hacer tambien en el repo
+        return if (!puedeComprar && !busquedaActiva) {
+            recetas.filter { r -> r.ingredientes.all { it.ingrediente.nombre.lowercase() in ingredientesDisponibles } }
+        } else {
+            recetas
         }
     }
 
@@ -414,6 +467,8 @@ class RecomendacionService(
         const val ID_INEXISTENTE = -1L
         const val MULTIPLICADOR_CANDIDATAS = 5
         const val MINIMO_CANDIDATAS = 50
+        const val LIMITE_SUGERENCIA_DIARIA = 30
+        const val TOP_SUGERENCIAS_RANDOM = 5
 
         const val PUNTOS_INGREDIENTES = 30
         const val PUNTOS_RESTRICCIONES = 20
