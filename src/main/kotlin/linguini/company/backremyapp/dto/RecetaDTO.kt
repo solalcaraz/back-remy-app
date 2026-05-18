@@ -42,7 +42,8 @@ data class RecomendacionRecetaDTO(
     val receta: ResumenRecetaDTO,
     val puntaje: Int,
     val costoAproximado: Double,
-    val motivos: List<String>,
+    val motivosPositivos: List<String>,
+    val motivosNegativos: List<String>,
     val ingredientesCoincidentes: Set<String>,
     val ingredientesFaltantes: Set<String>
 )

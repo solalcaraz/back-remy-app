@@ -1,26 +1,18 @@
 package linguini.company.backremyapp.dto
 
-data class RecetaBusquedaRequest(
-    val ingredientes: List<String>,
+data class RecomendacionRequest(
+    val ingredientesExtra: List<String> = emptyList(),
     val tiempoMaximo: Int? = null,
     val puedeComprar: Boolean = false,
-)
+    val limite: Int = 10
+){
+    init {
+        require(limite in 1..50) {
+            "El límite debe estar entre 1 y 50"
+        }
 
-data class RecetaBusquedaResponse(
-    val recetas: List<BusquedaRecetaDTO>,
-    val totalResultados: Int,
-)
-
-data class BusquedaRecetaDTO(
-    val id: Long?,
-    val nombre: String,
-    val descripcion: String,
-    val tiempoEnMinutos: Int,
-    val dificultad: String,
-    /*val tipoDieta: String,*/
-    val img: String,
-    val cantidadIngredientes: Int,
-    val porcentajeMatch: Int,
-    val ingredientesFaltantes: List<String>,
-    val tags: Set<String>
-)
+        require(tiempoMaximo == null || tiempoMaximo >= 1) {
+            "El tiempo máximo debe ser mayor a 0"
+        }
+    }
+}
