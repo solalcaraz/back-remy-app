@@ -46,7 +46,7 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
     fun findIdsCandidatasParaRecomendacion(
         @Param("ingredientesComunesIds") ingredientesComunesIds: List<Long>,
         @Param("ingredientesAEvitarIds") ingredientesAEvitarIds: List<Long>,
-        @Param("restriccionesIds") restriccionesIds: List<Long>,
+        @Param("restriccionesIds") restriccionesIds: List<Long>?,
         @Param("tiempoMaximo") tiempoMaximo: Int?,
         pageable: Pageable
     ): List<Long>
@@ -96,7 +96,7 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
         @Param("disponibles") disponibles: List<String>,
         @Param("tiempoMaximo") tiempoMaximo: Int?,
         @Param("aEvitar") aEvitar: List<String>,
-        @Param("restriccionesIds") restriccionesIds: List<Long>,
+        @Param("restriccionesIds") restriccionesIds: List<Long>?,
         pageable: Pageable
     ): List<Receta>
 
@@ -132,7 +132,7 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
         @Param("disponibles") disponibles: List<String>,
         @Param("tiempoMaximo") tiempoMaximo: Int?,
         @Param("aEvitar") aEvitar: List<String>,
-        @Param("restriccionesIds") restriccionesIds: List<Long>,
+        @Param("restriccionesIds") restriccionesIds: List<Long>?,
         pageable: Pageable
     ): List<Receta>
 }

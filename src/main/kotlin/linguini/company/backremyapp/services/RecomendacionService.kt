@@ -49,7 +49,7 @@ class RecomendacionService(
         val busquedaActiva = req.ingredientesExtra.isNotEmpty()
 
         // restricciones, se resuelve en el service con los id q pesan menos y se pasan a la query
-        val restriccionesIds = idsParaQuery(usuario.restriccionesAlimentarias.mapNotNull { it.id })
+        val restriccionesIds = usuario.restriccionesAlimentarias.mapNotNull { it.id }.ifEmpty { null }
 
         val recetas = buscarCandidatas(usuario, ingredientesDisponibles, ingredinetesAEvitar, restriccionesIds,
             req.tiempoMaximo, req.puedeComprar, busquedaActiva, limiteNormalizado)
@@ -93,7 +93,7 @@ class RecomendacionService(
 
         val ingredientesDisponibles = usuario.ingredientesComunes().map { it.nombre.lowercase() }
         val ingredientesAEvitar = usuario.ingredientesAEvitar().map { it.nombre.lowercase() }
-        val restriccionesIds = idsParaQuery(usuario.restriccionesAlimentarias.mapNotNull { it.id })
+        val restriccionesIds = usuario.restriccionesAlimentarias.mapNotNull { it.id }.ifEmpty { null }
 
         val recetas = buscarCandidatas(
             usuario, ingredientesDisponibles, ingredientesAEvitar, restriccionesIds,
@@ -134,7 +134,7 @@ class RecomendacionService(
 
     private fun buscarCandidatas(
         usuario: Usuario, ingredientesDisponibles: List<String>, ingredientesAEvitar: List<String>,
-        restriccionesIds: List<Long>, tiempoMaximo: Int?, puedeComprar: Boolean, busquedaActiva: Boolean, limite: Int
+        restriccionesIds: List<Long>?, tiempoMaximo: Int?, puedeComprar: Boolean, busquedaActiva: Boolean, limite: Int
     ): List<Receta> {
         val cantidadCandidatas = (limite * MULTIPLICADOR_CANDIDATAS).coerceAtLeast(MINIMO_CANDIDATAS)
         val pageable = PageRequest.of(0, cantidadCandidatas)
