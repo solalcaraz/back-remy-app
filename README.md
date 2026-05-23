@@ -74,3 +74,8 @@ INSERT INTO ingredientes (
     100.0,
     'GRAMOS'
 );
+```
+
+### Inserción Manual de Ingredientes Adicionales
+Al final se identifico la necesidad de incorporar otros ingedientes adicionales, como se definieron una vez finalizado el pipeline principal de generacion y carga, se opto por incorporarlos al final de script de SQL.
+- Ingredientes agregados manualmente: Remolacha, Zucchini, Coliflor, Maní, Semillas de girasol, Queso parmesano, Espárragos, Jamón cocido, Seitán, Tempeh, Soja texturizada, Edamame, Porotos blancos, Porotos aduki, Arvejas amarillas partidas y Lupini
