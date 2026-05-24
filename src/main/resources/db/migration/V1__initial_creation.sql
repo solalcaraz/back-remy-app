@@ -27,6 +27,7 @@ CREATE INDEX idx_restricciones_nombre ON restricciones_alimentarias(nombre);
 CREATE TABLE ingredientes (
     id BIGSERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL UNIQUE,
+    categoria VARCHAR(50) NOT NULL,
     unidad_base VARCHAR(50) NOT NULL,
 
     calorias DOUBLE PRECISION,

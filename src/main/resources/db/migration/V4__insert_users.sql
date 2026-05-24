@@ -1,13 +1,12 @@
--- V__usuarios.sql
--- Contraseña: 'admin' hasheada con BCrypt (cost 10)
--- Hash generado con: https://bcrypt-generator.com/
+-- Hash fijo generado previamente que traducido es "admin"
+-- $2a$10$FJ8PeifnHjsBhGI5CAPn/uQwzCrSyybEtsa6Owz9HOWH.zfMRfRTi
 
 -- Diego Maradona
 INSERT INTO usuarios (nombre, email, password, objetivo, nivel_cocina, perfil_economico)
 VALUES (
            'Diego Maradona',
            'diego@maradona.com',
-           '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy',
+           '$2a$10$FJ8PeifnHjsBhGI5CAPn/uQwzCrSyybEtsa6Owz9HOWH.zfMRfRTi',
            'INDIFERENTE',
            'BASICO',
            'INTERMEDIO'
@@ -63,7 +62,7 @@ INSERT INTO usuarios (nombre, email, password, objetivo, nivel_cocina, perfil_ec
 VALUES (
            'Ana Vegana',
            'ana@remy.app',
-           '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy',
+           '$2a$10$FJ8PeifnHjsBhGI5CAPn/uQwzCrSyybEtsa6Owz9HOWH.zfMRfRTi',
            'COMER_SALUDABLE',
            'INTERMEDIO',
            'BAJO_PRESUPUESTO'
@@ -129,7 +128,7 @@ INSERT INTO usuarios (nombre, email, password, objetivo, nivel_cocina, perfil_ec
 VALUES (
            'Martina Fitness',
            'martina@remy.app',
-           '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy',
+           '$2a$10$FJ8PeifnHjsBhGI5CAPn/uQwzCrSyybEtsa6Owz9HOWH.zfMRfRTi',
            'GANAR_MASA_MUSCULAR',
            'AVANZADO',
            'FLEXIBLE'
@@ -179,7 +178,7 @@ INSERT INTO usuarios (nombre, email, password, objetivo, nivel_cocina, perfil_ec
 VALUES (
            'Lucas Simple',
            'lucas@remy.app',
-           '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy',
+           '$2a$10$FJ8PeifnHjsBhGI5CAPn/uQwzCrSyybEtsa6Owz9HOWH.zfMRfRTi',
            'BAJAR_PESO',
            'BASICO',
            'INTERMEDIO'
