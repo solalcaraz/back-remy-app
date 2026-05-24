@@ -48,13 +48,14 @@ Luego, se desarrollo un script en py ejecutado desde google colab para automatiz
 Luego de obtener los datos nutricionales, se realizo una validacion automatica al archivo JSON para obtener una mejor calidad y consistencia final de datos que se van a persistir. Donde se verificaron los valores inconsistentes o incorrectos, y se constrato nuevamente la infomracion puntual usando la API de USDA.
 
 ### Generación automática de script SQL
-Finalmente se genero otro script en py para transformar el JSON final en un script SQL compatible con Flyway para incorporar al proyecto directamente.
+Finalmente se genero otro script en py para transformar el JSON final en un script SQL compatible con Flyway para incorporar al proyecto directamente. Ademas, se hizo una verificacion de las categorias y restricciones ya que el JSON inicial tenia las restricciones cargadas a mano y con toda esa información actualizada se genera un JSON nuevo para usar en el script de embedding y entrenar la red neuronal.
 - Link al google colab detallado: [ingredientesSQL.ipynb](https://colab.research.google.com/drive/1LQFQXjazeCYT00xlRZbfaqehwYF58oE7?usp=sharing)
 - Formato final esperado del script:
 
 ```sql
 INSERT INTO ingredientes (
     nombre,
+    categoria
     unidad_base,
     calorias,
     proteinas,
@@ -65,6 +66,7 @@ INSERT INTO ingredientes (
     unidad_referencia
 ) VALUES (
     'Pechuga de pollo',
+    'PROTEINAS_ANIMALES',
     'GRAMOS',
     106.0,
     22.5,
