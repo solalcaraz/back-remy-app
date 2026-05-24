@@ -14,7 +14,7 @@ import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
 
 @Component
-@Order(4)
+@Order(5)
 class RecetaLoader(
     private val recetaRepository: RecetaRepository,
     private val ingredienteRepository: IngredienteRepository
@@ -47,10 +47,10 @@ class RecetaLoader(
         imgUrl = "https://images.unsplash.com/photo-1604909052743-94e838986d24",
         tags = setOf("proteico", "economico"), // En el front tiene que salir también sin gluten
         ingredientes = listOf(
-            item("pollo", 500.0),
-            item("arroz", 200.0),
-            item("cebolla", 120.0),
-            item("ajo", 10.0)
+            item("Pechuga de pollo", 500.0),
+            item("Arroz blanco", 200.0),
+            item("Cebolla", 120.0),
+            item("Ajo", 10.0)
         ),
         pasos = listOf(
             paso(1, "Hervir el arroz", "Cocinar el arroz en agua con sal.", 15, "https://images.unsplash.com/photo-1536304929831-ee1ca9d44906"),
@@ -67,11 +67,11 @@ class RecetaLoader(
         imgUrl = "https://images.unsplash.com/photo-1512058564366-18510be2db19",
         tags = setOf("saludable"), // En el front tienen que salir también vegano y sin gluten
         ingredientes = listOf(
-            item("brocoli", 300.0),
-            item("cebolla", 150.0),
-            item("morron", 120.0),
-            item("ajo", 8.0),
-            item("aceite de oliva", 15.0, UnidadMedida.MILILITROS)
+            item("Brócoli", 300.0),
+            item("Cebolla", 150.0),
+            item("Morrón rojo", 120.0),
+            item("Ajo", 8.0),
+            item("Aceite de oliva", 15.0, UnidadMedida.MILILITROS)
         ),
         pasos = listOf(
             paso(1, "Cortar vegetales", "Separar el brocoli y cortar cebolla y morron.", 10, "https://images.unsplash.com/photo-1583663848850-46af132dc08e"),
@@ -88,11 +88,11 @@ class RecetaLoader(
         imgUrl = "https://images.unsplash.com/photo-1547592166-23ac45744acd",
         tags = setOf("alto en fibra", "economico"), // En el front tienen que salir también vegano
         ingredientes = listOf(
-            item("lentejas", 300.0),
-            item("tomate", 200.0),
-            item("cebolla", 120.0),
-            item("zanahoria", 120.0),
-            item("papa", 180.0)
+            item("Lentejas", 300.0),
+            item("Tomate triturado", 200.0),
+            item("Cebolla", 120.0),
+            item("Zanahoria", 120.0),
+            item("Papa", 180.0)
         ),
         pasos = listOf(
             paso(1, "Remojar lentejas", "Enjuagar y remojar las lentejas si hace falta.", 5, "https://images.unsplash.com/photo-1620021650702-8ee700c2f826"),
@@ -109,9 +109,9 @@ class RecetaLoader(
         imgUrl = "https://images.unsplash.com/photo-1525351484163-7529414344d8",
         tags = setOf("rapido", "proteico"), // En el front tiene que salir también vegetariano
         ingredientes = listOf(
-            item("huevo", 2.0, UnidadMedida.UNIDAD),
-            item("queso", 60.0),
-            item("pimienta", 1.0)
+            item("Huevo", 2.0, UnidadMedida.UNIDAD),
+            item("Queso parmesano", 60.0),
+            item("Pimienta negra", 1.0)
         ),
         pasos = listOf(
             paso(1, "Batir huevos", "Batir huevos con una pizca de pimienta.", 2, "https://images.unsplash.com/photo-1582169296194-e4d644c460ca"),
@@ -128,9 +128,9 @@ class RecetaLoader(
         imgUrl = "https://images.unsplash.com/photo-1517673132405-a56a62b18caf",
         tags = setOf("desayuno", "fibra", "rapido"),
         ingredientes = listOf(
-            item("avena", 60.0),
-            item("yogur natural", 160.0),
-            item("azucar", 8.0)
+            item("Avena", 60.0),
+            item("Yogur natural", 160.0),
+            item("Azúcar", 8.0)
         ),
         pasos = listOf(
             paso(1, "Mezclar", "Mezclar avena, yogur y azucar.", 3, "https://images.unsplash.com/photo-1495460596396-039cff98fc86"),
@@ -146,10 +146,10 @@ class RecetaLoader(
         imgUrl = "https://images.unsplash.com/photo-1512621776951-a57141f2eefd",
         tags = setOf("economico", "simple"), // En el front tiene que salir también vegetariano
         ingredientes = listOf(
-            item("papa", 350.0),
-            item("huevo", 2.0, UnidadMedida.UNIDAD),
-            item("cebolla", 80.0),
-            item("aceite de oliva", 12.0, UnidadMedida.MILILITROS)
+            item("Papa", 350.0),
+            item("Huevo", 2.0, UnidadMedida.UNIDAD),
+            item("Cebolla", 80.0),
+            item("Aceite de oliva", 12.0, UnidadMedida.MILILITROS)
         ),
         pasos = listOf(
             paso(1, "Hervir papa", "Cocinar la papa en cubos hasta que este tierna.", 18, "https://images.unsplash.com/photo-1582298538104-12ec82944f38"),
@@ -166,10 +166,10 @@ class RecetaLoader(
         imgUrl = "https://images.unsplash.com/photo-1544025162-d76694265947",
         tags = setOf("proteico", "clasico"), // En el front tiene que salir también sin gluten
         ingredientes = listOf(
-            item("carne vacuna", 350.0),
-            item("papa", 400.0),
-            item("leche", 80.0, UnidadMedida.MILILITROS),
-            item("ajo", 6.0)
+            item("Carne molida", 350.0),
+            item("Papa", 400.0),
+            item("Leche entera", 80.0, UnidadMedida.MILILITROS),
+            item("Ajo", 6.0)
         ),
         pasos = listOf(
             paso(1, "Hervir papas", "Cocinar las papas hasta que esten blandas.", 20, "https://images.unsplash.com/photo-1518977676601-b53f82aba655"),
@@ -186,10 +186,10 @@ class RecetaLoader(
         imgUrl = "https://images.unsplash.com/photo-1603133872878-684f208fb84b",
         tags = setOf("economico"), // En el front tiene que salir también vegano
         ingredientes = listOf(
-            item("arroz", 220.0),
-            item("brocoli", 220.0),
-            item("zanahoria", 90.0),
-            item("aceite de oliva", 10.0, UnidadMedida.MILILITROS)
+            item("Arroz blanco", 220.0),
+            item("Brócoli", 220.0),
+            item("Zanahoria", 90.0),
+            item("Aceite de oliva", 10.0, UnidadMedida.MILILITROS)
         ),
         pasos = listOf(
             paso(1, "Cocinar arroz", "Hervir el arroz hasta que este a punto.", 15, "https://images.unsplash.com/photo-1536304929831-ee1ca9d44906"),

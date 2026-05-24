@@ -37,7 +37,10 @@ class Ingrediente(
     var restriccionesAlimentarias: MutableSet<RestriccionAlimentaria> = mutableSetOf(),
 
     @Embedded
-    var infoNutricional: InfoNutricional? = null
+    var infoNutricional: InfoNutricional? = null,
+
+    @Enumerated(EnumType.STRING)
+    var categoria: CategoriaIngrediene
 ) {
     fun cumpleRestriccion(restriccion: RestriccionAlimentaria): Boolean {
         return restriccionesAlimentarias.any { it.id == restriccion.id }
@@ -48,4 +51,18 @@ enum class UnidadMedida(val label: String) {
     GRAMOS("gramos"),
     MILILITROS("militros"),
     UNIDAD("unidad"),
+}
+
+enum class CategoriaIngrediene {
+    PROTEINAS_ANIMALES,
+    PROTEINAS_VEGETALES,
+    VEGETALES_BASE,
+    VEGETALES_HOJA,
+    CEREALES_HARINAS,
+    LACTEOS,
+    ACEITES_GRASAS,
+    ESPECIAS_CONDIMENTOS,
+    OTROS_ESENCIALES,
+    FRUTAS,
+    FRUTOS_SECOS
 }

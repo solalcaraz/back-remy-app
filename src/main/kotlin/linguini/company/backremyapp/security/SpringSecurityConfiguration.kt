@@ -31,11 +31,22 @@ class SpringSecurityConfiguration {
 
     //Es diferente al de PHM porque la version 7 de SB elimino la manera de usasr esta funcion de mierda
     @Bean
-    fun authenticationProvider(usuarioRepository: UsuarioRepository): AuthenticationProvider =
-        DaoAuthenticationProvider(userDetailsService(usuarioRepository))
-            .also {
-                it.setPasswordEncoder(encoder())
-            }
+    fun authenticationProvider(
+        usuarioRepository: UsuarioRepository
+    ): AuthenticationProvider {
+
+        val authProvider = DaoAuthenticationProvider()
+
+        authProvider.setUserDetailsService(
+            userDetailsService(usuarioRepository)
+        )
+
+        authProvider.setPasswordEncoder(
+            encoder()
+        )
+
+        return authProvider
+    }
 
     @Bean
     fun authenticationManager(config: AuthenticationConfiguration): AuthenticationManager =
