@@ -24,7 +24,28 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Pechuga de pollo'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Pechuga de pollo'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Pechuga de pollo'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Pechuga de pollo'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
 );
 
 
@@ -51,7 +72,28 @@ INSERT INTO ingredientes (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Carne molida'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Carne molida'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Carne molida'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Carne molida'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
 );
 
 
@@ -78,7 +120,28 @@ INSERT INTO ingredientes (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Bife de lomo'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Bife de lomo'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Bife de lomo'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Bife de lomo'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
 );
 
 
@@ -105,7 +168,28 @@ INSERT INTO ingredientes (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Costilla de cerdo'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Costilla de cerdo'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Costilla de cerdo'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Costilla de cerdo'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
 );
 
 
@@ -132,6 +216,20 @@ INSERT INTO ingredientes (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Huevo'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Huevo'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Huevo'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -139,7 +237,21 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Huevo'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Huevo'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Huevo'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -166,7 +278,28 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Atún en lata'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Atún en lata'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Atún en lata'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Atún en lata'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
 );
 
 
@@ -200,6 +333,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Lentejas'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Lentejas'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -207,28 +347,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Lentejas'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Lentejas'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Lentejas'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Lentejas'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -255,6 +374,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Garbanzos'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Garbanzos'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -262,28 +388,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Garbanzos'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Garbanzos'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Garbanzos'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Garbanzos'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -317,6 +422,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Porotos negros'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Porotos negros'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -324,28 +436,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Porotos negros'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Porotos negros'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Porotos negros'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Porotos negros'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -379,6 +470,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Tofu firme'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Tofu firme'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -386,28 +484,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Tofu firme'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Tofu firme'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Tofu firme'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Tofu firme'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -441,6 +518,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Tomate perita'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Tomate perita'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -448,28 +532,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Tomate perita'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Tomate perita'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Tomate perita'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Tomate perita'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -503,6 +566,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Cebolla'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Cebolla'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -510,28 +580,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Cebolla'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Cebolla'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Cebolla'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Cebolla'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -565,6 +614,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Cebolla morada'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Cebolla morada'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -572,28 +628,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Cebolla morada'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Cebolla morada'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Cebolla morada'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Cebolla morada'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -627,6 +662,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Ajo'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Ajo'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -634,28 +676,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Ajo'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Ajo'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Ajo'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Ajo'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -689,6 +710,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Zanahoria'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Zanahoria'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -696,28 +724,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Zanahoria'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Zanahoria'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Zanahoria'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Zanahoria'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -751,6 +758,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Papa'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Papa'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -758,28 +772,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Papa'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Papa'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Papa'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Papa'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -813,6 +806,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Batata'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Batata'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -820,28 +820,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Batata'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Batata'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Batata'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Batata'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -875,6 +854,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Zapallo anco'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Zapallo anco'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -882,28 +868,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Zapallo anco'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Zapallo anco'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Zapallo anco'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Zapallo anco'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -937,6 +902,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Morrón rojo'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Morrón rojo'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -944,28 +916,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Morrón rojo'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Morrón rojo'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Morrón rojo'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Morrón rojo'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -999,6 +950,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Morrón verde'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Morrón verde'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -1006,28 +964,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Morrón verde'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Morrón verde'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Morrón verde'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Morrón verde'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -1061,6 +998,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Apio'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Apio'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -1068,28 +1012,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Apio'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Apio'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Apio'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Apio'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -1123,6 +1046,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Choclo'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Choclo'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -1130,28 +1060,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Choclo'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Choclo'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Choclo'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Choclo'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -1185,6 +1094,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Espinaca'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Espinaca'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -1192,28 +1108,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Espinaca'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Espinaca'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Espinaca'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Espinaca'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -1247,6 +1142,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Lechuga'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Lechuga'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -1254,28 +1156,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Lechuga'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Lechuga'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Lechuga'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Lechuga'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -1309,6 +1190,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Brócoli'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Brócoli'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -1316,28 +1204,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Brócoli'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Brócoli'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Brócoli'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Brócoli'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -1371,6 +1238,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Acelga'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Acelga'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -1378,28 +1252,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Acelga'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Acelga'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Acelga'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Acelga'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -1433,6 +1286,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Rúcula'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Rúcula'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -1440,28 +1300,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Rúcula'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Rúcula'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Rúcula'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Rúcula'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -1488,6 +1327,20 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Arroz blanco'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Arroz blanco'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Arroz blanco'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -1495,7 +1348,28 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Arroz blanco'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Arroz blanco'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Arroz blanco'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Arroz blanco'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -1522,6 +1396,20 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Arroz integral'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Arroz integral'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Arroz integral'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -1529,7 +1417,28 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Arroz integral'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Arroz integral'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Arroz integral'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Arroz integral'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -1556,7 +1465,42 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Harina 0000'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Harina 0000'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Harina 0000'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Harina 0000'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Harina 0000'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Harina 0000'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -1576,6 +1520,20 @@ INSERT INTO ingredientes (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Harina de garbanzo'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Harina de garbanzo'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Harina de garbanzo'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -1583,7 +1541,28 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Harina de garbanzo'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Harina de garbanzo'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Harina de garbanzo'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Harina de garbanzo'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -1603,6 +1582,20 @@ INSERT INTO ingredientes (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Avena'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Avena'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Avena'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -1610,7 +1603,28 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Avena'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Avena'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Avena'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Avena'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -1637,7 +1651,42 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Fideos spaghetti'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Fideos spaghetti'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Fideos spaghetti'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Fideos spaghetti'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Fideos spaghetti'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Fideos spaghetti'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -1664,7 +1713,42 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Fideos integrales'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Fideos integrales'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Fideos integrales'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Fideos integrales'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Fideos integrales'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Fideos integrales'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -1684,7 +1768,42 @@ INSERT INTO ingredientes (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Pan rallado'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Pan rallado'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Pan rallado'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Pan rallado'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Pan rallado'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Pan rallado'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -1704,6 +1823,20 @@ INSERT INTO ingredientes (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Quinoa'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Quinoa'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Quinoa'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -1711,7 +1844,28 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Quinoa'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Quinoa'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Quinoa'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Quinoa'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -1738,6 +1892,20 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Leche entera'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Leche entera'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Leche entera'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -1746,6 +1914,13 @@ INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Leche entera'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Leche entera'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -1772,6 +1947,20 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Leche descremada'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Leche descremada'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Leche descremada'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -1780,6 +1969,13 @@ INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Leche descremada'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Leche descremada'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -1806,6 +2002,20 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Leche de almendras'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Leche de almendras'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Leche de almendras'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -1813,7 +2023,28 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Leche de almendras'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Leche de almendras'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Leche de almendras'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Leche de almendras'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -1833,6 +2064,20 @@ INSERT INTO ingredientes (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Queso rallado'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Queso rallado'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Queso rallado'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -1841,6 +2086,13 @@ INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Queso rallado'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Queso rallado'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -1860,6 +2112,20 @@ INSERT INTO ingredientes (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Queso crema'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Queso crema'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Queso crema'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -1868,6 +2134,13 @@ INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Queso crema'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Queso crema'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -1894,6 +2167,20 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Yogur natural'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Yogur natural'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Yogur natural'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -1902,6 +2189,13 @@ INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Yogur natural'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Yogur natural'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -1921,6 +2215,20 @@ INSERT INTO ingredientes (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Crema de leche'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Crema de leche'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Crema de leche'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -1929,6 +2237,13 @@ INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Crema de leche'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Crema de leche'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -1955,6 +2270,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Manteca'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Manteca'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -1962,21 +2284,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Manteca'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Manteca'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Manteca'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
 );
 
 
@@ -2004,6 +2312,13 @@ INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Aceite de girasol'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Aceite de girasol'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
 );
 
 
@@ -2065,6 +2380,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Aceite de oliva'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Aceite de oliva'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -2120,6 +2442,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Sal fina'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Sal fina'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -2127,28 +2456,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Sal fina'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Sal fina'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Sal fina'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Sal fina'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -2182,6 +2490,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Pimienta negra'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Pimienta negra'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -2189,28 +2504,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Pimienta negra'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Pimienta negra'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Pimienta negra'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Pimienta negra'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -2237,6 +2531,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Pimentón dulce'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Pimentón dulce'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -2244,28 +2545,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Pimentón dulce'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Pimentón dulce'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Pimentón dulce'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Pimentón dulce'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -2292,6 +2572,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Comino'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Comino'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -2299,28 +2586,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Comino'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Comino'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Comino'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Comino'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -2354,6 +2620,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Orégano seco'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Orégano seco'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -2361,28 +2634,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Orégano seco'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Orégano seco'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Orégano seco'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Orégano seco'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -2409,6 +2661,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Laurel'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Laurel'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -2416,28 +2675,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Laurel'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Laurel'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Laurel'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Laurel'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -2464,6 +2702,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Ají molido'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Ají molido'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -2471,28 +2716,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Ají molido'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Ají molido'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Ají molido'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Ají molido'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -2526,6 +2750,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Perejil fresco'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Perejil fresco'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -2533,28 +2764,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Perejil fresco'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Perejil fresco'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Perejil fresco'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Perejil fresco'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -2588,6 +2798,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Cúrcuma'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Cúrcuma'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -2595,28 +2812,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Cúrcuma'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Cúrcuma'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Cúrcuma'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Cúrcuma'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -2650,6 +2846,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Jengibre fresco'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Jengibre fresco'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -2657,28 +2860,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Jengibre fresco'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Jengibre fresco'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Jengibre fresco'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Jengibre fresco'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -2712,6 +2894,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Vinagre de manzana'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Vinagre de manzana'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -2719,28 +2908,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Vinagre de manzana'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Vinagre de manzana'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Vinagre de manzana'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Vinagre de manzana'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -2767,6 +2935,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Salsa de soja'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Salsa de soja'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -2774,28 +2949,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Salsa de soja'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Salsa de soja'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Salsa de soja'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Salsa de soja'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -2829,6 +2983,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Mostaza'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Mostaza'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -2836,28 +2997,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Mostaza'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Mostaza'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Mostaza'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Mostaza'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -2891,7 +3031,28 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Caldo de verduras bajo en sodio'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Caldo de verduras bajo en sodio'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Caldo de verduras bajo en sodio'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Caldo de verduras bajo en sodio'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -2925,7 +3086,21 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Caldo de pollo'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Caldo de pollo'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Caldo de pollo'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -2959,7 +3134,28 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Salsa de tomate'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Salsa de tomate'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Salsa de tomate'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Salsa de tomate'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -2993,7 +3189,28 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Tomate triturado'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Tomate triturado'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Tomate triturado'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Tomate triturado'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -3027,7 +3244,28 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Azúcar'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Azúcar'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Azúcar'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Azúcar'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -3068,7 +3306,28 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Stevia'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Stevia'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Stevia'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Stevia'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -3102,7 +3361,21 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Miel'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Miel'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Miel'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -3136,7 +3409,28 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Polvo para hornear'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Polvo para hornear'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Polvo para hornear'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Polvo para hornear'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -3170,6 +3464,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Limón'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Limón'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -3177,28 +3478,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Limón'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Limón'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Limón'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Limón'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -3232,6 +3512,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Naranja'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Naranja'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -3239,28 +3526,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Naranja'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Naranja'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Naranja'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Naranja'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -3294,6 +3560,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Banana'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Banana'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -3301,28 +3574,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Banana'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Banana'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Banana'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Banana'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -3356,6 +3608,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Manzana'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Manzana'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -3363,28 +3622,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Manzana'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Manzana'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Manzana'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Manzana'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -3411,6 +3649,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Palta'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Palta'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -3418,28 +3663,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Palta'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Palta'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Palta'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Palta'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -3466,6 +3690,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Nueces'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Nueces'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -3473,28 +3704,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Nueces'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Nueces'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Nueces'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Nueces'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -3521,6 +3731,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Almendras'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Almendras'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -3528,28 +3745,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Almendras'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Almendras'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Almendras'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Almendras'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -3576,6 +3772,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Semillas de chía'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Semillas de chía'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -3583,28 +3786,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Semillas de chía'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Semillas de chía'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Semillas de chía'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Semillas de chía'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -3631,6 +3813,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Coco rallado'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Coco rallado'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -3638,28 +3827,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Coco rallado'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Coco rallado'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Coco rallado'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Coco rallado'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -3679,6 +3847,20 @@ INSERT INTO ingredientes (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Harina de almendras'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Harina de almendras'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Harina de almendras'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -3686,7 +3868,28 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Harina de almendras'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Harina de almendras'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Harina de almendras'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Harina de almendras'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -3713,6 +3916,20 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Almidón de maíz'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Almidón de maíz'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Almidón de maíz'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -3720,7 +3937,28 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Almidón de maíz'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Almidón de maíz'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Almidón de maíz'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Almidón de maíz'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -3754,7 +3992,28 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Cacao en polvo sin azúcar'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Cacao en polvo sin azúcar'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Cacao en polvo sin azúcar'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Cacao en polvo sin azúcar'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -3788,7 +4047,28 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Vainilla esencia'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Vainilla esencia'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Vainilla esencia'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Vainilla esencia'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -3815,7 +4095,28 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Aceitunas negras'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Aceitunas negras'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Aceitunas negras'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Aceitunas negras'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -3842,7 +4143,28 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Aceitunas verdes'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Aceitunas verdes'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Aceitunas verdes'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Aceitunas verdes'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -3876,6 +4198,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Pasas de uva'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Pasas de uva'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -3883,28 +4212,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Pasas de uva'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Pasas de uva'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Pasas de uva'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Pasas de uva'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -3931,7 +4239,42 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Tapas de empanada'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Tapas de empanada'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Tapas de empanada'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Tapas de empanada'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Tapas de empanada'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Tapas de empanada'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -3951,7 +4294,42 @@ INSERT INTO ingredientes (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Masa para tarta'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Masa para tarta'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Masa para tarta'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Masa para tarta'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Masa para tarta'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Masa para tarta'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -3978,7 +4356,28 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Levadura seca'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Levadura seca'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Levadura seca'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Levadura seca'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -3999,6 +4398,13 @@ INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Aceite de coco'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Aceite de coco'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
 );
 
 
@@ -4067,6 +4473,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Arvejas'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Arvejas'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -4074,28 +4487,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Arvejas'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Arvejas'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Arvejas'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Arvejas'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -4129,6 +4521,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Champiñones'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Champiñones'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -4136,28 +4535,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Champiñones'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Champiñones'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Champiñones'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Champiñones'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -4191,6 +4569,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Berenjena'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Berenjena'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -4198,28 +4583,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Berenjena'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Berenjena'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Berenjena'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Berenjena'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -4253,6 +4617,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Zapallito verde'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Zapallito verde'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -4260,28 +4631,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Zapallito verde'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Zapallito verde'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Zapallito verde'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Zapallito verde'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -4315,6 +4665,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Choclo en lata'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Choclo en lata'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -4322,28 +4679,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Choclo en lata'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Choclo en lata'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Choclo en lata'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Choclo en lata'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -4377,6 +4713,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Remolacha'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Remolacha'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -4384,28 +4727,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Remolacha'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Remolacha'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Remolacha'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Remolacha'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -4439,6 +4761,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Zucchini'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Zucchini'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -4446,28 +4775,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Zucchini'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Zucchini'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Zucchini'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Zucchini'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -4501,6 +4809,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Coliflor'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Coliflor'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -4508,28 +4823,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Coliflor'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Coliflor'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Coliflor'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Coliflor'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -4556,6 +4850,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Maní'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Maní'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -4563,28 +4864,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Maní'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Maní'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Maní'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Maní'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -4611,6 +4891,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Semillas de girasol'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Semillas de girasol'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -4618,28 +4905,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Semillas de girasol'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Semillas de girasol'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Semillas de girasol'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Semillas de girasol'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -4659,6 +4925,20 @@ INSERT INTO ingredientes (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Queso parmesano'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Queso parmesano'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Queso parmesano'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -4667,6 +4947,13 @@ INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Queso parmesano'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Queso parmesano'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -4700,6 +4987,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Espárragos'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Espárragos'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -4707,28 +5001,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Espárragos'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Espárragos'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Espárragos'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Espárragos'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -4755,7 +5028,21 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Jamón cocido'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Jamón cocido'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Jamón cocido'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
 );
 
 
@@ -4796,6 +5083,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Seitán'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Seitán'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -4803,28 +5097,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Seitán'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Seitán'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Seitán'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Seitán'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -4851,6 +5124,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Tempeh'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Tempeh'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -4858,28 +5138,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Tempeh'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Tempeh'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Tempeh'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Tempeh'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -4906,6 +5165,20 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Soja texturizada'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'bajo_sodio')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Soja texturizada'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Soja texturizada'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -4913,28 +5186,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Soja texturizada'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Soja texturizada'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Soja texturizada'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Soja texturizada'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -4961,6 +5213,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Edamame'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Edamame'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -4968,28 +5227,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Edamame'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Edamame'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Edamame'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Edamame'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -5023,6 +5261,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Porotos blancos'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Porotos blancos'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -5030,28 +5275,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Porotos blancos'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Porotos blancos'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Porotos blancos'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Porotos blancos'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -5085,6 +5309,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Porotos aduki'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Porotos aduki'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -5092,28 +5323,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Porotos aduki'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Porotos aduki'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Porotos aduki'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Porotos aduki'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -5147,6 +5357,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Arvejas amarillas partidas'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Arvejas amarillas partidas'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -5154,28 +5371,7 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Arvejas amarillas partidas'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Arvejas amarillas partidas'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Arvejas amarillas partidas'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Arvejas amarillas partidas'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
 
@@ -5202,6 +5398,13 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Lupini'),
+    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_azucar')
+);
+
+
+INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
+VALUES (
+    (SELECT id FROM ingredientes WHERE nombre = 'Lupini'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_gluten')
 );
 
@@ -5209,27 +5412,6 @@ VALUES (
 INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
 VALUES (
     (SELECT id FROM ingredientes WHERE nombre = 'Lupini'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_lactosa')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Lupini'),
     (SELECT id FROM restricciones_alimentarias WHERE nombre = 'sin_mariscos')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Lupini'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegano')
-);
-
-
-INSERT INTO ingredientes_restricciones_alimentarias (ingrediente_id, restriccion_alimentaria_id)
-VALUES (
-    (SELECT id FROM ingredientes WHERE nombre = 'Lupini'),
-    (SELECT id FROM restricciones_alimentarias WHERE nombre = 'vegetariano')
 );
 
