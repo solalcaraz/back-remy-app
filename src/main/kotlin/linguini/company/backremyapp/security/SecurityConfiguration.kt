@@ -51,6 +51,7 @@ class SecurityConfiguration(
                     .requestMatchers(HttpMethod.POST, "/receta/favorito/**").permitAll()
                     .requestMatchers(HttpMethod.DELETE, "/receta/favorito/**").permitAll()
                     .requestMatchers(HttpMethod.GET, "/ingrediente/**").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/ingrediente/**").permitAll()
                     // Permisos de admin para modificar
                     // Solo los que pueden reservar (lector) acceden a este endpoint
                     //---------------------------
