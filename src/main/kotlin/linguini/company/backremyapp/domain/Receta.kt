@@ -35,6 +35,9 @@ class Receta(
     var dificultad: NivelCocina = NivelCocina.INTERMEDIO,
 
     @OneToMany(mappedBy = "receta", cascade = [CascadeType.ALL], orphanRemoval = true)
+    var ingredientes: MutableSet<RecetaIngrediente> = mutableSetOf(),
+
+    @OneToMany(mappedBy = "receta", cascade = [CascadeType.ALL], orphanRemoval = true)
     @OrderBy("orden ASC")
     var pasos: MutableSet<Paso> = mutableSetOf(),
 
@@ -54,22 +57,19 @@ class Receta(
         this.dificultad = calcularDificultad()
     }
 
-    @OneToMany(mappedBy = "receta", cascade = [CascadeType.ALL], orphanRemoval = true)
-    var ingredientesCore: MutableList<RecetaIngrediente> = mutableListOf()
+    val ingredientesCore: List<RecetaIngrediente>
+        get() = ingredientes.filter { it.tipo == TipoIngredienteReceta.CORE }
 
-    @OneToMany(mappedBy = "receta", cascade = [CascadeType.ALL], orphanRemoval = true)
-    var ingredientesReemplazables: MutableList<RecetaIngrediente> = mutableListOf()
+    val ingredientesReemplazables: List<RecetaIngrediente>
+        get() = ingredientes.filter { it.tipo == TipoIngredienteReceta.REEMPLAZABLE }
 
-    @OneToMany(mappedBy = "receta", cascade = [CascadeType.ALL], orphanRemoval = true)
-    var ingredientesOpcionales: MutableList<RecetaIngrediente> = mutableListOf()
-
-    fun todosLosIngredientes(): List<RecetaIngrediente> =
-        ingredientesCore + ingredientesReemplazables + ingredientesOpcionales
+    val ingredientesOpcionales: List<RecetaIngrediente>
+        get() = ingredientes.filter { it.tipo == TipoIngredienteReceta.OPCIONAL }
 
     fun calcularTiempo(): Int = pasos.sumOf { it.tiempoEstimadoMinutos }
 
     fun calcularDificultad(): NivelCocina {
-        val puntaje = (pasos.size * 2) + (todosLosIngredientes().size * 1.5) + (tiempoEnMinutos / 10)
+        val puntaje = (pasos.size * 2) + (ingredientes.size * 1.5) + (tiempoEnMinutos / 10)
 
         return when {
             puntaje < 15 -> NivelCocina.BASICO
@@ -79,16 +79,15 @@ class Receta(
     }
 
     // Estos métodos también se podrían agregar al PrePersist y guardar el resultado en columnas
-    fun caloriasTotales(): Double = todosLosIngredientes().sumOf { it.caloriasEstimadas() }
+    fun caloriasTotales(): Double = ingredientes.sumOf { it.caloriasEstimadas() }
 
-    fun grasasTotales(): Double = todosLosIngredientes().sumOf { it.grasasEstimadas() }
+    fun grasasTotales(): Double = ingredientes.sumOf { it.grasasEstimadas() }
 
-    fun proteinasTotales(): Double = todosLosIngredientes().sumOf { it.proteinasEstimadas() }
+    fun proteinasTotales(): Double = ingredientes.sumOf { it.proteinasEstimadas() }
 
-    fun fibrasTotales(): Double = todosLosIngredientes().sumOf { it.fibrasEstimadas() }
+    fun fibrasTotales(): Double = ingredientes.sumOf { it.fibrasEstimadas() }
 
     fun restriccionesAlimentariasCumplidas(): Set<RestriccionAlimentaria> {
-        val ingredientes = todosLosIngredientes()
         if (ingredientes.isEmpty()) return emptySet()
 
         return ingredientes
@@ -100,7 +99,7 @@ class Receta(
 
     fun cumpleRestricciones(restricciones: Collection<RestriccionAlimentaria>): Boolean {
         return restricciones.all { restriccion ->
-            todosLosIngredientes().all { recetaIngrediente ->
+            ingredientes.all { recetaIngrediente ->
                 recetaIngrediente.ingrediente.cumpleRestriccion(restriccion)
             }
         }
@@ -113,7 +112,7 @@ class Receta(
 
         if (ingredientesAEvitarIds.isEmpty()) return false
 
-        return todosLosIngredientes().any { recetaIngrediente ->
+        return ingredientes.any { recetaIngrediente ->
             recetaIngrediente.ingrediente.id in ingredientesAEvitarIds
         }
     }
@@ -123,7 +122,7 @@ class Receta(
             .mapNotNull { it.id }
             .toSet()
 
-        return todosLosIngredientes()
+        return ingredientes
             .map { it.ingrediente }
             .filter { it.id in ingredientesComunesIds }
             .toSet()
@@ -134,7 +133,7 @@ class Receta(
             .mapNotNull { it.id }
             .toSet()
 
-        return todosLosIngredientes()
+        return ingredientes
             .map { it.ingrediente }
             .filter { it.id !in ingredientesComunesIds }
             .toSet()
@@ -159,10 +158,10 @@ class Receta(
         }
     }
 
-//    fun agregarIngrediente(ingrediente: RecetaIngrediente) {
-//        ingredientes.add(ingrediente)
-//        ingrediente.receta = this
-//    }
+    fun agregarIngrediente(ingrediente: RecetaIngrediente) {
+        ingredientes.add(ingrediente)
+        ingrediente.receta = this
+    }
 
     fun agregarPaso(paso: Paso) {
         pasos.add(paso)

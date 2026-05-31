@@ -19,7 +19,11 @@ class RecetaIngrediente(
     var cantidad: Double,
 
     @Enumerated(EnumType.STRING)
-    var unidadMedida: UnidadMedida
+    var unidadMedida: UnidadMedida,
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_ingrediente", nullable = false, length = 20)
+    var tipo: TipoIngredienteReceta = TipoIngredienteReceta.CORE
 ) {
     fun caloriasEstimadas(): Double {
         val info = ingrediente.infoNutricional ?: return 0.0
@@ -52,4 +56,10 @@ class RecetaIngrediente(
     fun costoEstimado(precio: PrecioIngrediente): Double {
         return precio.precio.toDouble() * cantidad / precio.cantidadReferencia.toDouble()
     }
+}
+
+enum class TipoIngredienteReceta {
+    CORE,
+    REEMPLAZABLE,
+    OPCIONAL
 }

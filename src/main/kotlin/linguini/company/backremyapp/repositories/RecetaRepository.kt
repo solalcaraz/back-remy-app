@@ -10,30 +10,18 @@ import java.util.Optional
 
 interface RecetaRepository : JpaRepository<Receta, Long> {
     @EntityGraph(attributePaths = [
-        "ingredientesCore",
-        "ingredientesCore.ingrediente",
-        "ingredientesCore.ingrediente.restriccionesAlimentarias",
-        "ingredientesReemplazables",
-        "ingredientesReemplazables.ingrediente",
-        "ingredientesReemplazables.ingrediente.restriccionesAlimentarias",
-        "ingredientesOpcionales",
-        "ingredientesOpcionales.ingrediente",
-        "ingredientesOpcionales.ingrediente.restriccionesAlimentarias",
+        "ingredientes",
+        "ingredientes.ingrediente",
+        "ingredientes.ingrediente.restriccionesAlimentarias",
         "pasos",
         "tags"
     ])
     fun findWithDetailsById(id: Long): Optional<Receta>
 
     @EntityGraph(attributePaths = [
-        "ingredientesCore",
-        "ingredientesCore.ingrediente",
-        "ingredientesCore.ingrediente.restriccionesAlimentarias",
-        "ingredientesReemplazables",
-        "ingredientesReemplazables.ingrediente",
-        "ingredientesReemplazables.ingrediente.restriccionesAlimentarias",
-        "ingredientesOpcionales",
-        "ingredientesOpcionales.ingrediente",
-        "ingredientesOpcionales.ingrediente.restriccionesAlimentarias",
+        "ingredientes",
+        "ingredientes.ingrediente",
+        "ingredientes.ingrediente.restriccionesAlimentarias",
         "pasos",
         "tags"
     ])
@@ -42,66 +30,35 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
     @Query("""
         SELECT r.id
         FROM Receta r
-        LEFT JOIN r.ingredientesCore ricOrden
-        LEFT JOIN ricOrden.ingrediente icOrden
-        LEFT JOIN r.ingredientesReemplazables rirOrden
-        LEFT JOIN rirOrden.ingrediente irOrden
+        LEFT JOIN r.ingredientes riOrden
+        LEFT JOIN riOrden.ingrediente iOrden
         WHERE (:tiempoMaximo IS NULL OR r.tiempoEnMinutos <= :tiempoMaximo)
           AND NOT EXISTS (
-              SELECT ric FROM Receta rCoreEvitar
-              JOIN rCoreEvitar.ingredientesCore ric
-              WHERE rCoreEvitar = r
-              AND ric.ingrediente.id IN :ingredientesAEvitarIds
-          )
-          AND NOT EXISTS (
-              SELECT rir FROM Receta rReemplazableEvitar
-              JOIN rReemplazableEvitar.ingredientesReemplazables rir
-              WHERE rReemplazableEvitar = r
-              AND rir.ingrediente.id IN :ingredientesAEvitarIds
-          )
-          AND NOT EXISTS (
-              SELECT rio FROM Receta rOpcionalEvitar
-              JOIN rOpcionalEvitar.ingredientesOpcionales rio
-              WHERE rOpcionalEvitar = r
-              AND rio.ingrediente.id IN :ingredientesAEvitarIds
+              SELECT riEvitar FROM Receta rEvitar
+              JOIN rEvitar.ingredientes riEvitar
+              WHERE rEvitar = r
+              AND riEvitar.ingrediente.id IN :ingredientesAEvitarIds
           )
           AND (
               :restriccionesIds IS NULL OR NOT EXISTS (
-                  SELECT ric2 FROM Receta rCoreRestriccion
-                  JOIN rCoreRestriccion.ingredientesCore ric2
-                  WHERE rCoreRestriccion = r
+                  SELECT riRestriccion FROM Receta rRestriccion
+                  JOIN rRestriccion.ingredientes riRestriccion
+                  WHERE rRestriccion = r
                   AND NOT EXISTS (
-                      SELECT ra FROM ric2.ingrediente.restriccionesAlimentarias ra
-                      WHERE ra.id IN :restriccionesIds
-                  )
-              )
-          )
-          AND (
-              :restriccionesIds IS NULL OR NOT EXISTS (
-                  SELECT rir2 FROM Receta rReemplazableRestriccion
-                  JOIN rReemplazableRestriccion.ingredientesReemplazables rir2
-                  WHERE rReemplazableRestriccion = r
-                  AND NOT EXISTS (
-                      SELECT ra FROM rir2.ingrediente.restriccionesAlimentarias ra
-                      WHERE ra.id IN :restriccionesIds
-                  )
-              )
-          )
-          AND (
-              :restriccionesIds IS NULL OR NOT EXISTS (
-                  SELECT rio2 FROM Receta rOpcionalRestriccion
-                  JOIN rOpcionalRestriccion.ingredientesOpcionales rio2
-                  WHERE rOpcionalRestriccion = r
-                  AND NOT EXISTS (
-                      SELECT ra FROM rio2.ingrediente.restriccionesAlimentarias ra
+                      SELECT ra FROM riRestriccion.ingrediente.restriccionesAlimentarias ra
                       WHERE ra.id IN :restriccionesIds
                   )
               )
           )
         GROUP BY r.id, r.tiempoEnMinutos
         ORDER BY
-            COUNT(DISTINCT CASE WHEN icOrden.id IN :ingredientesComunesIds THEN icOrden.id ELSE NULL END) +
-            COUNT(DISTINCT CASE WHEN irOrden.id IN :ingredientesComunesIds THEN irOrden.id ELSE NULL END) DESC,
+            COUNT(DISTINCT CASE
+                WHEN riOrden.tipo IN (
+                    linguini.company.backremyapp.domain.TipoIngredienteReceta.CORE,
+                    linguini.company.backremyapp.domain.TipoIngredienteReceta.REEMPLAZABLE
+                )
+                AND iOrden.id IN :ingredientesComunesIds THEN iOrden.id ELSE NULL
+            END) DESC,
             r.tiempoEnMinutos ASC,
             r.id ASC
     """)
@@ -113,6 +70,13 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
         pageable: Pageable
     ): List<Long>
 
+    @EntityGraph(attributePaths = [
+        "ingredientes",
+        "ingredientes.ingrediente",
+        "ingredientes.ingrediente.restriccionesAlimentarias",
+        "pasos",
+        "tags"
+    ])
     @Query("SELECT DISTINCT r FROM Receta r WHERE r.id IN :ids")
     fun findAllWithDetailsByIdIn(@Param("ids") ids: List<Long>): List<Receta>
 
@@ -129,69 +93,33 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
         SELECT DISTINCT r FROM Receta r
         WHERE (:tiempoMaximo IS NULL OR r.tiempoEnMinutos <= :tiempoMaximo)
           AND NOT EXISTS (
-              SELECT ric FROM Receta rCore
-              JOIN rCore.ingredientesCore ric
+              SELECT riCore FROM Receta rCore
+              JOIN rCore.ingredientes riCore
               WHERE rCore = r
-              AND LOWER(ric.ingrediente.nombre) NOT IN :disponibles
+              AND riCore.tipo = linguini.company.backremyapp.domain.TipoIngredienteReceta.CORE
+              AND LOWER(riCore.ingrediente.nombre) NOT IN :disponibles
           )
           AND (
-              SELECT COUNT(rir) FROM Receta rReemplazable
-              JOIN rReemplazable.ingredientesReemplazables rir
+              SELECT COUNT(riReemplazable) FROM Receta rReemplazable
+              JOIN rReemplazable.ingredientes riReemplazable
               WHERE rReemplazable = r
-              AND LOWER(rir.ingrediente.nombre) NOT IN :disponibles
+              AND riReemplazable.tipo = linguini.company.backremyapp.domain.TipoIngredienteReceta.REEMPLAZABLE
+              AND LOWER(riReemplazable.ingrediente.nombre) NOT IN :disponibles
           ) <= 2
-          AND (
-              r.ingredientesCore IS NOT EMPTY
-              OR r.ingredientesReemplazables IS NOT EMPTY
-              OR r.ingredientesOpcionales IS NOT EMPTY
-          )
+          AND r.ingredientes IS NOT EMPTY
           AND NOT EXISTS (
-              SELECT ric2 FROM Receta rCoreEvitar
-              JOIN rCoreEvitar.ingredientesCore ric2
-              WHERE rCoreEvitar = r
-              AND LOWER(ric2.ingrediente.nombre) IN :aEvitar
-          )
-          AND NOT EXISTS (
-              SELECT rir2 FROM Receta rReemplazableEvitar
-              JOIN rReemplazableEvitar.ingredientesReemplazables rir2
-              WHERE rReemplazableEvitar = r
-              AND LOWER(rir2.ingrediente.nombre) IN :aEvitar
-          )
-          AND NOT EXISTS (
-              SELECT rio2 FROM Receta rOpcionalEvitar
-              JOIN rOpcionalEvitar.ingredientesOpcionales rio2
-              WHERE rOpcionalEvitar = r
-              AND LOWER(rio2.ingrediente.nombre) IN :aEvitar
+              SELECT riEvitar FROM Receta rEvitar
+              JOIN rEvitar.ingredientes riEvitar
+              WHERE rEvitar = r
+              AND LOWER(riEvitar.ingrediente.nombre) IN :aEvitar
           )
           AND (
             :restriccionesIds IS NULL OR NOT EXISTS (
-                SELECT ric3 FROM Receta rCoreRestriccion
-                JOIN rCoreRestriccion.ingredientesCore ric3
-                WHERE rCoreRestriccion = r
+                SELECT riRestriccion FROM Receta rRestriccion
+                JOIN rRestriccion.ingredientes riRestriccion
+                WHERE rRestriccion = r
                 AND NOT EXISTS (
-                    SELECT ra FROM ric3.ingrediente.restriccionesAlimentarias ra
-                    WHERE ra.id IN :restriccionesIds
-                )
-            )
-          )
-          AND (
-            :restriccionesIds IS NULL OR NOT EXISTS (
-                SELECT rir3 FROM Receta rReemplazableRestriccion
-                JOIN rReemplazableRestriccion.ingredientesReemplazables rir3
-                WHERE rReemplazableRestriccion = r
-                AND NOT EXISTS (
-                    SELECT ra FROM rir3.ingrediente.restriccionesAlimentarias ra
-                    WHERE ra.id IN :restriccionesIds
-                )
-            )
-          )
-          AND (
-            :restriccionesIds IS NULL OR NOT EXISTS (
-                SELECT rio3 FROM Receta rOpcionalRestriccion
-                JOIN rOpcionalRestriccion.ingredientesOpcionales rio3
-                WHERE rOpcionalRestriccion = r
-                AND NOT EXISTS (
-                    SELECT ra FROM rio3.ingrediente.restriccionesAlimentarias ra
+                    SELECT ra FROM riRestriccion.ingrediente.restriccionesAlimentarias ra
                     WHERE ra.id IN :restriccionesIds
                 )
             )
@@ -213,73 +141,25 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
     @Query("""
         SELECT DISTINCT r FROM Receta r
         WHERE (:tiempoMaximo IS NULL OR r.tiempoEnMinutos <= :tiempoMaximo)
-          AND (
-              EXISTS (
-                  SELECT ric FROM Receta rCore
-                  JOIN rCore.ingredientesCore ric
-                  WHERE rCore = r
-                  AND LOWER(ric.ingrediente.nombre) IN :disponibles
-              )
-              OR EXISTS (
-                  SELECT rir FROM Receta rReemplazable
-                  JOIN rReemplazable.ingredientesReemplazables rir
-                  WHERE rReemplazable = r
-                  AND LOWER(rir.ingrediente.nombre) IN :disponibles
-              )
-              OR EXISTS (
-                  SELECT rio FROM Receta rOpcional
-                  JOIN rOpcional.ingredientesOpcionales rio
-                  WHERE rOpcional = r
-                  AND LOWER(rio.ingrediente.nombre) IN :disponibles
-              )
+          AND EXISTS (
+              SELECT riDisponible FROM Receta rDisponible
+              JOIN rDisponible.ingredientes riDisponible
+              WHERE rDisponible = r
+              AND LOWER(riDisponible.ingrediente.nombre) IN :disponibles
           )
           AND NOT EXISTS (
-              SELECT ric2 FROM Receta rCoreEvitar
-              JOIN rCoreEvitar.ingredientesCore ric2
-              WHERE rCoreEvitar = r
-              AND LOWER(ric2.ingrediente.nombre) IN :aEvitar
-          )
-          AND NOT EXISTS (
-              SELECT rir2 FROM Receta rReemplazableEvitar
-              JOIN rReemplazableEvitar.ingredientesReemplazables rir2
-              WHERE rReemplazableEvitar = r
-              AND LOWER(rir2.ingrediente.nombre) IN :aEvitar
-          )
-          AND NOT EXISTS (
-              SELECT rio2 FROM Receta rOpcionalEvitar
-              JOIN rOpcionalEvitar.ingredientesOpcionales rio2
-              WHERE rOpcionalEvitar = r
-              AND LOWER(rio2.ingrediente.nombre) IN :aEvitar
+              SELECT riEvitar FROM Receta rEvitar
+              JOIN rEvitar.ingredientes riEvitar
+              WHERE rEvitar = r
+              AND LOWER(riEvitar.ingrediente.nombre) IN :aEvitar
           )
           AND (
             :restriccionesIds IS NULL OR NOT EXISTS (
-                SELECT ric3 FROM Receta rCoreRestriccion
-                JOIN rCoreRestriccion.ingredientesCore ric3
-                WHERE rCoreRestriccion = r
+                SELECT riRestriccion FROM Receta rRestriccion
+                JOIN rRestriccion.ingredientes riRestriccion
+                WHERE rRestriccion = r
                 AND NOT EXISTS (
-                    SELECT ra FROM ric3.ingrediente.restriccionesAlimentarias ra
-                    WHERE ra.id IN :restriccionesIds
-                )
-            )
-          )
-          AND (
-            :restriccionesIds IS NULL OR NOT EXISTS (
-                SELECT rir3 FROM Receta rReemplazableRestriccion
-                JOIN rReemplazableRestriccion.ingredientesReemplazables rir3
-                WHERE rReemplazableRestriccion = r
-                AND NOT EXISTS (
-                    SELECT ra FROM rir3.ingrediente.restriccionesAlimentarias ra
-                    WHERE ra.id IN :restriccionesIds
-                )
-            )
-          )
-          AND (
-            :restriccionesIds IS NULL OR NOT EXISTS (
-                SELECT rio3 FROM Receta rOpcionalRestriccion
-                JOIN rOpcionalRestriccion.ingredientesOpcionales rio3
-                WHERE rOpcionalRestriccion = r
-                AND NOT EXISTS (
-                    SELECT ra FROM rio3.ingrediente.restriccionesAlimentarias ra
+                    SELECT ra FROM riRestriccion.ingrediente.restriccionesAlimentarias ra
                     WHERE ra.id IN :restriccionesIds
                 )
             )
