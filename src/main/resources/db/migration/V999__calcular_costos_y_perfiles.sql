@@ -15,7 +15,7 @@ WITH CostosReceta AS (
         COALESCE(SUM(
                          CASE
                              -- Si la categoría es alguna de estas, dividimos su precio por 100
-                             WHEN i.categoria IN ('ACEITES_GRASAS', 'ESPECIAS_CONDIMENTOS', 'OTROS_ESENCIALES')
+                             WHEN i.categoria IN ('LACTEOS', 'ACEITES_GRASAS', 'ESPECIAS_CONDIMENTOS', 'OTROS_ESENCIALES')
                                  THEN pi.precio / 100.0
                              -- Para el resto de los ingredientes, el precio completo
                              ELSE pi.precio
