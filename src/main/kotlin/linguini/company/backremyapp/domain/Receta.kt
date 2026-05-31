@@ -34,10 +34,6 @@ class Receta(
     @Enumerated(EnumType.STRING)
     var dificultad: NivelCocina = NivelCocina.INTERMEDIO,
 
-    //Todo: eliminar, ahora se usa las 3 listas de ingredientes
-    @OneToMany(mappedBy = "receta", cascade = [CascadeType.ALL], orphanRemoval = true)
-    var ingredientes: MutableSet<RecetaIngrediente> = mutableSetOf(),
-
     @OneToMany(mappedBy = "receta", cascade = [CascadeType.ALL], orphanRemoval = true)
     @OrderBy("orden ASC")
     var pasos: MutableSet<Paso> = mutableSetOf(),
@@ -67,10 +63,13 @@ class Receta(
     @OneToMany(mappedBy = "receta", cascade = [CascadeType.ALL], orphanRemoval = true)
     var ingredientesOpcionales: MutableList<RecetaIngrediente> = mutableListOf()
 
+    fun todosLosIngredientes(): List<RecetaIngrediente> =
+        ingredientesCore + ingredientesReemplazables + ingredientesOpcionales
+
     fun calcularTiempo(): Int = pasos.sumOf { it.tiempoEstimadoMinutos }
 
     fun calcularDificultad(): NivelCocina {
-        val puntaje = (pasos.size * 2) + (ingredientes.size * 1.5) + (tiempoEnMinutos / 10)
+        val puntaje = (pasos.size * 2) + (todosLosIngredientes().size * 1.5) + (tiempoEnMinutos / 10)
 
         return when {
             puntaje < 15 -> NivelCocina.BASICO
@@ -80,15 +79,16 @@ class Receta(
     }
 
     // Estos métodos también se podrían agregar al PrePersist y guardar el resultado en columnas
-    fun caloriasTotales(): Double = ingredientes.sumOf { it.caloriasEstimadas() }
+    fun caloriasTotales(): Double = todosLosIngredientes().sumOf { it.caloriasEstimadas() }
 
-    fun grasasTotales(): Double = ingredientes.sumOf { it.grasasEstimadas() }
+    fun grasasTotales(): Double = todosLosIngredientes().sumOf { it.grasasEstimadas() }
 
-    fun proteinasTotales(): Double = ingredientes.sumOf { it.proteinasEstimadas() }
+    fun proteinasTotales(): Double = todosLosIngredientes().sumOf { it.proteinasEstimadas() }
 
-    fun fibrasTotales(): Double = ingredientes.sumOf { it.fibrasEstimadas() }
+    fun fibrasTotales(): Double = todosLosIngredientes().sumOf { it.fibrasEstimadas() }
 
     fun restriccionesAlimentariasCumplidas(): Set<RestriccionAlimentaria> {
+        val ingredientes = todosLosIngredientes()
         if (ingredientes.isEmpty()) return emptySet()
 
         return ingredientes
@@ -100,7 +100,7 @@ class Receta(
 
     fun cumpleRestricciones(restricciones: Collection<RestriccionAlimentaria>): Boolean {
         return restricciones.all { restriccion ->
-            ingredientes.all { recetaIngrediente ->
+            todosLosIngredientes().all { recetaIngrediente ->
                 recetaIngrediente.ingrediente.cumpleRestriccion(restriccion)
             }
         }
@@ -113,7 +113,7 @@ class Receta(
 
         if (ingredientesAEvitarIds.isEmpty()) return false
 
-        return ingredientes.any { recetaIngrediente ->
+        return todosLosIngredientes().any { recetaIngrediente ->
             recetaIngrediente.ingrediente.id in ingredientesAEvitarIds
         }
     }
@@ -123,7 +123,7 @@ class Receta(
             .mapNotNull { it.id }
             .toSet()
 
-        return ingredientes
+        return todosLosIngredientes()
             .map { it.ingrediente }
             .filter { it.id in ingredientesComunesIds }
             .toSet()
@@ -134,7 +134,7 @@ class Receta(
             .mapNotNull { it.id }
             .toSet()
 
-        return ingredientes
+        return todosLosIngredientes()
             .map { it.ingrediente }
             .filter { it.id !in ingredientesComunesIds }
             .toSet()

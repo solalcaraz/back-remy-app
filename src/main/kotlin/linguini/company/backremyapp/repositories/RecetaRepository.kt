@@ -9,10 +9,34 @@ import org.springframework.data.repository.query.Param
 import java.util.Optional
 
 interface RecetaRepository : JpaRepository<Receta, Long> {
-    @EntityGraph(attributePaths = ["ingredientes", "ingredientes.ingrediente", "ingredientes.ingrediente.restriccionesAlimentarias", "pasos", "tags"])
+    @EntityGraph(attributePaths = [
+        "ingredientesCore",
+        "ingredientesCore.ingrediente",
+        "ingredientesCore.ingrediente.restriccionesAlimentarias",
+        "ingredientesReemplazables",
+        "ingredientesReemplazables.ingrediente",
+        "ingredientesReemplazables.ingrediente.restriccionesAlimentarias",
+        "ingredientesOpcionales",
+        "ingredientesOpcionales.ingrediente",
+        "ingredientesOpcionales.ingrediente.restriccionesAlimentarias",
+        "pasos",
+        "tags"
+    ])
     fun findWithDetailsById(id: Long): Optional<Receta>
 
-    @EntityGraph(attributePaths = ["ingredientes", "ingredientes.ingrediente", "ingredientes.ingrediente.restriccionesAlimentarias", "pasos", "tags"])
+    @EntityGraph(attributePaths = [
+        "ingredientesCore",
+        "ingredientesCore.ingrediente",
+        "ingredientesCore.ingrediente.restriccionesAlimentarias",
+        "ingredientesReemplazables",
+        "ingredientesReemplazables.ingrediente",
+        "ingredientesReemplazables.ingrediente.restriccionesAlimentarias",
+        "ingredientesOpcionales",
+        "ingredientesOpcionales.ingrediente",
+        "ingredientesOpcionales.ingrediente.restriccionesAlimentarias",
+        "pasos",
+        "tags"
+    ])
     fun findAllWithDetailsBy(): List<Receta>
 
     @Query("""

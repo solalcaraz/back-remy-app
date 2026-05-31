@@ -22,7 +22,7 @@ class RecetaMapper: RecetaAdapter {
             tiempoEnMinutos = receta.tiempoEnMinutos,
             porciones = receta.porciones,
             dificultad = receta.dificultad.label,
-            ingredientes = receta.ingredientes.map {
+            ingredientes = receta.todosLosIngredientes().map {
                 IngredienteRecetaDTO(it.id, it.ingrediente.nombre, it.cantidad, it.unidadMedida.name)
             },
             pasos = receta.pasos.map {
