@@ -215,7 +215,7 @@ class RecetaLoader(
     ).apply {
         this.descripcion = descripcion
         this.imgUrl = imgUrl
-        ingredientes.forEach { agregarIngrediente(it) }
+//        ingredientes.forEach { agregarIngrediente(it) }
         pasos.forEach { agregarPaso(it) }
     }
 

@@ -34,6 +34,7 @@ class Receta(
     @Enumerated(EnumType.STRING)
     var dificultad: NivelCocina = NivelCocina.INTERMEDIO,
 
+    //Todo: eliminar, ahora se usa las 3 listas de ingredientes
     @OneToMany(mappedBy = "receta", cascade = [CascadeType.ALL], orphanRemoval = true)
     var ingredientes: MutableSet<RecetaIngrediente> = mutableSetOf(),
 
@@ -56,6 +57,15 @@ class Receta(
         this.tiempoEnMinutos = calcularTiempo()
         this.dificultad = calcularDificultad()
     }
+
+    @OneToMany(mappedBy = "receta", cascade = [CascadeType.ALL], orphanRemoval = true)
+    var ingredientesCore: MutableList<RecetaIngrediente> = mutableListOf()
+
+    @OneToMany(mappedBy = "receta", cascade = [CascadeType.ALL], orphanRemoval = true)
+    var ingredientesReemplazables: MutableList<RecetaIngrediente> = mutableListOf()
+
+    @OneToMany(mappedBy = "receta", cascade = [CascadeType.ALL], orphanRemoval = true)
+    var ingredientesOpcionales: MutableList<RecetaIngrediente> = mutableListOf()
 
     fun calcularTiempo(): Int = pasos.sumOf { it.tiempoEstimadoMinutos }
 
@@ -149,10 +159,10 @@ class Receta(
         }
     }
 
-    fun agregarIngrediente(ingrediente: RecetaIngrediente) {
-        ingredientes.add(ingrediente)
-        ingrediente.receta = this
-    }
+//    fun agregarIngrediente(ingrediente: RecetaIngrediente) {
+//        ingredientes.add(ingrediente)
+//        ingrediente.receta = this
+//    }
 
     fun agregarPaso(paso: Paso) {
         pasos.add(paso)
