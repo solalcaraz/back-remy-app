@@ -34,6 +34,20 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
         LEFT JOIN riOrden.ingrediente iOrden
         WHERE (:tiempoMaximo IS NULL OR r.tiempoEnMinutos <= :tiempoMaximo)
           AND NOT EXISTS (
+              SELECT riCoreDisponible FROM Receta rCoreDisponible
+              JOIN rCoreDisponible.ingredientes riCoreDisponible
+              WHERE rCoreDisponible = r
+              AND riCoreDisponible.tipo = linguini.company.backremyapp.domain.TipoIngredienteReceta.CORE
+              AND riCoreDisponible.ingrediente.id NOT IN :ingredientesComunesIds
+          )
+          AND (
+              SELECT COUNT(riReemplazableDisponible) FROM Receta rReemplazableDisponible
+              JOIN rReemplazableDisponible.ingredientes riReemplazableDisponible
+              WHERE rReemplazableDisponible = r
+              AND riReemplazableDisponible.tipo = linguini.company.backremyapp.domain.TipoIngredienteReceta.REEMPLAZABLE
+              AND riReemplazableDisponible.ingrediente.id NOT IN :ingredientesComunesIds
+          ) <= 5
+          AND NOT EXISTS (
               SELECT riEvitar FROM Receta rEvitar
               JOIN rEvitar.ingredientes riEvitar
               WHERE rEvitar = r

@@ -213,7 +213,7 @@ class RecomendacionService(
 
     private fun buscarPreciosPorIngrediente(recetas: List<Receta>): Map<Long, PrecioIngrediente> {
         val ingredientesIds = recetas
-            .flatMap { receta -> receta.todosLosIngredientes().mapNotNull { it.ingrediente.id } }
+            .flatMap { receta -> receta.ingredientes.mapNotNull { it.ingrediente.id } }
             .distinct()
 
         if (ingredientesIds.isEmpty()) return emptyMap()
@@ -227,7 +227,7 @@ class RecomendacionService(
         receta: Receta,
         preciosPorIngredienteId: Map<Long, PrecioIngrediente>
     ): Double {
-        val costo = receta.todosLosIngredientes().sumOf { recetaIngrediente ->
+        val costo = receta.ingredientes.sumOf { recetaIngrediente ->
             val ingredienteId = recetaIngrediente.ingrediente.id ?: return@sumOf 0.0
             val precio = preciosPorIngredienteId[ingredienteId] ?: return@sumOf 0.0
 
@@ -262,7 +262,7 @@ class RecomendacionService(
         val cumpleRestricciones = receta.cumpleRestricciones(usuario.restriccionesAlimentarias)
 
         val disponiblesSet = ingredientesDisponibles.toSet() // para buscar mas rapido y evitar duplicados en los strings
-        val ingredientesReceta = receta.todosLosIngredientes()
+        val ingredientesReceta = receta.ingredientes
         val totalIngredientes = ingredientesReceta.size
 
         // se comparan los ing contra los ingredinetes totales (perfil del user y req)
@@ -440,7 +440,7 @@ class RecomendacionService(
     private fun restriccionesIncumplidas(receta: Receta, usuario: Usuario): List<String> {
         return usuario.restriccionesAlimentarias
             .filterNot { restriccion ->
-                receta.todosLosIngredientes().all { recetaIngrediente ->
+                receta.ingredientes.all { recetaIngrediente ->
                     recetaIngrediente.ingrediente.cumpleRestriccion(restriccion)
                 }
             }
@@ -454,7 +454,7 @@ class RecomendacionService(
 
         if (ingredientesAEvitarIds.isEmpty()) return emptyList()
 
-        return receta.todosLosIngredientes()
+        return receta.ingredientes
             .map { it.ingrediente }
             .filter { it.id in ingredientesAEvitarIds }
             .map { it.nombre }
