@@ -68,7 +68,7 @@ class RecomendacionService(
 
         return recetas
             .map { receta ->
-                val costoAproximado = costoAproximado(receta, preciosPorIngredienteId)
+                val costoAproximado = receta.costoTotalCompra
                 val evaluacion = evaluarReceta(
                     receta, usuario, ingredientesDisponibles, req.ingredientesExtra,
                     favoritosIds, historialIds, costoAproximado, req.puedeComprar, busquedaActiva
@@ -112,7 +112,7 @@ class RecomendacionService(
         // Así la sugerencia varía en cada visita pero siempre es una receta relevante.
         val candidatasTop = recetas
             .map { receta ->
-                val costo = costoAproximado(receta, preciosPorIngredienteId)
+                val costo = receta.costoTotalCompra
                 val evaluacion = evaluarReceta(
                     receta, usuario, ingredientesDisponibles, emptyList(),
                     favoritosIds, historialIds, costo, puedeComprar = true, busquedaActiva = false
@@ -205,19 +205,19 @@ class RecomendacionService(
             .toMap()
     }
 
-    private fun costoAproximado(
-        receta: Receta,
-        preciosPorIngredienteId: Map<Long, PrecioIngrediente>
-    ): Double {
-        val costo = receta.ingredientes.sumOf { recetaIngrediente ->
-            val ingredienteId = recetaIngrediente.ingrediente.id ?: return@sumOf 0.0
-            val precio = preciosPorIngredienteId[ingredienteId] ?: return@sumOf 0.0
-
-            recetaIngrediente.costoEstimado(precio)
-        }
-
-        return (costo * 100).roundToInt() / 100.0
-    }
+//    private fun costoAproximado(
+//        receta: Receta,
+//        preciosPorIngredienteId: Map<Long, PrecioIngrediente>
+//    ): Double {
+//        val costo = receta.ingredientes.sumOf { recetaIngrediente ->
+//            val ingredienteId = recetaIngrediente.ingrediente.id ?: return@sumOf 0.0
+//            val precio = preciosPorIngredienteId[ingredienteId] ?: return@sumOf 0.0
+//
+//            recetaIngrediente.costoEstimado(precio)
+//        }
+//
+//        return (costo * 100).roundToInt() / 100.0
+//    }
 
     /* Evaluar receta solamente agrega un puntaje y un array de motivos
     De esta manera podemos ofrecerle al usuario un scoring en base a su configuración

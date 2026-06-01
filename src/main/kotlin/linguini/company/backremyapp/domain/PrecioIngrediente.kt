@@ -36,5 +36,11 @@ class PrecioIngrediente(
     val unidadReferencia: UnidadMedida,
 
     @Column
-    val fechaActualizacion: LocalDate? = LocalDate.now()
+    val fechaActualizacion: LocalDate? = LocalDate.now(),
+
+    @Column
+    val producto_referencia: String,
+
+    @Column
+    val origen_referencia: String
 )

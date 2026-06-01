@@ -58,14 +58,16 @@ CREATE INDEX idx_ingredientes_restricciones_restriccion ON ingredientes_restricc
 
 -- TABLA PRECIOS INGREDIENTES ----------------------------
 CREATE TABLE precios_ingredientes (
-    id BIGSERIAL PRIMARY KEY,
-    ingrediente_id BIGINT NOT NULL,
-    precio NUMERIC(10,2) NOT NULL,
-    cantidad_referencia NUMERIC(10,2),
-    unidad_referencia VARCHAR(50),
-    fecha_actualizacion DATE,
-    CONSTRAINT fk_precio_ingrediente
-        FOREIGN KEY (ingrediente_id) REFERENCES ingredientes(id) ON DELETE CASCADE
+      id BIGSERIAL PRIMARY KEY,
+      ingrediente_id BIGINT NOT NULL,
+      precio NUMERIC(10,2) NOT NULL,
+      cantidad_referencia NUMERIC(10,2),
+      unidad_referencia VARCHAR(50),
+      fecha_actualizacion DATE DEFAULT CURRENT_DATE,
+      producto_referencia TEXT,
+      origen_referencia VARCHAR(50),
+      CONSTRAINT fk_precio_ingrediente
+          FOREIGN KEY (ingrediente_id) REFERENCES ingredientes(id) ON DELETE CASCADE
 );
 
 CREATE INDEX idx_precios_ingredientes_ingrediente ON precios_ingredientes(ingrediente_id);
@@ -78,7 +80,9 @@ CREATE TABLE recetas (
     porciones INT NOT NULL,
     dificultad VARCHAR(50) NOT NULL DEFAULT 'INTERMEDIO',
     descripcion TEXT,
-    img_url VARCHAR(500)
+    img_url VARCHAR(500),
+    costo_total_compra DOUBLE PRECISION NOT NULL DEFAULT 0.0,
+    perfil_economico VARCHAR(50) NOT NULL DEFAULT 'INTERMEDIO'
 );
 
 CREATE INDEX idx_recetas_nombre ON recetas(nombre);
