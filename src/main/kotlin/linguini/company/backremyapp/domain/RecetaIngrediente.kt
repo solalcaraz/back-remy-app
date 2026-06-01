@@ -53,9 +53,10 @@ class RecetaIngrediente(
     }
 
     /* y llamarlo en el service? */
-    fun costoEstimado(precio: PrecioIngrediente): Double {
-        return precio.precio.toDouble() * cantidad / precio.cantidadReferencia.toDouble()
-    }
+//    fun costoEstimado(precio: PrecioIngrediente): Double {
+//        return precio.precio.toDouble() * cantidad / precio.cantidadReferencia.toDouble()
+//    }
+    // No tenemos cantidades de referencia
 }
 
 enum class TipoIngredienteReceta {

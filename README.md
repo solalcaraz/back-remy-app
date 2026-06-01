@@ -81,3 +81,18 @@ INSERT INTO ingredientes (
 ### Inserción Manual de Ingredientes Adicionales
 Al final se identifico la necesidad de incorporar otros ingedientes adicionales, como se definieron una vez finalizado el pipeline principal de generacion y carga, se opto por incorporarlos al final de script de SQL.
 - Ingredientes agregados manualmente: Remolacha, Zucchini, Coliflor, Maní, Semillas de girasol, Queso parmesano, Espárragos, Jamón cocido, Seitán, Tempeh, Soja texturizada, Edamame, Porotos blancos, Porotos aduki, Arvejas amarillas partidas y Lupini
+
+## Obtención de precios actualizados de los ingredientes
+Buscamos una fuente de referencia institucional como la página del Gobierno: https://www.preciosclaros.gob.ar/ , tomando como región más próxima a La Plata.
+A través de PGAdmin se obtuvo el .csv de la tabla de ingredientes, incluyendo los agregados manualmente, y con un Jupyter Notebook (https://github.com/IlledNacu/precios-ingredientes) se fueron ejecutando los bloques de código que extraerían la información necesaria de los endpoints a disposición.
+### Primera etapa: PreciosClaros
+En esta fuente, hallamos por similitud un total de 79/108 alimentos, y en base a un precioMin y un precioMax calculamos y guardamos un promedio.
+### Segunda etapa: Ratoneando
+Como todavía quedaban muchos ingredientes huérfanos, se creó un json con los que todavía faltaban y se buscó otra fuente.
+En este caso probamos con la App https://ratoneando.ar/ , que toma como fuente productos de supermercados.
+En esta fuente, hallamos por similitud un total de 10 alimentos con un precio fijo.
+### Tercera etapa: Jumbo
+Todavía quedaban 19 húerfanos. Como instancia final, accedimos a los datos públicos de Jumbo para obtener precios fijos de 12 alimentos más.
+### Insert para nuestra BD
+En base a los 3 .json que nos quedaron como resultado final, primero el de PreciosClaros, luego el de Ratoneando y por último el de Jumbo, generamos los inserts en base al id del ingrediente, con el precio, el producto_referencia y el origen_referencia.
+Los resultados no son perfectos, debido a la complejidad lingüística en el tratamiento de los datos que manejan las distintas fuentes. Sirven como una guía estimativa de cuánto puede salir un producto si lo vas a comprar ahora al supermercado.

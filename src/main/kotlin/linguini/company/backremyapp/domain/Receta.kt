@@ -50,6 +50,13 @@ class Receta(
     @Column(name = "img_url", nullable = false)
     var imgUrl: String = ""
 
+    @Column(name = "costo_total_compra", nullable = false)
+    var costoTotalCompra: Double = 0.0
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "perfil_economico", nullable = false)
+    var perfilEconomico: PerfilEconomico = PerfilEconomico.INTERMEDIO
+
     @PrePersist
     @PreUpdate
     fun sincronizarDatosAutomaticos() {
