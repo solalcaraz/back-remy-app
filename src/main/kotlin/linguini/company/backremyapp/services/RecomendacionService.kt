@@ -143,7 +143,7 @@ class RecomendacionService(
         // la query ordena por coincidencia con los ing dispo, pero el sist de scrore refina el orden
         val recetas: List<Receta> =
             if (busquedaActiva) {  //o sea si el user ingreso ing en el input o solo quiere recetas con los ing que marco como comun
-                // si puede comprar la busqueda de recetas se amplia, basta con que tenga algunos de los ing dispo
+                // si puede comprar la busqueda de recetas se amplia, basta con que tenga algunos de los ing dispo en cualquiera de las 3 listas
                 if (puedeComprar) {
                     recetaRepository.findConAlgunIngrediente(
                         ingredientesDisponibles,
@@ -153,6 +153,8 @@ class RecomendacionService(
                         pageable
                     )
                 } else { // si no puede comprar la busqueda se limita a recetas que tenga todos los ing disponibles
+                    // SUGERENCIAS: devuelve recetas con ingredientes core, max 2 reemplazables faltantes y pueden faltar opcionales
+                    // filtra ingredientes a evitar en las 3 listas y restricciones
                     recetaRepository.findConTodosLosIngredientes(
                         ingredientesDisponibles,
                         tiempoMaximo,
@@ -165,6 +167,7 @@ class RecomendacionService(
                 val ingredientesComunesIds = idsParaQuery(usuario.ingredientesComunes().mapNotNull { it.id })
                 val ingredientesAEvitarIds = idsParaQuery(usuario.ingredientesAEvitar().mapNotNull { it.id })
 
+                // SUGERENCIAS: ingredientesCore disponibles, hasta 5 reemplazables faltantes e ignora opcionales
                 val candidatasIds = recetaRepository.findIdsCandidatasParaRecomendacion(
                     ingredientesComunesIds = ingredientesComunesIds,
                     ingredientesAEvitarIds = ingredientesAEvitarIds,
@@ -183,10 +186,25 @@ class RecomendacionService(
 
         // TODO: este filtro es bastante chico por eso no me parece mal dejarlo aca, pero quizas se deberia hacer tambien en el repo
         return if (!puedeComprar && !busquedaActiva) {
-            recetas.filter { r -> r.ingredientes.all { it.ingrediente.nombre.lowercase() in ingredientesDisponibles } }
+            recetas.filter { receta -> tieneIngredientesDisponiblesParaSugerencia(receta, ingredientesDisponibles) }
         } else {
             recetas
         }
+    }
+
+    private fun tieneIngredientesDisponiblesParaSugerencia(
+        receta: Receta,
+        ingredientesDisponibles: List<String>
+    ): Boolean {
+        val disponibles = ingredientesDisponibles.toSet()
+        val tieneTodosLosCore = receta.ingredientesCore.all {
+            it.ingrediente.nombre.lowercase() in disponibles
+        }
+        val reemplazablesFaltantes = receta.ingredientesReemplazables.count {
+            it.ingrediente.nombre.lowercase() !in disponibles
+        }
+
+        return tieneTodosLosCore && reemplazablesFaltantes <= 5
     }
 
     private fun idsParaQuery(ids: List<Long>): List<Long> {
@@ -244,10 +262,11 @@ class RecomendacionService(
         val cumpleRestricciones = receta.cumpleRestricciones(usuario.restriccionesAlimentarias)
 
         val disponiblesSet = ingredientesDisponibles.toSet() // para buscar mas rapido y evitar duplicados en los strings
-        val totalIngredientes = receta.ingredientes.size
+        val ingredientesReceta = receta.ingredientes
+        val totalIngredientes = ingredientesReceta.size
 
         // se comparan los ing contra los ingredinetes totales (perfil del user y req)
-        val nombresReceta = receta.ingredientes.map { it.ingrediente.nombre.lowercase() }
+        val nombresReceta = ingredientesReceta.map { it.ingrediente.nombre.lowercase() }
         val coincidenciasTotales = nombresReceta.count { it in disponiblesSet }
         val coincidenciasRequest = ingredientesExtra.count { it in nombresReceta }
         val faltantes = totalIngredientes - coincidenciasTotales

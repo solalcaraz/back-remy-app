@@ -5,6 +5,7 @@ import linguini.company.backremyapp.domain.NivelCocina
 import linguini.company.backremyapp.domain.Paso
 import linguini.company.backremyapp.domain.Receta
 import linguini.company.backremyapp.domain.RecetaIngrediente
+import linguini.company.backremyapp.domain.TipoIngredienteReceta
 import linguini.company.backremyapp.domain.UnidadMedida
 import linguini.company.backremyapp.exceptions.NotFoundException
 import linguini.company.backremyapp.repositories.IngredienteRepository
@@ -111,7 +112,7 @@ class RecetaLoader(
         ingredientes = listOf(
             item("Huevo", 2.0, UnidadMedida.UNIDAD),
             item("Queso parmesano", 60.0),
-            item("Pimienta negra", 1.0)
+            item("Pimienta negra", 1.0, tipo = TipoIngredienteReceta.OPCIONAL)
         ),
         pasos = listOf(
             paso(1, "Batir huevos", "Batir huevos con una pizca de pimienta.", 2, "https://images.unsplash.com/photo-1582169296194-e4d644c460ca"),
@@ -130,7 +131,7 @@ class RecetaLoader(
         ingredientes = listOf(
             item("Avena", 60.0),
             item("Yogur natural", 160.0),
-            item("Azúcar", 8.0)
+            item("Azúcar", 8.0, tipo = TipoIngredienteReceta.OPCIONAL)
         ),
         pasos = listOf(
             paso(1, "Mezclar", "Mezclar avena, yogur y azucar.", 3, "https://images.unsplash.com/photo-1495460596396-039cff98fc86"),
@@ -148,8 +149,8 @@ class RecetaLoader(
         ingredientes = listOf(
             item("Papa", 350.0),
             item("Huevo", 2.0, UnidadMedida.UNIDAD),
-            item("Cebolla", 80.0),
-            item("Aceite de oliva", 12.0, UnidadMedida.MILILITROS)
+            item("Cebolla", 80.0, tipo = TipoIngredienteReceta.REEMPLAZABLE),
+            item("Aceite de oliva", 12.0, UnidadMedida.MILILITROS, tipo = TipoIngredienteReceta.OPCIONAL)
         ),
         pasos = listOf(
             paso(1, "Hervir papa", "Cocinar la papa en cubos hasta que este tierna.", 18, "https://images.unsplash.com/photo-1582298538104-12ec82944f38"),
@@ -168,8 +169,8 @@ class RecetaLoader(
         ingredientes = listOf(
             item("Carne molida", 350.0),
             item("Papa", 400.0),
-            item("Leche entera", 80.0, UnidadMedida.MILILITROS),
-            item("Ajo", 6.0)
+            item("Leche entera", 80.0, UnidadMedida.MILILITROS, tipo = TipoIngredienteReceta.REEMPLAZABLE),
+            item("Ajo", 6.0, tipo = TipoIngredienteReceta.OPCIONAL)
         ),
         pasos = listOf(
             paso(1, "Hervir papas", "Cocinar las papas hasta que esten blandas.", 20, "https://images.unsplash.com/photo-1518977676601-b53f82aba655"),
@@ -188,8 +189,8 @@ class RecetaLoader(
         ingredientes = listOf(
             item("Arroz blanco", 220.0),
             item("Brócoli", 220.0),
-            item("Zanahoria", 90.0),
-            item("Aceite de oliva", 10.0, UnidadMedida.MILILITROS)
+            item("Zanahoria", 90.0, tipo = TipoIngredienteReceta.REEMPLAZABLE),
+            item("Aceite de oliva", 10.0, UnidadMedida.MILILITROS, tipo = TipoIngredienteReceta.OPCIONAL)
         ),
         pasos = listOf(
             paso(1, "Cocinar arroz", "Hervir el arroz hasta que este a punto.", 15, "https://images.unsplash.com/photo-1536304929831-ee1ca9d44906"),
@@ -222,11 +223,13 @@ class RecetaLoader(
     private fun item(
         nombreIngrediente: String,
         cantidad: Double,
-        unidad: UnidadMedida = UnidadMedida.GRAMOS
+        unidad: UnidadMedida = UnidadMedida.GRAMOS,
+        tipo: TipoIngredienteReceta = TipoIngredienteReceta.CORE
     ) = RecetaIngrediente(
         ingrediente = ingrediente(nombreIngrediente),
         cantidad = cantidad,
-        unidadMedida = unidad
+        unidadMedida = unidad,
+        tipo = tipo
     )
 
     private fun paso(

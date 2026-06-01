@@ -64,6 +64,15 @@ class Receta(
         this.dificultad = calcularDificultad()
     }
 
+    val ingredientesCore: List<RecetaIngrediente>
+        get() = ingredientes.filter { it.tipo == TipoIngredienteReceta.CORE }
+
+    val ingredientesReemplazables: List<RecetaIngrediente>
+        get() = ingredientes.filter { it.tipo == TipoIngredienteReceta.REEMPLAZABLE }
+
+    val ingredientesOpcionales: List<RecetaIngrediente>
+        get() = ingredientes.filter { it.tipo == TipoIngredienteReceta.OPCIONAL }
+
     fun calcularTiempo(): Int = pasos.sumOf { it.tiempoEstimadoMinutos }
 
     fun calcularDificultad(): NivelCocina {

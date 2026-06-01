@@ -9,37 +9,70 @@ import org.springframework.data.repository.query.Param
 import java.util.Optional
 
 interface RecetaRepository : JpaRepository<Receta, Long> {
-    @EntityGraph(attributePaths = ["ingredientes", "ingredientes.ingrediente", "ingredientes.ingrediente.restriccionesAlimentarias", "pasos", "tags"])
+    @EntityGraph(attributePaths = [
+        "ingredientes",
+        "ingredientes.ingrediente",
+        "ingredientes.ingrediente.restriccionesAlimentarias",
+        "pasos",
+        "tags"
+    ])
     fun findWithDetailsById(id: Long): Optional<Receta>
 
-    @EntityGraph(attributePaths = ["ingredientes", "ingredientes.ingrediente", "ingredientes.ingrediente.restriccionesAlimentarias", "pasos", "tags"])
+    @EntityGraph(attributePaths = [
+        "ingredientes",
+        "ingredientes.ingrediente",
+        "ingredientes.ingrediente.restriccionesAlimentarias",
+        "pasos",
+        "tags"
+    ])
     fun findAllWithDetailsBy(): List<Receta>
 
     @Query("""
         SELECT r.id
         FROM Receta r
-        LEFT JOIN r.ingredientes ri
-        LEFT JOIN ri.ingrediente i
+        LEFT JOIN r.ingredientes riOrden
+        LEFT JOIN riOrden.ingrediente iOrden
         WHERE (:tiempoMaximo IS NULL OR r.tiempoEnMinutos <= :tiempoMaximo)
           AND NOT EXISTS (
-              SELECT ri2 FROM RecetaIngrediente ri2
-              WHERE ri2.receta = r
-              AND ri2.ingrediente.id IN :ingredientesAEvitarIds
+              SELECT riCoreDisponible FROM Receta rCoreDisponible
+              JOIN rCoreDisponible.ingredientes riCoreDisponible
+              WHERE rCoreDisponible = r
+              AND riCoreDisponible.tipo = linguini.company.backremyapp.domain.TipoIngredienteReceta.CORE
+              AND riCoreDisponible.ingrediente.id NOT IN :ingredientesComunesIds
+          )
+          AND (
+              SELECT COUNT(riReemplazableDisponible) FROM Receta rReemplazableDisponible
+              JOIN rReemplazableDisponible.ingredientes riReemplazableDisponible
+              WHERE rReemplazableDisponible = r
+              AND riReemplazableDisponible.tipo = linguini.company.backremyapp.domain.TipoIngredienteReceta.REEMPLAZABLE
+              AND riReemplazableDisponible.ingrediente.id NOT IN :ingredientesComunesIds
+          ) <= 5
+          AND NOT EXISTS (
+              SELECT riEvitar FROM Receta rEvitar
+              JOIN rEvitar.ingredientes riEvitar
+              WHERE rEvitar = r
+              AND riEvitar.ingrediente.id IN :ingredientesAEvitarIds
           )
           AND (
               :restriccionesIds IS NULL OR NOT EXISTS (
-                  SELECT ri3 FROM RecetaIngrediente ri3
-                  WHERE ri3.receta = r
+                  SELECT riRestriccion FROM Receta rRestriccion
+                  JOIN rRestriccion.ingredientes riRestriccion
+                  WHERE rRestriccion = r
                   AND NOT EXISTS (
-                      SELECT ra FROM ri3.ingrediente.restriccionesAlimentarias ra
+                      SELECT ra FROM riRestriccion.ingrediente.restriccionesAlimentarias ra
                       WHERE ra.id IN :restriccionesIds
                   )
               )
           )
         GROUP BY r.id, r.tiempoEnMinutos
         ORDER BY
-            SUM(CASE WHEN i.id IN :ingredientesComunesIds THEN 1 ELSE 0 END) DESC,
-            SUM(CASE WHEN i.id IN :ingredientesAEvitarIds THEN 1 ELSE 0 END) ASC,
+            COUNT(DISTINCT CASE
+                WHEN riOrden.tipo IN (
+                    linguini.company.backremyapp.domain.TipoIngredienteReceta.CORE,
+                    linguini.company.backremyapp.domain.TipoIngredienteReceta.REEMPLAZABLE
+                )
+                AND iOrden.id IN :ingredientesComunesIds THEN iOrden.id ELSE NULL
+            END) DESC,
             r.tiempoEnMinutos ASC,
             r.id ASC
     """)
@@ -51,7 +84,13 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
         pageable: Pageable
     ): List<Long>
 
-    @EntityGraph(attributePaths = ["ingredientes", "ingredientes.ingrediente", "ingredientes.ingrediente.restriccionesAlimentarias", "pasos", "tags"])
+    @EntityGraph(attributePaths = [
+        "ingredientes",
+        "ingredientes.ingrediente",
+        "ingredientes.ingrediente.restriccionesAlimentarias",
+        "pasos",
+        "tags"
+    ])
     @Query("SELECT DISTINCT r FROM Receta r WHERE r.id IN :ids")
     fun findAllWithDetailsByIdIn(@Param("ids") ids: List<Long>): List<Receta>
 
@@ -64,29 +103,37 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
     no contiene ing a evitar y cumple las restricciones del user
     y pageable para no traer recetas sin limite
      */
-    @EntityGraph(attributePaths = ["ingredientes", "ingredientes.ingrediente", "ingredientes.ingrediente.restriccionesAlimentarias", "pasos", "tags"])
     @Query("""
         SELECT DISTINCT r FROM Receta r
-        JOIN r.ingredientes ri
-        JOIN ri.ingrediente i
-        WHERE LOWER(i.nombre) IN :disponibles
-          AND (:tiempoMaximo IS NULL OR r.tiempoEnMinutos <= :tiempoMaximo)
+        WHERE (:tiempoMaximo IS NULL OR r.tiempoEnMinutos <= :tiempoMaximo)
           AND NOT EXISTS (
-              SELECT ri2 FROM RecetaIngrediente ri2
-              WHERE ri2.receta = r
-              AND LOWER(ri2.ingrediente.nombre) NOT IN :disponibles
+              SELECT riCore FROM Receta rCore
+              JOIN rCore.ingredientes riCore
+              WHERE rCore = r
+              AND riCore.tipo = linguini.company.backremyapp.domain.TipoIngredienteReceta.CORE
+              AND LOWER(riCore.ingrediente.nombre) NOT IN :disponibles
           )
+          AND (
+              SELECT COUNT(riReemplazable) FROM Receta rReemplazable
+              JOIN rReemplazable.ingredientes riReemplazable
+              WHERE rReemplazable = r
+              AND riReemplazable.tipo = linguini.company.backremyapp.domain.TipoIngredienteReceta.REEMPLAZABLE
+              AND LOWER(riReemplazable.ingrediente.nombre) NOT IN :disponibles
+          ) <= 2
+          AND r.ingredientes IS NOT EMPTY
           AND NOT EXISTS (
-              SELECT ri3 FROM RecetaIngrediente ri3
-              WHERE ri3.receta = r
-              AND LOWER(ri3.ingrediente.nombre) IN :aEvitar
+              SELECT riEvitar FROM Receta rEvitar
+              JOIN rEvitar.ingredientes riEvitar
+              WHERE rEvitar = r
+              AND LOWER(riEvitar.ingrediente.nombre) IN :aEvitar
           )
           AND (
             :restriccionesIds IS NULL OR NOT EXISTS (
-                SELECT ri4 FROM RecetaIngrediente ri4
-                WHERE ri4.receta = r
+                SELECT riRestriccion FROM Receta rRestriccion
+                JOIN rRestriccion.ingredientes riRestriccion
+                WHERE rRestriccion = r
                 AND NOT EXISTS (
-                    SELECT ri4 FROM ri4.ingrediente.restriccionesAlimentarias ra
+                    SELECT ra FROM riRestriccion.ingrediente.restriccionesAlimentarias ra
                     WHERE ra.id IN :restriccionesIds
                 )
             )
@@ -105,24 +152,28 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
     se excluyen solamente los ing a evitar y tambien cumple las restricciones alimentarias
     y pageable para no traer recetas sin limite
     */
-    @EntityGraph(attributePaths = ["ingredientes", "ingredientes.ingrediente", "ingredientes.ingrediente.restriccionesAlimentarias", "pasos", "tags"])
     @Query("""
         SELECT DISTINCT r FROM Receta r
-        JOIN r.ingredientes ri
-        JOIN ri.ingrediente i
-        WHERE LOWER(i.nombre) IN :disponibles
-          AND (:tiempoMaximo IS NULL OR r.tiempoEnMinutos <= :tiempoMaximo)
+        WHERE (:tiempoMaximo IS NULL OR r.tiempoEnMinutos <= :tiempoMaximo)
+          AND EXISTS (
+              SELECT riDisponible FROM Receta rDisponible
+              JOIN rDisponible.ingredientes riDisponible
+              WHERE rDisponible = r
+              AND LOWER(riDisponible.ingrediente.nombre) IN :disponibles
+          )
           AND NOT EXISTS (
-              SELECT ri2 FROM RecetaIngrediente ri2
-              WHERE ri2.receta = r
-              AND LOWER(ri2.ingrediente.nombre) IN :aEvitar
+              SELECT riEvitar FROM Receta rEvitar
+              JOIN rEvitar.ingredientes riEvitar
+              WHERE rEvitar = r
+              AND LOWER(riEvitar.ingrediente.nombre) IN :aEvitar
           )
           AND (
             :restriccionesIds IS NULL OR NOT EXISTS (
-                SELECT ri3 FROM RecetaIngrediente ri3
-                WHERE ri3.receta = r
+                SELECT riRestriccion FROM Receta rRestriccion
+                JOIN rRestriccion.ingredientes riRestriccion
+                WHERE rRestriccion = r
                 AND NOT EXISTS (
-                    SELECT ra FROM ri3.ingrediente.restriccionesAlimentarias ra
+                    SELECT ra FROM riRestriccion.ingrediente.restriccionesAlimentarias ra
                     WHERE ra.id IN :restriccionesIds
                 )
             )
