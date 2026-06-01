@@ -71,32 +71,33 @@ class UsuarioService(
             ?: emptyList()
 
         val nombresIngredientes = (ingredientesComunesNombres + ingredientesAEvitarNombres).distinct()
+        val nombresIngredientesNormalizados = nombresIngredientes.map { it.lowercase() }
 
         if (nombresIngredientes.isEmpty()) {
             usuario.preferenciasIngredientes.clear()
             return
         }
 
-        val ingredientes = ingredienteRepository.findByNombreIn(nombresIngredientes)
+        val ingredientes = ingredienteRepository.findByNombreNormalizadoIn(nombresIngredientesNormalizados)
 
         if (ingredientes.size != nombresIngredientes.size) {
-            val encontrados = ingredientes.map { it.nombre }.toSet()
-            val faltantes = nombresIngredientes.filterNot { it in encontrados }
+            val encontrados = ingredientes.map { it.nombre.lowercase() }.toSet()
+            val faltantes = nombresIngredientes.filterNot { it.lowercase() in encontrados }
 
             throw NotFoundException(
                 "No se encontraron los siguientes ingredientes: ${faltantes.joinToString(", ")}"
             )
         }
 
-        val ingredientesPorNombre = ingredientes.associateBy { it.nombre }
+        val ingredientesPorNombre = ingredientes.associateBy { it.nombre.lowercase() }
 
         val comunes = ingredientesComunesNombres.map { nombre ->
-            ingredientesPorNombre[nombre]
+            ingredientesPorNombre[nombre.lowercase()]
                 ?: throw NotFoundException("Ingrediente no encontrado: $nombre")
         }
 
         val evitar = ingredientesAEvitarNombres.map { nombre ->
-            ingredientesPorNombre[nombre]
+            ingredientesPorNombre[nombre.lowercase()]
                 ?: throw NotFoundException("Ingrediente no encontrado: $nombre")
         }
 
@@ -120,7 +121,7 @@ class UsuarioService(
         usuario: Usuario
     ) {
         val nombresRestricciones = usuarioPatch.restriccionesAlimentarias
-            ?.map { it.trim() }
+            ?.map { normalizarRestriccionAlimentaria(it) }
             ?.filter { it.isNotBlank() }
             ?.distinct()
             ?: emptyList()
@@ -130,7 +131,7 @@ class UsuarioService(
             return
         }
 
-        val restricciones = restriccionAlimentariaRepository.findByNombreIn(nombresRestricciones)
+        val restricciones = restriccionAlimentariaRepository.findByNombreNormalizadoIn(nombresRestricciones)
 
         if (restricciones.size != nombresRestricciones.size) {
             val encontradas = restricciones.map { it.nombre }.toSet()
@@ -142,5 +143,16 @@ class UsuarioService(
         }
 
         usuario.cambiarRestriccionesAlimentarias(restricciones)
+    }
+
+    private fun normalizarRestriccionAlimentaria(nombre: String): String {
+        return when (nombre.trim().lowercase().replace(" ", "_")) {
+            "vegetariano" -> "vegetariano"
+            "vegano" -> "vegano"
+            "sin_gluten" -> "sin_gluten"
+            "sin_lactosa" -> "sin_lactosa"
+            "bajo_sodio" -> "bajo_sodio"
+            else -> nombre.trim().lowercase().replace(" ", "_")
+        }
     }
 }

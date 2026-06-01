@@ -45,6 +45,7 @@ class SecurityConfiguration(
 
                     //Todo: setear roles en receta
                     .requestMatchers("/paso/**").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/receta/sugerencia-diaria").authenticated()
                     .requestMatchers(HttpMethod.GET, "/receta/**").permitAll()
                     .requestMatchers(HttpMethod.POST, "/receta/comenzar/**").permitAll()
                     .requestMatchers(HttpMethod.GET, "/receta/favorito/**").permitAll()
