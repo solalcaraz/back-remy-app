@@ -137,30 +137,17 @@ erDiagram
 - `Usuario` contiene el perfil alimentario: restricciones, objetivo, nivel de cocina y perfil economico.
 - `Ingrediente` contiene informacion nutricional embebida y restricciones que cumple.
 - `RecetaIngrediente` existe porque la relacion entre receta e ingrediente tiene datos propios: cantidad y unidad.
-- `PreferenciaIngredienteUsuario` distingue ingredientes comunes de ingredientes a evitar.
+- `PreferenciaIngredienteUsuario` distingue ingredientes comunes de ingredientes a evitar. Los ingredientes `COMUN` son los que el usuario suele tener en casa y se consideran disponibles para busquedas y recomendaciones. Los ingredientes `EVITAR` son los que el usuario no quiere consumir, ya sea por gusto, alergia u otra razon.
 - `FavoritoReceta` e `HistorialReceta` son relaciones con datos propios, por eso no son ManyToMany directas.
 - `PrecioIngrediente` permite historizar o actualizar precios sin modificar el ingrediente base.
 - `RecetaTag` representa la `@ElementCollection` de tags de receta.
 
-## Siguiente entidad natural para el MVP
+## Inventario del usuario para el MVP
 
-Todavia falta modelar la despensa o inventario del usuario. Seria una entidad similar a:
+Para el MVP no se modela una entidad separada de inventario o despensa. La fuente de verdad es `PreferenciaIngredienteUsuario`:
 
-```mermaid
-erDiagram
-    USUARIO ||--o{ INGREDIENTE_DISPONIBLE_USUARIO : tiene_en_casa
-    INGREDIENTE ||--o{ INGREDIENTE_DISPONIBLE_USUARIO : disponible_como
+- `COMUN`: ingrediente que el usuario suele tener en casa. Se trata como ingrediente disponible.
+- `EVITAR`: ingrediente que el usuario no quiere consumir. Se usa para penalizar o filtrar segun el caso.
 
-    INGREDIENTE_DISPONIBLE_USUARIO {
-        long id PK
-        UUID usuario_id FK
-        long ingrediente_id FK
-        double cantidad
-        enum unidad_medida
-        date fecha_carga
-        date fecha_vencimiento
-    }
-```
-
-Esa entidad permitiria que la recomendacion deje de usar `ingredientesComunes` como aproximacion y pase a recomendar segun ingredientes realmente disponibles.
+Si mas adelante se necesita un inventario real con cantidad, unidad, fecha de carga o vencimiento, ahi si podria agregarse una entidad especifica. Por ahora seria duplicar informacion y complicar el modelo sin necesidad.
 
