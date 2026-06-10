@@ -1,0 +1,3136 @@
+[
+  {
+    "nombre": "Pechuga de pollo",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_ANIMALES",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos"
+    ],
+    "info_nutricional": {
+      "calorias": 106.0,
+      "proteinas": 22.5,
+      "carbohidratos": 0.0,
+      "grasas": 1.93,
+      "fibra": null,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Carne molida",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_ANIMALES",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos"
+    ],
+    "info_nutricional": {
+      "calorias": 243.0,
+      "proteinas": 17.5,
+      "carbohidratos": 0.0,
+      "grasas": 19.4,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Bife de lomo",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_ANIMALES",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos"
+    ],
+    "info_nutricional": {
+      "calorias": 143.0,
+      "proteinas": 21.1,
+      "carbohidratos": 0.18,
+      "grasas": 6.46,
+      "fibra": null,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Costilla de cerdo",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_ANIMALES",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos"
+    ],
+    "info_nutricional": {
+      "calorias": 138.0,
+      "proteinas": 19.3,
+      "carbohidratos": 0.0,
+      "grasas": 11.8,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Huevo",
+    "unidad_base": "UNIDAD",
+    "categoria": "PROTEINAS_ANIMALES",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 146.0,
+      "proteinas": 12.6,
+      "carbohidratos": 0.72,
+      "grasas": 9.51,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Atún en lata",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_ANIMALES",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa"
+    ],
+    "info_nutricional": {
+      "calorias": 85.0,
+      "proteinas": 19.0,
+      "carbohidratos": 0.08,
+      "grasas": 0.94,
+      "fibra": null,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Lentejas",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_VEGETALES",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 360.0,
+      "proteinas": 24.6,
+      "carbohidratos": 63.4,
+      "grasas": 1.06,
+      "fibra": 10.7,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Garbanzos",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_VEGETALES",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 364.0,
+      "proteinas": 19.3,
+      "carbohidratos": 60.7,
+      "grasas": 6.04,
+      "fibra": 17.4,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Porotos negros",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_VEGETALES",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 341.0,
+      "proteinas": 21.6,
+      "carbohidratos": 62.4,
+      "grasas": 1.42,
+      "fibra": 15.5,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Tofu firme",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_VEGETALES",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 76.0,
+      "proteinas": 8.08,
+      "carbohidratos": 1.87,
+      "grasas": 4.78,
+      "fibra": 0.3,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Tomate perita",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_BASE",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 18.0,
+      "proteinas": 0.88,
+      "carbohidratos": 3.89,
+      "grasas": 0.2,
+      "fibra": 1.2,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Cebolla",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_BASE",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 36.0,
+      "proteinas": 0.89,
+      "carbohidratos": 7.68,
+      "grasas": 0.1,
+      "fibra": 1.7,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Cebolla morada",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_BASE",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 44.0,
+      "proteinas": 0.94,
+      "carbohidratos": 9.93,
+      "grasas": 0.1,
+      "fibra": 2.2,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Ajo",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_BASE",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 143.0,
+      "proteinas": 6.62,
+      "carbohidratos": 28.2,
+      "grasas": 0.38,
+      "fibra": 2.7,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Zanahoria",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_BASE",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 48.0,
+      "proteinas": 0.93,
+      "carbohidratos": 9.58,
+      "grasas": 0.24,
+      "fibra": 3.1,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Papa",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_BASE",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 73.0,
+      "proteinas": 1.81,
+      "carbohidratos": 16.0,
+      "grasas": 0.26,
+      "fibra": 2.2,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Batata",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_BASE",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 86.0,
+      "proteinas": 1.57,
+      "carbohidratos": 20.1,
+      "grasas": 0.05,
+      "fibra": 3.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Zapallo anco",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_BASE",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 48.0,
+      "proteinas": 1.0,
+      "carbohidratos": 11.7,
+      "grasas": 0.1,
+      "fibra": 2.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Morrón rojo",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_BASE",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 31.3,
+      "proteinas": 0.89,
+      "carbohidratos": 6.65,
+      "grasas": 0.13,
+      "fibra": 1.16,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Morrón verde",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_BASE",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 22.9,
+      "proteinas": 0.72,
+      "carbohidratos": 4.78,
+      "grasas": 0.11,
+      "fibra": 0.94,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Apio",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_BASE",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 16.7,
+      "proteinas": 0.492,
+      "carbohidratos": 3.32,
+      "grasas": 0.162,
+      "fibra": null,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Choclo",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_BASE",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 84.6,
+      "proteinas": 2.79,
+      "carbohidratos": 14.7,
+      "grasas": 1.63,
+      "fibra": 2.43,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Espinaca",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_HOJA",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 27.0,
+      "proteinas": 2.86,
+      "carbohidratos": 3.63,
+      "grasas": 0.39,
+      "fibra": 2.2,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Lechuga",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_HOJA",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 17.1,
+      "proteinas": 0.742,
+      "carbohidratos": 3.37,
+      "grasas": 0.0738,
+      "fibra": null,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Brócoli",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_HOJA",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 39.0,
+      "proteinas": 2.57,
+      "carbohidratos": 6.27,
+      "grasas": 0.34,
+      "fibra": 2.4,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Acelga",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_HOJA",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 19.0,
+      "proteinas": 1.8,
+      "carbohidratos": 3.74,
+      "grasas": 0.2,
+      "fibra": 1.6,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Rúcula",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_HOJA",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 31.0,
+      "proteinas": 1.65,
+      "carbohidratos": 5.37,
+      "grasas": 0.32,
+      "fibra": 2.3,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Arroz blanco",
+    "unidad_base": "GRAMOS",
+    "categoria": "CEREALES_HARINAS",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 359.0,
+      "proteinas": 7.04,
+      "carbohidratos": 80.3,
+      "grasas": 1.03,
+      "fibra": 0.149,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Arroz integral",
+    "unidad_base": "GRAMOS",
+    "categoria": "CEREALES_HARINAS",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 366.0,
+      "proteinas": 7.25,
+      "carbohidratos": 76.7,
+      "grasas": 3.31,
+      "fibra": 3.02,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Harina 0000",
+    "unidad_base": "GRAMOS",
+    "categoria": "CEREALES_HARINAS",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 366.0,
+      "proteinas": 10.9,
+      "carbohidratos": 77.3,
+      "grasas": 1.48,
+      "fibra": null,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Harina de garbanzo",
+    "unidad_base": "GRAMOS",
+    "categoria": "CEREALES_HARINAS",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 387.0,
+      "proteinas": 22.4,
+      "carbohidratos": 57.8,
+      "grasas": 6.69,
+      "fibra": 10.8,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Avena",
+    "unidad_base": "GRAMOS",
+    "categoria": "CEREALES_HARINAS",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 389.0,
+      "proteinas": 16.9,
+      "carbohidratos": 66.3,
+      "grasas": 6.9,
+      "fibra": 10.6,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Fideos spaghetti",
+    "unidad_base": "GRAMOS",
+    "categoria": "CEREALES_HARINAS",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 371.0,
+      "proteinas": 13.0,
+      "carbohidratos": 74.7,
+      "grasas": 1.51,
+      "fibra": 3.2,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Fideos integrales",
+    "unidad_base": "GRAMOS",
+    "categoria": "CEREALES_HARINAS",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 357.0,
+      "proteinas": 13.5,
+      "carbohidratos": 73.1,
+      "grasas": 2.68,
+      "fibra": 10.1,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Pan rallado",
+    "unidad_base": "GRAMOS",
+    "categoria": "CEREALES_HARINAS",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 395.0,
+      "proteinas": 13.4,
+      "carbohidratos": 72.0,
+      "grasas": 5.3,
+      "fibra": 4.5,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Quinoa",
+    "unidad_base": "GRAMOS",
+    "categoria": "CEREALES_HARINAS",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 368.0,
+      "proteinas": 14.1,
+      "carbohidratos": 64.2,
+      "grasas": 6.07,
+      "fibra": 7.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Leche entera",
+    "unidad_base": "MILILITROS",
+    "categoria": "LACTEOS",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_mariscos",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 61.0,
+      "proteinas": 3.15,
+      "carbohidratos": 4.8,
+      "grasas": 3.25,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Leche descremada",
+    "unidad_base": "MILILITROS",
+    "categoria": "LACTEOS",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_mariscos",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 34.0,
+      "proteinas": 3.37,
+      "carbohidratos": 4.96,
+      "grasas": 0.08,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Leche de almendras",
+    "unidad_base": "MILILITROS",
+    "categoria": "LACTEOS",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 19.3,
+      "proteinas": 0.656,
+      "carbohidratos": 0.671,
+      "grasas": 1.56,
+      "fibra": 0.75,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Queso rallado",
+    "unidad_base": "GRAMOS",
+    "categoria": "LACTEOS",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_mariscos",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 420.0,
+      "proteinas": 28.4,
+      "carbohidratos": 13.9,
+      "grasas": 27.8,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Queso crema",
+    "unidad_base": "GRAMOS",
+    "categoria": "LACTEOS",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_mariscos",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 343.0,
+      "proteinas": 6.15,
+      "carbohidratos": 5.52,
+      "grasas": 34.4,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Yogur natural",
+    "unidad_base": "GRAMOS",
+    "categoria": "LACTEOS",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_mariscos",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 78.0,
+      "proteinas": 3.82,
+      "carbohidratos": 5.57,
+      "grasas": 4.48,
+      "fibra": null,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Crema de leche",
+    "unidad_base": "MILILITROS",
+    "categoria": "LACTEOS",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_mariscos",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 343.0,
+      "proteinas": 2.02,
+      "carbohidratos": 3.8,
+      "grasas": 35.6,
+      "fibra": null,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Manteca",
+    "unidad_base": "GRAMOS",
+    "categoria": "ACEITES_GRASAS",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 717.0,
+      "proteinas": 0.85,
+      "carbohidratos": 0.06,
+      "grasas": 81.1,
+      "fibra": null,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Aceite de girasol",
+    "unidad_base": "MILILITROS",
+    "categoria": "ACEITES_GRASAS",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 884.0,
+      "proteinas": 0.0,
+      "carbohidratos": 0.0,
+      "grasas": 100.0,
+      "fibra": null,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Aceite de oliva",
+    "unidad_base": "MILILITROS",
+    "categoria": "ACEITES_GRASAS",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 884.0,
+      "proteinas": 0.0,
+      "carbohidratos": 0.0,
+      "grasas": 100.0,
+      "fibra": null,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Sal fina",
+    "unidad_base": "GRAMOS",
+    "categoria": "ESPECIAS_CONDIMENTOS",
+    "restricciones": [
+      "bajo_en_grasas",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 0.0,
+      "proteinas": 0.0,
+      "carbohidratos": 0.0,
+      "grasas": 0.0,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Pimienta negra",
+    "unidad_base": "GRAMOS",
+    "categoria": "ESPECIAS_CONDIMENTOS",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 251.0,
+      "proteinas": 10.4,
+      "carbohidratos": 64.0,
+      "grasas": 3.26,
+      "fibra": 25.3,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Pimentón dulce",
+    "unidad_base": "GRAMOS",
+    "categoria": "ESPECIAS_CONDIMENTOS",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 282.0,
+      "proteinas": 14.1,
+      "carbohidratos": 54.0,
+      "grasas": 12.9,
+      "fibra": 34.9,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Comino",
+    "unidad_base": "GRAMOS",
+    "categoria": "ESPECIAS_CONDIMENTOS",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 375.0,
+      "proteinas": 17.8,
+      "carbohidratos": 44.2,
+      "grasas": 22.3,
+      "fibra": 10.5,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Orégano seco",
+    "unidad_base": "GRAMOS",
+    "categoria": "ESPECIAS_CONDIMENTOS",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 265.0,
+      "proteinas": 9.0,
+      "carbohidratos": 68.9,
+      "grasas": 4.28,
+      "fibra": 42.5,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Laurel",
+    "unidad_base": "GRAMOS",
+    "categoria": "ESPECIAS_CONDIMENTOS",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 313.0,
+      "proteinas": 7.61,
+      "carbohidratos": 75.0,
+      "grasas": 8.36,
+      "fibra": 26.3,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Ají molido",
+    "unidad_base": "GRAMOS",
+    "categoria": "ESPECIAS_CONDIMENTOS",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 314.0,
+      "proteinas": 12.0,
+      "carbohidratos": 56.6,
+      "grasas": 16.8,
+      "fibra": 28.7,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Perejil fresco",
+    "unidad_base": "GRAMOS",
+    "categoria": "ESPECIAS_CONDIMENTOS",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 36.0,
+      "proteinas": 2.97,
+      "carbohidratos": 6.33,
+      "grasas": 0.79,
+      "fibra": 3.3,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Cúrcuma",
+    "unidad_base": "GRAMOS",
+    "categoria": "ESPECIAS_CONDIMENTOS",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 312.0,
+      "proteinas": 9.68,
+      "carbohidratos": 67.1,
+      "grasas": 3.25,
+      "fibra": 22.7,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Jengibre fresco",
+    "unidad_base": "GRAMOS",
+    "categoria": "ESPECIAS_CONDIMENTOS",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 80.0,
+      "proteinas": 1.82,
+      "carbohidratos": 17.8,
+      "grasas": 0.75,
+      "fibra": 2.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Vinagre de manzana",
+    "unidad_base": "MILILITROS",
+    "categoria": "ESPECIAS_CONDIMENTOS",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 0.0,
+      "proteinas": 0.0,
+      "carbohidratos": 0.93,
+      "grasas": 0.0,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Salsa de soja",
+    "unidad_base": "MILILITROS",
+    "categoria": "ESPECIAS_CONDIMENTOS",
+    "restricciones": [
+      "bajo_en_grasas",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 60.0,
+      "proteinas": 10.5,
+      "carbohidratos": 5.57,
+      "grasas": 0.1,
+      "fibra": 0.8,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Mostaza",
+    "unidad_base": "GRAMOS",
+    "categoria": "ESPECIAS_CONDIMENTOS",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 66.0,
+      "proteinas": 4.37,
+      "carbohidratos": 5.83,
+      "grasas": 3.34,
+      "fibra": 3.3,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Caldo de verduras bajo en sodio",
+    "unidad_base": "MILILITROS",
+    "categoria": "OTROS_ESENCIALES",
+    "restricciones": [
+      "bajo_en_grasas",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 5.0,
+      "proteinas": 0.2,
+      "carbohidratos": 1.2,
+      "grasas": 0.1,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Caldo de pollo",
+    "unidad_base": "MILILITROS",
+    "categoria": "OTROS_ESENCIALES",
+    "restricciones": [
+      "bajo_en_grasas",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 7.0,
+      "proteinas": 0.8,
+      "carbohidratos": 0.5,
+      "grasas": 0.3,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Salsa de tomate",
+    "unidad_base": "MILILITROS",
+    "categoria": "OTROS_ESENCIALES",
+    "restricciones": [
+      "bajo_en_grasas",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 29.0,
+      "proteinas": 1.59,
+      "carbohidratos": 6.95,
+      "grasas": 0.16,
+      "fibra": 1.5,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Tomate triturado",
+    "unidad_base": "MILILITROS",
+    "categoria": "OTROS_ESENCIALES",
+    "restricciones": [
+      "bajo_en_grasas",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 32.0,
+      "proteinas": 1.6,
+      "carbohidratos": 7.3,
+      "grasas": 0.27,
+      "fibra": 1.9,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Azúcar",
+    "unidad_base": "GRAMOS",
+    "categoria": "OTROS_ESENCIALES",
+    "restricciones": [
+      "bajo_en_grasas",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 387.0,
+      "proteinas": 0.0,
+      "carbohidratos": 99.8,
+      "grasas": 0.0,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Stevia",
+    "unidad_base": "GRAMOS",
+    "categoria": "OTROS_ESENCIALES",
+    "restricciones": [
+      "bajo_en_grasas",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 0.0,
+      "proteinas": 0.0,
+      "carbohidratos": 95.6,
+      "grasas": 0.0,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Miel",
+    "unidad_base": "GRAMOS",
+    "categoria": "OTROS_ESENCIALES",
+    "restricciones": [
+      "bajo_en_grasas",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 304.0,
+      "proteinas": 0.3,
+      "carbohidratos": 82.4,
+      "grasas": 0.0,
+      "fibra": 0.2,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Polvo para hornear",
+    "unidad_base": "GRAMOS",
+    "categoria": "OTROS_ESENCIALES",
+    "restricciones": [
+      "bajo_en_grasas",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 53.0,
+      "proteinas": 0.0,
+      "carbohidratos": 27.7,
+      "grasas": 0.0,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Limón",
+    "unidad_base": "UNIDAD",
+    "categoria": "FRUTAS",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 29.0,
+      "proteinas": 1.1,
+      "carbohidratos": 9.32,
+      "grasas": 0.3,
+      "fibra": 2.8,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Naranja",
+    "unidad_base": "UNIDAD",
+    "categoria": "FRUTAS",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 47.0,
+      "proteinas": 0.94,
+      "carbohidratos": 11.8,
+      "grasas": 0.12,
+      "fibra": 2.4,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Banana",
+    "unidad_base": "UNIDAD",
+    "categoria": "FRUTAS",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 89.0,
+      "proteinas": 1.09,
+      "carbohidratos": 22.8,
+      "grasas": 0.33,
+      "fibra": 2.6,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Manzana",
+    "unidad_base": "UNIDAD",
+    "categoria": "FRUTAS",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 52.0,
+      "proteinas": 0.26,
+      "carbohidratos": 13.8,
+      "grasas": 0.17,
+      "fibra": 2.4,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Palta",
+    "unidad_base": "UNIDAD",
+    "categoria": "FRUTAS",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 160.0,
+      "proteinas": 2.0,
+      "carbohidratos": 8.53,
+      "grasas": 14.7,
+      "fibra": 6.7,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Nueces",
+    "unidad_base": "GRAMOS",
+    "categoria": "FRUTOS_SECOS",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 730.0,
+      "proteinas": 14.6,
+      "carbohidratos": 10.9,
+      "grasas": 69.7,
+      "fibra": 5.21,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Almendras",
+    "unidad_base": "GRAMOS",
+    "categoria": "FRUTOS_SECOS",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 626.0,
+      "proteinas": 21.5,
+      "carbohidratos": 20.0,
+      "grasas": 51.1,
+      "fibra": 10.8,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Semillas de chía",
+    "unidad_base": "GRAMOS",
+    "categoria": "FRUTOS_SECOS",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 486.0,
+      "proteinas": 16.5,
+      "carbohidratos": 42.1,
+      "grasas": 30.7,
+      "fibra": 34.4,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Coco rallado",
+    "unidad_base": "GRAMOS",
+    "categoria": "FRUTOS_SECOS",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 660.0,
+      "proteinas": 6.88,
+      "carbohidratos": 23.7,
+      "grasas": 64.5,
+      "fibra": 16.3,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Harina de almendras",
+    "unidad_base": "GRAMOS",
+    "categoria": "CEREALES_HARINAS",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 622.0,
+      "proteinas": 26.2,
+      "carbohidratos": 16.2,
+      "grasas": 50.2,
+      "fibra": 9.27,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Almidón de maíz",
+    "unidad_base": "GRAMOS",
+    "categoria": "CEREALES_HARINAS",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 381.0,
+      "proteinas": 0.26,
+      "carbohidratos": 91.3,
+      "grasas": 0.05,
+      "fibra": 0.9,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Cacao en polvo sin azúcar",
+    "unidad_base": "GRAMOS",
+    "categoria": "OTROS_ESENCIALES",
+    "restricciones": [
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 229.0,
+      "proteinas": 19.6,
+      "carbohidratos": 57.9,
+      "grasas": 13.7,
+      "fibra": 33.2,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Vainilla esencia",
+    "unidad_base": "MILILITROS",
+    "categoria": "OTROS_ESENCIALES",
+    "restricciones": [
+      "bajo_en_grasas",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 288.0,
+      "proteinas": 0.06,
+      "carbohidratos": 12.7,
+      "grasas": 0.06,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Aceitunas negras",
+    "unidad_base": "GRAMOS",
+    "categoria": "OTROS_ESENCIALES",
+    "restricciones": [
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 115.0,
+      "proteinas": 0.84,
+      "carbohidratos": 6.26,
+      "grasas": 10.9,
+      "fibra": 3.2,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Aceitunas verdes",
+    "unidad_base": "GRAMOS",
+    "categoria": "OTROS_ESENCIALES",
+    "restricciones": [
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 145.0,
+      "proteinas": 1.03,
+      "carbohidratos": 3.84,
+      "grasas": 15.3,
+      "fibra": 3.3,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Pasas de uva",
+    "unidad_base": "GRAMOS",
+    "categoria": "FRUTAS",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 299.0,
+      "proteinas": 3.07,
+      "carbohidratos": 79.2,
+      "grasas": 0.46,
+      "fibra": 3.7,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Tapas de empanada",
+    "unidad_base": "UNIDAD",
+    "categoria": "CEREALES_HARINAS",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 290.0,
+      "proteinas": 7.5,
+      "carbohidratos": 55.0,
+      "grasas": 4.0,
+      "fibra": 1.5,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Masa para tarta",
+    "unidad_base": "GRAMOS",
+    "categoria": "CEREALES_HARINAS",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 430.0,
+      "proteinas": 5.5,
+      "carbohidratos": 42.0,
+      "grasas": 26.0,
+      "fibra": 1.2,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Levadura seca",
+    "unidad_base": "GRAMOS",
+    "categoria": "OTROS_ESENCIALES",
+    "restricciones": [
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 325.0,
+      "proteinas": 40.4,
+      "carbohidratos": 41.2,
+      "grasas": 7.61,
+      "fibra": 26.9,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Aceite de coco",
+    "unidad_base": "MILILITROS",
+    "categoria": "ACEITES_GRASAS",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 862.0,
+      "proteinas": 0.0,
+      "carbohidratos": 0.0,
+      "grasas": 100.0,
+      "fibra": null,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Arvejas",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_BASE",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 77.0,
+      "proteinas": 5.15,
+      "carbohidratos": 14.3,
+      "grasas": 0.27,
+      "fibra": 4.5,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Champiñones",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_BASE",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 22.0,
+      "proteinas": 3.09,
+      "carbohidratos": 3.26,
+      "grasas": 0.34,
+      "fibra": 1.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Berenjena",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_BASE",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 25.0,
+      "proteinas": 0.98,
+      "carbohidratos": 5.88,
+      "grasas": 0.18,
+      "fibra": 3.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Zapallito verde",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_BASE",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 17.0,
+      "proteinas": 1.21,
+      "carbohidratos": 3.11,
+      "grasas": 0.32,
+      "fibra": 1.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Choclo en lata",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_BASE",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 83.0,
+      "proteinas": 2.46,
+      "carbohidratos": 20.0,
+      "grasas": 0.63,
+      "fibra": 2.3,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Remolacha",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_BASE",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 43.0,
+      "proteinas": 1.61,
+      "carbohidratos": 9.56,
+      "grasas": 0.17,
+      "fibra": 2.8,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Zucchini",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_BASE",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 17.0,
+      "proteinas": 1.21,
+      "carbohidratos": 3.11,
+      "grasas": 0.32,
+      "fibra": 1.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Coliflor",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_BASE",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 25.0,
+      "proteinas": 1.92,
+      "carbohidratos": 4.97,
+      "grasas": 0.28,
+      "fibra": 2.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Maní",
+    "unidad_base": "GRAMOS",
+    "categoria": "FRUTOS_SECOS",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 567.0,
+      "proteinas": 25.8,
+      "carbohidratos": 16.1,
+      "grasas": 49.2,
+      "fibra": 8.5,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Semillas de girasol",
+    "unidad_base": "GRAMOS",
+    "categoria": "FRUTOS_SECOS",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 584.0,
+      "proteinas": 20.78,
+      "carbohidratos": 20.0,
+      "grasas": 51.5,
+      "fibra": 8.6,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Queso parmesano",
+    "unidad_base": "GRAMOS",
+    "categoria": "LACTEOS",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_mariscos",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 431.0,
+      "proteinas": 38.5,
+      "carbohidratos": 4.06,
+      "grasas": 28.6,
+      "fibra": null,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Espárragos",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_BASE",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 20.0,
+      "proteinas": 2.2,
+      "carbohidratos": 3.88,
+      "grasas": 0.12,
+      "fibra": 2.1,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Jamón cocido",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_ANIMALES",
+    "restricciones": [
+      "bajo_en_grasas",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos"
+    ],
+    "info_nutricional": {
+      "calorias": 107.0,
+      "proteinas": 16.2,
+      "carbohidratos": 1.51,
+      "grasas": 4.02,
+      "fibra": null,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Seitán",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_VEGETALES",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 370.0,
+      "proteinas": 75.0,
+      "carbohidratos": 14.0,
+      "grasas": 1.9,
+      "fibra": 0.6,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Tempeh",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_VEGETALES",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 193.0,
+      "proteinas": 18.5,
+      "carbohidratos": 9.39,
+      "grasas": 10.8,
+      "fibra": 3.4,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Soja texturizada",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_VEGETALES",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 329.0,
+      "proteinas": 51.5,
+      "carbohidratos": 28.0,
+      "grasas": 1.2,
+      "fibra": 13.7,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Edamame",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_VEGETALES",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 122.0,
+      "proteinas": 10.9,
+      "carbohidratos": 8.91,
+      "grasas": 5.2,
+      "fibra": 5.2,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Porotos blancos",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_VEGETALES",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 333.0,
+      "proteinas": 23.4,
+      "carbohidratos": 60.3,
+      "grasas": 0.85,
+      "fibra": 15.7,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Porotos aduki",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_VEGETALES",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 329.0,
+      "proteinas": 19.9,
+      "carbohidratos": 62.9,
+      "grasas": 0.53,
+      "fibra": 12.7,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Arvejas amarillas partidas",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_VEGETALES",
+    "restricciones": [
+      "bajo_en_grasas",
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 341.0,
+      "proteinas": 23.8,
+      "carbohidratos": 60.4,
+      "grasas": 1.16,
+      "fibra": 16.3,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Lupini",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_VEGETALES",
+    "restricciones": [
+      "bajo_sodio",
+      "sin_azucar",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_mariscos",
+      "vegano",
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 371.0,
+      "proteinas": 36.2,
+      "carbohidratos": 40.4,
+      "grasas": 9.74,
+      "fibra": 18.9,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Salmón",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_ANIMALES",
+    "restricciones": [
+      "sin_gluten",
+      "sin_azucar"
+    ],
+    "info_nutricional": {
+      "calorias": 208.0,
+      "proteinas": 20.4,
+      "carbohidratos": 0.0,
+      "grasas": 13.4,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Merluza",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_ANIMALES",
+    "restricciones": [
+      "bajo_en_grasas",
+      "sin_gluten",
+      "sin_azucar"
+    ],
+    "info_nutricional": {
+      "calorias": 90.0,
+      "proteinas": 18.3,
+      "carbohidratos": 0.0,
+      "grasas": 1.3,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Langostino",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_ANIMALES",
+    "restricciones": [
+      "bajo_en_grasas",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_azucar"
+    ],
+    "info_nutricional": {
+      "calorias": 99.0,
+      "proteinas": 24.0,
+      "carbohidratos": 0.2,
+      "grasas": 0.3,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Ricota",
+    "unidad_base": "GRAMOS",
+    "categoria": "LACTEOS",
+    "restricciones": [
+      "vegetariano",
+      "sin_gluten",
+      "bajo_en_grasas"
+    ],
+    "info_nutricional": {
+      "calorias": 174.0,
+      "proteinas": 11.3,
+      "carbohidratos": 3.0,
+      "grasas": 13.0,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Queso fresco",
+    "unidad_base": "GRAMOS",
+    "categoria": "LACTEOS",
+    "restricciones": [
+      "vegetariano",
+      "sin_gluten"
+    ],
+    "info_nutricional": {
+      "calorias": 299.0,
+      "proteinas": 18.0,
+      "carbohidratos": 2.2,
+      "grasas": 24.0,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Camarón",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_ANIMALES",
+    "restricciones": [
+      "bajo_en_grasas",
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_azucar"
+    ],
+    "info_nutricional": {
+      "calorias": 99.0,
+      "proteinas": 24.0,
+      "carbohidratos": 0.2,
+      "grasas": 0.3,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Sardina",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_ANIMALES",
+    "restricciones": [
+      "sin_gluten",
+      "sin_azucar"
+    ],
+    "info_nutricional": {
+      "calorias": 208.0,
+      "proteinas": 24.6,
+      "carbohidratos": 0.0,
+      "grasas": 11.5,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Trucha",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_ANIMALES",
+    "restricciones": [
+      "sin_gluten",
+      "sin_azucar"
+    ],
+    "info_nutricional": {
+      "calorias": 141.0,
+      "proteinas": 19.9,
+      "carbohidratos": 0.0,
+      "grasas": 6.2,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Anchoa",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_ANIMALES",
+    "restricciones": [
+      "sin_gluten",
+      "sin_lactosa"
+    ],
+    "info_nutricional": {
+      "calorias": 210.0,
+      "proteinas": 28.9,
+      "carbohidratos": 0.0,
+      "grasas": 10.6,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Panceta",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_ANIMALES",
+    "restricciones": [
+      "sin_gluten",
+      "sin_lactosa",
+      "sin_azucar"
+    ],
+    "info_nutricional": {
+      "calorias": 541.0,
+      "proteinas": 37.0,
+      "carbohidratos": 1.4,
+      "grasas": 42.0,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Salchicha",
+    "unidad_base": "GRAMOS",
+    "categoria": "PROTEINAS_ANIMALES",
+    "restricciones": [],
+    "info_nutricional": {
+      "calorias": 301.0,
+      "proteinas": 12.0,
+      "carbohidratos": 2.0,
+      "grasas": 27.0,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Leche de coco",
+    "unidad_base": "MILILITROS",
+    "categoria": "LACTEOS",
+    "restricciones": [
+      "vegano",
+      "vegetariano",
+      "sin_gluten",
+      "sin_lactosa"
+    ],
+    "info_nutricional": {
+      "calorias": 230.0,
+      "proteinas": 2.3,
+      "carbohidratos": 5.5,
+      "grasas": 23.8,
+      "fibra": 2.2,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "MILILITROS"
+    }
+  },
+  {
+    "nombre": "Leche de avena",
+    "unidad_base": "MILILITROS",
+    "categoria": "LACTEOS",
+    "restricciones": [
+      "vegano",
+      "vegetariano",
+      "sin_lactosa"
+    ],
+    "info_nutricional": {
+      "calorias": 47.0,
+      "proteinas": 1.0,
+      "carbohidratos": 6.7,
+      "grasas": 1.5,
+      "fibra": 0.8,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "MILILITROS"
+    }
+  },
+  {
+    "nombre": "Queso mozzarella",
+    "unidad_base": "GRAMOS",
+    "categoria": "LACTEOS",
+    "restricciones": [
+      "vegetariano",
+      "sin_gluten"
+    ],
+    "info_nutricional": {
+      "calorias": 280.0,
+      "proteinas": 28.0,
+      "carbohidratos": 3.1,
+      "grasas": 17.0,
+      "fibra": 0.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Arroz yamani",
+    "unidad_base": "GRAMOS",
+    "categoria": "CEREALES_HARINAS",
+    "restricciones": [
+      "vegano",
+      "vegetariano",
+      "sin_lactosa",
+      "sin_gluten"
+    ],
+    "info_nutricional": {
+      "calorias": 111.0,
+      "proteinas": 2.6,
+      "carbohidratos": 23.0,
+      "grasas": 0.9,
+      "fibra": 1.8,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Harina integral",
+    "unidad_base": "GRAMOS",
+    "categoria": "CEREALES_HARINAS",
+    "restricciones": [
+      "vegano",
+      "vegetariano",
+      "sin_lactosa"
+    ],
+    "info_nutricional": {
+      "calorias": 340.0,
+      "proteinas": 13.2,
+      "carbohidratos": 72.0,
+      "grasas": 2.5,
+      "fibra": 10.7,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Pan lactal",
+    "unidad_base": "GRAMOS",
+    "categoria": "CEREALES_HARINAS",
+    "restricciones": [
+      "vegetariano"
+    ],
+    "info_nutricional": {
+      "calorias": 265.0,
+      "proteinas": 8.8,
+      "carbohidratos": 49.0,
+      "grasas": 3.2,
+      "fibra": 2.7,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Puerro",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_BASE",
+    "restricciones": [
+      "vegano",
+      "vegetariano",
+      "sin_gluten",
+      "sin_lactosa",
+      "bajo_en_grasas"
+    ],
+    "info_nutricional": {
+      "calorias": 61.0,
+      "proteinas": 1.5,
+      "carbohidratos": 14.2,
+      "grasas": 0.3,
+      "fibra": 1.8,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Pepino",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_BASE",
+    "restricciones": [
+      "vegano",
+      "vegetariano",
+      "sin_gluten",
+      "sin_lactosa",
+      "bajo_en_grasas"
+    ],
+    "info_nutricional": {
+      "calorias": 15.0,
+      "proteinas": 0.7,
+      "carbohidratos": 3.6,
+      "grasas": 0.1,
+      "fibra": 0.5,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Repollo blanco",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_HOJA",
+    "restricciones": [
+      "vegano",
+      "vegetariano",
+      "sin_gluten",
+      "sin_lactosa",
+      "bajo_en_grasas"
+    ],
+    "info_nutricional": {
+      "calorias": 25.0,
+      "proteinas": 1.3,
+      "carbohidratos": 5.8,
+      "grasas": 0.1,
+      "fibra": 2.5,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Repollo morado",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_HOJA",
+    "restricciones": [
+      "vegano",
+      "vegetariano",
+      "sin_gluten",
+      "sin_lactosa",
+      "bajo_en_grasas"
+    ],
+    "info_nutricional": {
+      "calorias": 31.0,
+      "proteinas": 1.4,
+      "carbohidratos": 7.4,
+      "grasas": 0.2,
+      "fibra": 2.1,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Radicheta",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_HOJA",
+    "restricciones": [
+      "vegano",
+      "vegetariano",
+      "sin_gluten",
+      "sin_lactosa",
+      "bajo_en_grasas"
+    ],
+    "info_nutricional": {
+      "calorias": 23.0,
+      "proteinas": 1.4,
+      "carbohidratos": 4.5,
+      "grasas": 0.3,
+      "fibra": 0.9,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Choclo",
+    "unidad_base": "GRAMOS",
+    "categoria": "VEGETALES_BASE",
+    "restricciones": [
+      "vegano",
+      "vegetariano",
+      "sin_gluten",
+      "sin_lactosa"
+    ],
+    "info_nutricional": {
+      "calorias": 86.0,
+      "proteinas": 3.2,
+      "carbohidratos": 19.0,
+      "grasas": 1.2,
+      "fibra": 2.7,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Frutilla",
+    "unidad_base": "GRAMOS",
+    "categoria": "FRUTAS",
+    "restricciones": [
+      "vegano",
+      "vegetariano",
+      "sin_gluten",
+      "sin_lactosa",
+      "bajo_en_grasas"
+    ],
+    "info_nutricional": {
+      "calorias": 32.0,
+      "proteinas": 0.7,
+      "carbohidratos": 7.7,
+      "grasas": 0.3,
+      "fibra": 2.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Durazno en lata",
+    "unidad_base": "GRAMOS",
+    "categoria": "FRUTAS",
+    "restricciones": [
+      "vegetariano",
+      "sin_gluten"
+    ],
+    "info_nutricional": {
+      "calorias": 68.0,
+      "proteinas": 0.5,
+      "carbohidratos": 17.0,
+      "grasas": 0.1,
+      "fibra": 1.2,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Ananá",
+    "unidad_base": "GRAMOS",
+    "categoria": "FRUTAS",
+    "restricciones": [
+      "vegano",
+      "vegetariano",
+      "sin_gluten",
+      "sin_lactosa",
+      "bajo_en_grasas"
+    ],
+    "info_nutricional": {
+      "calorias": 50.0,
+      "proteinas": 0.5,
+      "carbohidratos": 13.1,
+      "grasas": 0.1,
+      "fibra": 1.4,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Durazno",
+    "unidad_base": "GRAMOS",
+    "categoria": "FRUTAS",
+    "restricciones": [
+      "vegano",
+      "vegetariano",
+      "sin_gluten",
+      "sin_lactosa",
+      "bajo_en_grasas"
+    ],
+    "info_nutricional": {
+      "calorias": 39.0,
+      "proteinas": 0.9,
+      "carbohidratos": 9.5,
+      "grasas": 0.3,
+      "fibra": 1.5,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Semilla de lino",
+    "unidad_base": "GRAMOS",
+    "categoria": "FRUTOS_SECOS",
+    "restricciones": [
+      "vegano",
+      "vegetariano",
+      "sin_gluten",
+      "sin_lactosa"
+    ],
+    "info_nutricional": {
+      "calorias": 534.0,
+      "proteinas": 18.3,
+      "carbohidratos": 28.9,
+      "grasas": 42.2,
+      "fibra": 27.3,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Semilla de sésamo",
+    "unidad_base": "GRAMOS",
+    "categoria": "FRUTOS_SECOS",
+    "restricciones": [
+      "vegano",
+      "vegetariano",
+      "sin_gluten",
+      "sin_lactosa"
+    ],
+    "info_nutricional": {
+      "calorias": 573.0,
+      "proteinas": 17.7,
+      "carbohidratos": 23.4,
+      "grasas": 49.7,
+      "fibra": 11.8,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Castañas de cajú",
+    "unidad_base": "GRAMOS",
+    "categoria": "FRUTOS_SECOS",
+    "restricciones": [
+      "vegano",
+      "vegetariano",
+      "sin_gluten",
+      "sin_lactosa"
+    ],
+    "info_nutricional": {
+      "calorias": 553.0,
+      "proteinas": 18.2,
+      "carbohidratos": 30.2,
+      "grasas": 43.8,
+      "fibra": 3.3,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Aquafaba",
+    "unidad_base": "MILILITROS",
+    "categoria": "OTROS_ESENCIALES",
+    "restricciones": [
+      "vegano",
+      "vegetariano",
+      "sin_gluten",
+      "sin_lactosa",
+      "bajo_en_grasas"
+    ],
+    "info_nutricional": {
+      "calorias": 14.0,
+      "proteinas": 0.5,
+      "carbohidratos": 2.0,
+      "grasas": 0.2,
+      "fibra": 0.3,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "MILILITROS"
+    }
+  },
+  {
+    "nombre": "Psyllium",
+    "unidad_base": "GRAMOS",
+    "categoria": "OTROS_ESENCIALES",
+    "restricciones": [
+      "vegano",
+      "vegetariano",
+      "sin_gluten",
+      "sin_lactosa"
+    ],
+    "info_nutricional": {
+      "calorias": 42.0,
+      "proteinas": 2.5,
+      "carbohidratos": 88.0,
+      "grasas": 0.6,
+      "fibra": 78.0,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  },
+  {
+    "nombre": "Lino molido",
+    "unidad_base": "GRAMOS",
+    "categoria": "FRUTOS_SECOS",
+    "restricciones": [
+      "vegano",
+      "vegetariano",
+      "sin_gluten",
+      "sin_lactosa"
+    ],
+    "info_nutricional": {
+      "calorias": 534.0,
+      "proteinas": 18.3,
+      "carbohidratos": 28.9,
+      "grasas": 42.2,
+      "fibra": 27.3,
+      "cantidad_referencia": 100.0,
+      "unidad_referencia": "GRAMOS"
+    }
+  }
+]

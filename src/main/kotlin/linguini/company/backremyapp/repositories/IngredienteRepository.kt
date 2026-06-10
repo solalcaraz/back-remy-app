@@ -11,6 +11,9 @@ interface IngredienteRepository : JpaRepository<Ingrediente, Long> {
     fun findByNombreIn(nombres: Collection<String>): List<Ingrediente>
     fun findByNombre(nombre: String): Ingrediente?
 
+    @Query("SELECT i FROM Ingrediente i WHERE LOWER(i.nombre) IN :nombres")
+    fun findByNombreNormalizadoIn(@Param("nombres") nombres: Collection<String>): List<Ingrediente>
+
     @EntityGraph(attributePaths = ["restriccionesAlimentarias"])
     @Query("SELECT i FROM Ingrediente i WHERE LOWER(i.nombre) = LOWER(:nombre)")
     fun findByNombreIgnoreCaseWithRestricciones(@Param("nombre") nombre: String): Ingrediente?

@@ -95,12 +95,15 @@ class RecomendacionService(
         val ingredientesAEvitar = usuario.ingredientesAEvitar().map { it.nombre.lowercase() }
         val restriccionesIds = usuario.restriccionesAlimentarias.mapNotNull { it.id }.ifEmpty { null }
 
-        val recetas = buscarCandidatas(
+        val recetasIniciales = buscarCandidatas(
             usuario, ingredientesDisponibles, ingredientesAEvitar, restriccionesIds,
             null, true, false, LIMITE_SUGERENCIA_DIARIA
         )
 
-        // deberia traer una cualquiera y en el front sugerir que ajuste su perfil ?
+        val recetas = recetasIniciales.ifEmpty {
+            buscarFallbackSugerenciaDiaria(usuario)
+        }
+
         if(recetas.isEmpty()) throw NotFoundException("No hay recetas disponibles para tu perfil")
 
         val favoritosIds = favoritoRecetaRepository.findRecetaIdsByUsuarioId(usuarioId)
@@ -130,6 +133,30 @@ class RecomendacionService(
             receta = resumen,
             motivosPositivos = evaluacion.motivosPositivos
         )
+    }
+
+    private fun buscarFallbackSugerenciaDiaria(usuario: Usuario): List<Receta> {
+        val ingredientesAEvitarIds = usuario.ingredientesAEvitar()
+            .mapNotNull { it.id }
+            .toSet()
+
+        val recetasSinIngredientesAEvitar = recetaRepository.findAllWithDetailsBy()
+            .asSequence()
+            .filterNot { receta ->
+                receta.ingredientes.any { recetaIngrediente ->
+                    recetaIngrediente.ingrediente.id in ingredientesAEvitarIds
+                }
+            }
+            .toList()
+
+        val compatibles = recetasSinIngredientesAEvitar
+            .filter { receta -> receta.cumpleRestricciones(usuario.restriccionesAlimentarias) }
+
+        return compatibles.ifEmpty { recetasSinIngredientesAEvitar }
+            .asSequence()
+            .sortedWith(compareBy<Receta> { it.tiempoEnMinutos }.thenBy { it.id ?: Long.MAX_VALUE })
+            .take(LIMITE_SUGERENCIA_DIARIA)
+            .toList()
     }
 
     private fun buscarCandidatas(
@@ -311,6 +338,10 @@ class RecomendacionService(
             motivosNegativos.add("Requiere adaptar ingredientes para cumplir: ${restriccionesIncumplidas.joinToString(", ")}")
         }
 
+        val ajusteVariante = ajustePorVarianteDietetica(receta, usuario)
+        puntaje += ajusteVariante.puntaje
+        ajusteVariante.motivoNegativo?.let { motivosNegativos.add(it) }
+
         // objetivos del user
         if (compatibleConObjetivo) {
             puntaje += puntosPorObjetivo(usuario.objetivo)
@@ -394,6 +425,31 @@ class RecomendacionService(
         return (puntosBase - penalizacion).coerceIn(0, PUNTOS_INGREDIENTES)
     }
 
+    private fun ajustePorVarianteDietetica(receta: Receta, usuario: Usuario): AjusteVarianteDietetica {
+        val tags = receta.tags.map { it.lowercase() }.toSet()
+        val esVariante = "variante" in tags
+        if (!esVariante) return AjusteVarianteDietetica(PUNTOS_RECETA_BASE, null)
+
+        val restriccionesUsuario = usuario.restriccionesAlimentarias.map { it.nombre }.toSet()
+        val necesitaVeganoOVegetariano = restriccionesUsuario.any { it == "vegano" || it == "vegetariano" }
+        val necesitaSinGluten = "sin_gluten" in restriccionesUsuario
+
+        val esVarianteVeggie = tags.any { it == "vegana" || it == "vegano" || it == "vegetariana" || it == "vegetariano" }
+        val esVarianteSinGluten = tags.any { it == "sin_gluten" || it == "celiaca" || it == "celiaco" }
+
+        val penalizaciones = listOf(
+            esVarianteVeggie && !necesitaVeganoOVegetariano,
+            esVarianteSinGluten && !necesitaSinGluten
+        ).count { it }
+
+        if (penalizaciones == 0) return AjusteVarianteDietetica(0, null)
+
+        return AjusteVarianteDietetica(
+            puntaje = -PENALIZACION_VARIANTE_DIETETICA * penalizaciones,
+            motivoNegativo = "Es una variante dietaria que no coincide con tus restricciones actuales"
+        )
+    }
+
     private fun puntosPorCosto(costoAproximado: Double, perfilEconomico: PerfilEconomico): Int {
         return when (perfilEconomico) {
             PerfilEconomico.BAJO_PRESUPUESTO -> when {
@@ -411,7 +467,7 @@ class RecomendacionService(
             PerfilEconomico.FLEXIBLE -> when {
                 costoAproximado <= 5000.0 -> PUNTOS_COSTO
                 costoAproximado <= 8000.0 -> 6
-                else -> 3
+                else -> 6
             }
         }
     }
@@ -432,7 +488,8 @@ class RecomendacionService(
             }
             PerfilEconomico.FLEXIBLE -> when {
                 costoAproximado <= 5000.0 -> motivosPositivos.add("Costo dentro de tu rango ($costo)")
-                else -> motivosNegativos.add("Costo por encima de tu rango habitual ($costo)")
+                costoAproximado <= 12000.0 -> motivosPositivos.add("Costo razonable para tu perfil flexible ($costo)")
+                else -> motivosNegativos.add("Costo alto incluso para un perfil flexible ($costo)")
             }
         }
     }
@@ -495,9 +552,11 @@ class RecomendacionService(
         const val PUNTOS_DIFICULTAD = 15
         const val PUNTOS_SIN_INGREDIENTES_A_EVITAR = 10
         const val PUNTOS_COSTO = 10
+        const val PUNTOS_RECETA_BASE = 4
 
         const val PUNTOS_EXTRA_DESPENSA_COMPLETA = 5
         const val PENALIZACION_DIFICULTAD = 5
+        const val PENALIZACION_VARIANTE_DIETETICA = 10
         const val MODIFICADOR_FAVORITO = 5
         const val MODIFICADOR_HISTORIAL = 5
         const val PUNTOS_TIEMPO_RAPIDO = 3
@@ -540,4 +599,9 @@ private data class EvaluacionRecomendacion(
     val puntaje: Int,
     val motivosPositivos: List<String>,
     val motivosNegativos: List<String>
+)
+
+private data class AjusteVarianteDietetica(
+    val puntaje: Int,
+    val motivoNegativo: String?
 )
