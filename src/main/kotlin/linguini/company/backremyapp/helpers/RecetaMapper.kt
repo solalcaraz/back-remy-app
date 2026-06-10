@@ -42,7 +42,7 @@ class RecetaMapper: RecetaAdapter {
                 nombre = receta.nombre,
                 descripcion = receta.descripcion,
                 tiempoEnMinutos = receta.tiempoEnMinutos,
-                tipoReceta = "General",
+                tags = receta.tags,
                 imgUrl = receta.imgUrl,
                 favorito
             )

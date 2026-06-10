@@ -33,7 +33,7 @@ data class ResumenRecetaDTO(
     val nombre: String,
     val descripcion: String,
     val tiempoEnMinutos: Int,
-    val tipoReceta: String,
+    val tags: Set<String>,
     val imgUrl: String,
     val favorito: Boolean,
 )
