@@ -21,3 +21,11 @@ data class SugerenciaDiariaDTO(
     val receta: ResumenRecetaDTO,
     val motivosPositivos: List<String>
 )
+
+data class RecomendacionPaginadaDTO(
+    val data: List<RecomendacionRecetaDTO>,
+    val page: Int,
+    val size: Int,
+    val totalItems: Long,
+    val totalPage: Int
+)

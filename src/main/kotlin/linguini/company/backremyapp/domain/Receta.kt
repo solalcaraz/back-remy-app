@@ -120,7 +120,8 @@ class Receta(
         if (ingredientesAEvitarIds.isEmpty()) return false
 
         return ingredientes.any { recetaIngrediente ->
-            recetaIngrediente.ingrediente.id in ingredientesAEvitarIds
+            recetaIngrediente.tipo == TipoIngredienteReceta.CORE &&
+                recetaIngrediente.ingrediente.id in ingredientesAEvitarIds
         }
     }
 

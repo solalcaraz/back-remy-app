@@ -18,5 +18,6 @@ data class BusquedaIngredientesSimilaresDTO(
 data class SugerirReemplazoIngredienteRequest(
     val nombreIngrediente: String,
     val restriccionesUsuario: Set<String> = emptySet(),
+    val ingredientesReceta: Set<String> = emptySet(),
     val limite: Int = 3
 )

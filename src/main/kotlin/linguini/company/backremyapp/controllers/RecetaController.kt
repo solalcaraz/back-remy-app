@@ -1,7 +1,7 @@
 package linguini.company.backremyapp.controllers
 
 import linguini.company.backremyapp.dto.RecetaCompletaDTO
-import linguini.company.backremyapp.dto.RecomendacionRecetaDTO
+import linguini.company.backremyapp.dto.RecomendacionPaginadaDTO
 import linguini.company.backremyapp.dto.RecomendacionRequest
 import linguini.company.backremyapp.dto.ResumenRecetaDTO
 import linguini.company.backremyapp.dto.SugerenciaDiariaDTO
@@ -30,10 +30,20 @@ class RecetaController(
     val recetaMapper: RecetaMapper
 ) {
     @GetMapping("/{id}")
-    fun getRecetaCompleta(@PathVariable id: Long): RecetaCompletaDTO {
+    fun getRecetaCompleta(
+        @PathVariable id: Long,
+        @RequestParam usuarioId: UUID,
+        @RequestParam(required = false) ingredientesFaltantes: Set<String>?
+    ): RecetaCompletaDTO {
         val receta = recetaService.getRecetaCompletaById(id)
+        val usuario = recetaService.getPerfilUsuario(usuarioId)
 
-        return recetaMapper.toFullDTO(receta)
+        return recetaMapper.toFullDTO(
+            receta,
+            ingredientesFaltantes.orEmpty(),
+            usuario.ingredientesAEvitar().map { it.nombre }.toSet(),
+            usuario.restriccionesAlimentarias.map { it.nombre }.toSet()
+        )
     }
 
     @GetMapping("/historial")
@@ -60,13 +70,15 @@ class RecetaController(
     fun getRecomendaciones(
         @RequestBody(required = false)
         req: RecomendacionRequest = RecomendacionRequest(),
-    ): List<RecomendacionRecetaDTO> {
+        @RequestParam(defaultValue = "0")
+        page: Int
+    ): RecomendacionPaginadaDTO {
         val userId = SecurityContextHolder
             .getContext()
             .authentication
             ?.name.toString()
 
-        return recomendacionService.recomendarRecetas(UUID.fromString(userId), req)
+        return recomendacionService.recomendarRecetas(UUID.fromString(userId), req, page)
     }
 
     @GetMapping("/sugerencia-diaria")

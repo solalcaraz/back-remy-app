@@ -5,7 +5,8 @@ data class IngredienteRecetaDTO(
     val nombre: String,
     val cantidad: Double,
     val unidadMedida: String,
-    val tipo: String
+    val tipo: String,
+    val reemplazo: BusquedaIngredientesSimilaresDTO? = null
 )
 
 data class ResumenPasoDTO(
@@ -34,7 +35,7 @@ data class ResumenRecetaDTO(
     val nombre: String,
     val descripcion: String,
     val tiempoEnMinutos: Int,
-    val tipoReceta: String,
+    val tags: Set<String>,
     val imgUrl: String,
     val favorito: Boolean,
 )
