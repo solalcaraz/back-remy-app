@@ -25,6 +25,12 @@ class RecetaService (
         return receta
     }
 
+    @Transactional(readOnly = true)
+    fun getPerfilUsuario(usuarioId: UUID): Usuario {
+        return usuarioRepository.findPerfilById(usuarioId)
+            .orElseThrow { NotFoundException("Usuario no encontrado") }
+    }
+
     //fun findAllByRestriccionesAlimentariasAndDificultad(...)
 
     @Transactional(readOnly = true)

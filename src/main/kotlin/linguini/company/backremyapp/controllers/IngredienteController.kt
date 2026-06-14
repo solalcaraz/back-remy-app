@@ -44,7 +44,8 @@ class IngredienteController ( val ingredienteService: IngredienteService) {
         return ingredienteService.sugerirReemplazo(
             req.nombreIngrediente,
             req.restriccionesUsuario,
-            req.limite
+            req.limite,
+            req.ingredientesReceta
         )
     }
 }

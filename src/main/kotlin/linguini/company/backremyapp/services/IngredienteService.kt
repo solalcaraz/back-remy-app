@@ -37,23 +37,26 @@ class IngredienteService(val ingredienteRepository: IngredienteRepository) {
     fun sugerirReemplazo(
         nombreIngrediente: String,
         restriccionesUsuario: Set<String>,
-        limite: Int
+        limite: Int,
+        ingredientesReceta: Set<String> = emptySet()
     ): BusquedaIngredientesSimilaresDTO {
         val nombreNormalizado = nombreIngrediente.trim()
         val ingredienteBase = ingredienteRepository.findByNombreIgnoreCaseWithRestricciones(nombreNormalizado)
             ?: return ingredienteNoEncontrado(nombreNormalizado)
 
-        val restriccionesNormalizadas = restriccionesUsuario
-            .map { it.trim().lowercase() }
-            .filter { it.isNotBlank() }
-            .toSet()
+        val restriccionesNormalizadas = normalizarNombres(restriccionesUsuario)
+        val ingredientesRecetaNormalizados = normalizarNombres(ingredientesReceta)
         val limiteNormalizado = limite.coerceIn(1, MAX_RESULTADOS_REEMPLAZOS)
 
-        val reemplazos = buscarSimilaresOrdenados(ingredienteBase.nombre, MAX_RESULTADOS_REEMPLAZOS)
+        val limiteBusqueda = MAX_RESULTADOS_REEMPLAZOS + ingredientesRecetaNormalizados.size
+        val reemplazos = buscarSimilaresOrdenados(ingredienteBase.nombre, limiteBusqueda)
             .filter { candidato ->
                 val restriccionesCandidato = candidato.restricciones.map { it.lowercase() }.toSet()
+                val candidatoYaEstaEnReceta = normalizarNombre(candidato.nombre) in ingredientesRecetaNormalizados
+
                 restriccionesNormalizadas.all { it in restriccionesCandidato } &&
-                    categoriaCompatible(ingredienteBase.categoria, CategoriaIngrediene.valueOf(candidato.categoria))
+                    categoriaCompatible(ingredienteBase.categoria, CategoriaIngrediene.valueOf(candidato.categoria)) &&
+                    !candidatoYaEstaEnReceta
             }
             .take(limiteNormalizado)
 
@@ -100,6 +103,17 @@ class IngredienteService(val ingredienteRepository: IngredienteRepository) {
             restricciones = restriccionesAlimentarias.map { it.nombre }.toSet(),
             score = score
         )
+    }
+
+    private fun normalizarNombres(nombres: Set<String>): Set<String> {
+        return nombres
+            .map { normalizarNombre(it) }
+            .filter { it.isNotBlank() }
+            .toSet()
+    }
+
+    private fun normalizarNombre(nombre: String): String {
+        return nombre.trim().lowercase()
     }
 
     private fun categoriaCompatible(original: CategoriaIngrediene, candidata: CategoriaIngrediene): Boolean {

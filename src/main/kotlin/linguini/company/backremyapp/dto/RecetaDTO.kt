@@ -4,7 +4,8 @@ data class IngredienteRecetaDTO(
     val id: Long?,
     val nombre: String,
     val cantidad: Double,
-    val unidadMedida: String
+    val unidadMedida: String,
+    val reemplazo: BusquedaIngredientesSimilaresDTO? = null
 )
 
 data class ResumenPasoDTO(

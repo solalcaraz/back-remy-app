@@ -30,10 +30,20 @@ class RecetaController(
     val recetaMapper: RecetaMapper
 ) {
     @GetMapping("/{id}")
-    fun getRecetaCompleta(@PathVariable id: Long): RecetaCompletaDTO {
+    fun getRecetaCompleta(
+        @PathVariable id: Long,
+        @RequestParam usuarioId: UUID,
+        @RequestParam(required = false) ingredientesFaltantes: Set<String>?
+    ): RecetaCompletaDTO {
         val receta = recetaService.getRecetaCompletaById(id)
+        val usuario = recetaService.getPerfilUsuario(usuarioId)
 
-        return recetaMapper.toFullDTO(receta)
+        return recetaMapper.toFullDTO(
+            receta,
+            ingredientesFaltantes.orEmpty(),
+            usuario.ingredientesAEvitar().map { it.nombre }.toSet(),
+            usuario.restriccionesAlimentarias.map { it.nombre }.toSet()
+        )
     }
 
     @GetMapping("/historial")

@@ -252,7 +252,7 @@ class RecomendacionService(
         val nombres = (ingredientesComunes.map { it.nombre.lowercase() } + nombresInput)
             .distinct()
 
-        return (ids, nombres, nombresInput)
+        return IngredientesDisponiblesBusqueda(ids, nombres, nombresInput)
     }
 
     private fun idsParaQuery(ids: List<Long>): List<Long> {
