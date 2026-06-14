@@ -202,6 +202,7 @@ class RecomendacionService(
         val idsAEvitarParaQuery = idsParaQuery(ingredientesAEvitarIds)
 
         val candidatasIds = if (puedeComprar) {
+            // basta con que tenga 1 ing core disponible
             recetaRepository.findIdsConAlgunIngredienteDisponible(
                 ingredientesDisponiblesIds = idsDisponiblesParaQuery,
                 ingredientesAEvitarIds = idsAEvitarParaQuery,
@@ -210,6 +211,7 @@ class RecomendacionService(
                 pageable = pageable
             )
         } else {
+            // todos los ingredientes core disponible,  opcionales no se analizan y hasta 5 reemplazables faltantes
             recetaRepository.findIdsConIngredientesSuficientes(
                 ingredientesDisponiblesIds = idsDisponiblesParaQuery,
                 ingredientesAEvitarIds = idsAEvitarParaQuery,
@@ -236,6 +238,7 @@ class RecomendacionService(
         busquedaActiva: Boolean
     ): IngredientesDisponiblesBusqueda {
         val ingredientesComunes = usuario.ingredientesComunes()
+        // hago la busqueda asi porque capaz el usuario ingresa un nombre sin clickear en la sugerencia entonces no va a encontrar el ing
         val ingredientesInput = if (busquedaActiva) {
             ingredientesExtra
                 .map { it.trim() }
