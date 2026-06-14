@@ -5,6 +5,7 @@ data class IngredienteRecetaDTO(
     val nombre: String,
     val cantidad: Double,
     val unidadMedida: String,
+    val tipo: String,
     val reemplazo: BusquedaIngredientesSimilaresDTO? = null
 )
 
