@@ -29,6 +29,17 @@ interface IngredienteRepository : JpaRepository<Ingrediente, Long> {
 
     @Query(
         value = """
+            SELECT i.*
+            FROM ingredientes i
+            WHERE unaccent(LOWER(i.nombre)) LIKE CONCAT('%', unaccent(LOWER(CAST(:query AS text))), '%')
+            ORDER BY i.nombre ASC
+        """,
+        nativeQuery = true
+    )
+    fun buscarPorNombreQueContieneNormalizado(@Param("query") query: String): List<Ingrediente>
+
+    @Query(
+        value = """
             SELECT i.id AS id, CAST(1 - (i.embedding <=> base.embedding) AS DOUBLE PRECISION) AS score
             FROM ingredientes i
             JOIN ingredientes base ON LOWER(base.nombre) = LOWER(:nombre)

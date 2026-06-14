@@ -1,7 +1,7 @@
 package linguini.company.backremyapp.controllers
 
 import linguini.company.backremyapp.dto.RecetaCompletaDTO
-import linguini.company.backremyapp.dto.RecomendacionRecetaDTO
+import linguini.company.backremyapp.dto.RecomendacionPaginadaDTO
 import linguini.company.backremyapp.dto.RecomendacionRequest
 import linguini.company.backremyapp.dto.ResumenRecetaDTO
 import linguini.company.backremyapp.dto.SugerenciaDiariaDTO
@@ -60,13 +60,15 @@ class RecetaController(
     fun getRecomendaciones(
         @RequestBody(required = false)
         req: RecomendacionRequest = RecomendacionRequest(),
-    ): List<RecomendacionRecetaDTO> {
+        @RequestParam(defaultValue = "0")
+        page: Int
+    ): RecomendacionPaginadaDTO {
         val userId = SecurityContextHolder
             .getContext()
             .authentication
             ?.name.toString()
 
-        return recomendacionService.recomendarRecetas(UUID.fromString(userId), req)
+        return recomendacionService.recomendarRecetas(UUID.fromString(userId), req, page)
     }
 
     @GetMapping("/sugerencia-diaria")

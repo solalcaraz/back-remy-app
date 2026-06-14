@@ -1,6 +1,7 @@
 package linguini.company.backremyapp.repositories
 
 import linguini.company.backremyapp.domain.Receta
+import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.EntityGraph
 import org.springframework.data.jpa.repository.JpaRepository
@@ -51,6 +52,7 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
               SELECT riEvitar FROM Receta rEvitar
               JOIN rEvitar.ingredientes riEvitar
               WHERE rEvitar = r
+              AND riEvitar.tipo = linguini.company.backremyapp.domain.TipoIngredienteReceta.CORE
               AND riEvitar.ingrediente.id IN :ingredientesAEvitarIds
           )
           AND (
@@ -94,6 +96,192 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
     @Query("SELECT DISTINCT r FROM Receta r WHERE r.id IN :ids")
     fun findAllWithDetailsByIdIn(@Param("ids") ids: List<Long>): List<Receta>
 
+    @Query(
+        value = """
+            SELECT r.id
+            FROM Receta r
+            LEFT JOIN r.ingredientes riOrden
+            LEFT JOIN riOrden.ingrediente iOrden
+            WHERE (:tiempoMaximo IS NULL OR r.tiempoEnMinutos <= :tiempoMaximo)
+              AND EXISTS (
+                  SELECT riDisponible FROM Receta rDisponible
+                  JOIN rDisponible.ingredientes riDisponible
+                  WHERE rDisponible = r
+                  AND riDisponible.tipo IN (
+                      linguini.company.backremyapp.domain.TipoIngredienteReceta.CORE,
+                      linguini.company.backremyapp.domain.TipoIngredienteReceta.REEMPLAZABLE
+                  )
+                  AND riDisponible.ingrediente.id IN :ingredientesDisponiblesIds
+              )
+              AND NOT EXISTS (
+                  SELECT riEvitar FROM Receta rEvitar
+                  JOIN rEvitar.ingredientes riEvitar
+                  WHERE rEvitar = r
+                  AND riEvitar.tipo = linguini.company.backremyapp.domain.TipoIngredienteReceta.CORE
+                  AND riEvitar.ingrediente.id IN :ingredientesAEvitarIds
+              )
+              AND (
+                :restriccionesIds IS NULL OR NOT EXISTS (
+                    SELECT riRestriccion FROM Receta rRestriccion
+                    JOIN rRestriccion.ingredientes riRestriccion
+                    WHERE rRestriccion = r
+                    AND NOT EXISTS (
+                        SELECT ra FROM riRestriccion.ingrediente.restriccionesAlimentarias ra
+                        WHERE ra.id IN :restriccionesIds
+                    )
+                )
+              )
+            GROUP BY r.id, r.tiempoEnMinutos
+            ORDER BY
+                COUNT(DISTINCT CASE
+                    WHEN riOrden.tipo IN (
+                        linguini.company.backremyapp.domain.TipoIngredienteReceta.CORE,
+                        linguini.company.backremyapp.domain.TipoIngredienteReceta.REEMPLAZABLE
+                    )
+                    AND iOrden.id IN :ingredientesDisponiblesIds THEN iOrden.id ELSE NULL
+                END) DESC,
+                r.tiempoEnMinutos ASC,
+                r.id ASC
+        """,
+        countQuery = """
+            SELECT COUNT(DISTINCT r.id)
+            FROM Receta r
+            WHERE (:tiempoMaximo IS NULL OR r.tiempoEnMinutos <= :tiempoMaximo)
+              AND EXISTS (
+                  SELECT riDisponible FROM Receta rDisponible
+                  JOIN rDisponible.ingredientes riDisponible
+                  WHERE rDisponible = r
+                  AND riDisponible.tipo IN (
+                      linguini.company.backremyapp.domain.TipoIngredienteReceta.CORE,
+                      linguini.company.backremyapp.domain.TipoIngredienteReceta.REEMPLAZABLE
+                  )
+                  AND riDisponible.ingrediente.id IN :ingredientesDisponiblesIds
+              )
+              AND NOT EXISTS (
+                  SELECT riEvitar FROM Receta rEvitar
+                  JOIN rEvitar.ingredientes riEvitar
+                  WHERE rEvitar = r
+                  AND riEvitar.tipo = linguini.company.backremyapp.domain.TipoIngredienteReceta.CORE
+                  AND riEvitar.ingrediente.id IN :ingredientesAEvitarIds
+              )
+              AND (
+                :restriccionesIds IS NULL OR NOT EXISTS (
+                    SELECT riRestriccion FROM Receta rRestriccion
+                    JOIN rRestriccion.ingredientes riRestriccion
+                    WHERE rRestriccion = r
+                    AND NOT EXISTS (
+                        SELECT ra FROM riRestriccion.ingrediente.restriccionesAlimentarias ra
+                        WHERE ra.id IN :restriccionesIds
+                    )
+                )
+              )
+        """
+    )
+    fun findIdsConAlgunIngredienteDisponible(
+        @Param("ingredientesDisponiblesIds") ingredientesDisponiblesIds: List<Long>,
+        @Param("ingredientesAEvitarIds") ingredientesAEvitarIds: List<Long>,
+        @Param("restriccionesIds") restriccionesIds: List<Long>?,
+        @Param("tiempoMaximo") tiempoMaximo: Int?,
+        pageable: Pageable
+    ): Page<Long>
+
+    @Query(
+        value = """
+            SELECT r.id
+            FROM Receta r
+            LEFT JOIN r.ingredientes riOrden
+            LEFT JOIN riOrden.ingrediente iOrden
+            WHERE (:tiempoMaximo IS NULL OR r.tiempoEnMinutos <= :tiempoMaximo)
+              AND NOT EXISTS (
+                  SELECT riCoreDisponible FROM Receta rCoreDisponible
+                  JOIN rCoreDisponible.ingredientes riCoreDisponible
+                  WHERE rCoreDisponible = r
+                  AND riCoreDisponible.tipo = linguini.company.backremyapp.domain.TipoIngredienteReceta.CORE
+                  AND riCoreDisponible.ingrediente.id NOT IN :ingredientesDisponiblesIds
+              )
+              AND (
+                  SELECT COUNT(riReemplazableDisponible) FROM Receta rReemplazableDisponible
+                  JOIN rReemplazableDisponible.ingredientes riReemplazableDisponible
+                  WHERE rReemplazableDisponible = r
+                  AND riReemplazableDisponible.tipo = linguini.company.backremyapp.domain.TipoIngredienteReceta.REEMPLAZABLE
+                  AND riReemplazableDisponible.ingrediente.id NOT IN :ingredientesDisponiblesIds
+              ) <= 5
+              AND NOT EXISTS (
+                  SELECT riEvitar FROM Receta rEvitar
+                  JOIN rEvitar.ingredientes riEvitar
+                  WHERE rEvitar = r
+                  AND riEvitar.tipo = linguini.company.backremyapp.domain.TipoIngredienteReceta.CORE
+                  AND riEvitar.ingrediente.id IN :ingredientesAEvitarIds
+              )
+              AND (
+                :restriccionesIds IS NULL OR NOT EXISTS (
+                    SELECT riRestriccion FROM Receta rRestriccion
+                    JOIN rRestriccion.ingredientes riRestriccion
+                    WHERE rRestriccion = r
+                    AND NOT EXISTS (
+                        SELECT ra FROM riRestriccion.ingrediente.restriccionesAlimentarias ra
+                        WHERE ra.id IN :restriccionesIds
+                    )
+                )
+              )
+            GROUP BY r.id, r.tiempoEnMinutos
+            ORDER BY
+                COUNT(DISTINCT CASE
+                    WHEN riOrden.tipo IN (
+                        linguini.company.backremyapp.domain.TipoIngredienteReceta.CORE,
+                        linguini.company.backremyapp.domain.TipoIngredienteReceta.REEMPLAZABLE
+                    )
+                    AND iOrden.id IN :ingredientesDisponiblesIds THEN iOrden.id ELSE NULL
+                END) DESC,
+                r.tiempoEnMinutos ASC,
+                r.id ASC
+        """,
+        countQuery = """
+            SELECT COUNT(DISTINCT r.id)
+            FROM Receta r
+            WHERE (:tiempoMaximo IS NULL OR r.tiempoEnMinutos <= :tiempoMaximo)
+              AND NOT EXISTS (
+                  SELECT riCoreDisponible FROM Receta rCoreDisponible
+                  JOIN rCoreDisponible.ingredientes riCoreDisponible
+                  WHERE rCoreDisponible = r
+                  AND riCoreDisponible.tipo = linguini.company.backremyapp.domain.TipoIngredienteReceta.CORE
+                  AND riCoreDisponible.ingrediente.id NOT IN :ingredientesDisponiblesIds
+              )
+              AND (
+                  SELECT COUNT(riReemplazableDisponible) FROM Receta rReemplazableDisponible
+                  JOIN rReemplazableDisponible.ingredientes riReemplazableDisponible
+                  WHERE rReemplazableDisponible = r
+                  AND riReemplazableDisponible.tipo = linguini.company.backremyapp.domain.TipoIngredienteReceta.REEMPLAZABLE
+                  AND riReemplazableDisponible.ingrediente.id NOT IN :ingredientesDisponiblesIds
+              ) <= 5
+              AND NOT EXISTS (
+                  SELECT riEvitar FROM Receta rEvitar
+                  JOIN rEvitar.ingredientes riEvitar
+                  WHERE rEvitar = r
+                  AND riEvitar.tipo = linguini.company.backremyapp.domain.TipoIngredienteReceta.CORE
+                  AND riEvitar.ingrediente.id IN :ingredientesAEvitarIds
+              )
+              AND (
+                :restriccionesIds IS NULL OR NOT EXISTS (
+                    SELECT riRestriccion FROM Receta rRestriccion
+                    JOIN rRestriccion.ingredientes riRestriccion
+                    WHERE rRestriccion = r
+                    AND NOT EXISTS (
+                        SELECT ra FROM riRestriccion.ingrediente.restriccionesAlimentarias ra
+                        WHERE ra.id IN :restriccionesIds
+                    )
+                )
+              )
+        """
+    )
+    fun findIdsConIngredientesSuficientes(
+        @Param("ingredientesDisponiblesIds") ingredientesDisponiblesIds: List<Long>,
+        @Param("ingredientesAEvitarIds") ingredientesAEvitarIds: List<Long>,
+        @Param("restriccionesIds") restriccionesIds: List<Long>?,
+        @Param("tiempoMaximo") tiempoMaximo: Int?,
+        pageable: Pageable
+    ): Page<Long>
+
     fun findByNombre(nombre: String): Receta?
 
     //fun findAllByTiempoEnMinutosLessThan(minutos: Int): List<Receta>
@@ -125,6 +313,7 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
               SELECT riEvitar FROM Receta rEvitar
               JOIN rEvitar.ingredientes riEvitar
               WHERE rEvitar = r
+              AND riEvitar.tipo = linguini.company.backremyapp.domain.TipoIngredienteReceta.CORE
               AND LOWER(riEvitar.ingrediente.nombre) IN :aEvitar
           )
           AND (
@@ -165,6 +354,7 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
               SELECT riEvitar FROM Receta rEvitar
               JOIN rEvitar.ingredientes riEvitar
               WHERE rEvitar = r
+              AND riEvitar.tipo = linguini.company.backremyapp.domain.TipoIngredienteReceta.CORE
               AND LOWER(riEvitar.ingrediente.nombre) IN :aEvitar
           )
           AND (
