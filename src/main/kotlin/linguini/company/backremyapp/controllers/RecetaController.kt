@@ -38,9 +38,12 @@ class RecetaController(
         val receta = recetaService.getRecetaCompletaById(id)
         val usuario = recetaService.getPerfilUsuario(usuarioId)
 
+        val faltantesReales = ingredientesFaltantes?.takeIf { it.isNotEmpty() }
+            ?: receta.ingredientesFaltantesPara(usuario).map { it.nombre }.toSet()
+
         return recetaMapper.toFullDTO(
             receta,
-            ingredientesFaltantes.orEmpty(),
+            faltantesReales,
             usuario.ingredientesAEvitar().map { it.nombre }.toSet(),
             usuario.restriccionesAlimentarias.map { it.nombre }.toSet()
         )
