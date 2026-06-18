@@ -35,7 +35,7 @@ class RecetaMapper(
             porciones = receta.porciones,
             dificultad = receta.dificultad.label,
             ingredientes = receta.ingredientes.map {
-                IngredienteRecetaDTO(it.id, it.ingrediente.nombre, it.cantidad, it.unidadMedida.name, tipo = it.tipo.name)
+                IngredienteRecetaDTO(it.id, it.ingrediente.nombre, it.cantidad, it.unidadMedida.name, tipo = it.tipo.name, null, InfoNutricionalDTO(calorias = it.caloriasEstimadas(), proteinas = it.proteinasEstimadas(), carbohidratos = it.carbsEstimadas(), grasas = it.grasasEstimadas()))
             },
             pasos = receta.pasos.map {
                 ResumenPasoDTO(it.id, it.orden, it.titulo, it.descripcion, it.tiempoEstimadoMinutos)
@@ -43,7 +43,13 @@ class RecetaMapper(
             tags = receta.tags,
             restriccionesAlimentarias = receta.restriccionesAlimentariasCumplidas().map { it.nombre }.toSet(),
             imgUrl = receta.imgUrl,
-            favorito = false
+            favorito = false,
+            infoNutricional = InfoNutricionalDTO(
+                calorias = receta.caloriasTotales(),
+                proteinas = receta.proteinasTotales(),
+                carbohidratos = receta.carbohidratosTotales(),
+                grasas = receta.grasasTotales()
+            )
         )
     }
 
@@ -90,7 +96,13 @@ class RecetaMapper(
                     it.cantidad,
                     it.unidadMedida.name,
                     it.tipo.name,
-                    reemplazo
+                    reemplazo,
+                    InfoNutricionalDTO(
+                        calorias = it.caloriasEstimadas(),
+                        proteinas = it.proteinasEstimadas(),
+                        carbohidratos = it.carbsEstimadas(),
+                        grasas = it.grasasEstimadas()
+                    )
                 )
             },
             pasos = receta.pasos.map {
@@ -99,7 +111,13 @@ class RecetaMapper(
             tags = receta.tags,
             restriccionesAlimentarias = receta.restriccionesAlimentariasCumplidas().map { it.nombre }.toSet(),
             imgUrl = receta.imgUrl,
-            favorito = favorito
+            favorito = favorito,
+            infoNutricional = InfoNutricionalDTO(
+                calorias = receta.caloriasTotales(),
+                proteinas = receta.proteinasTotales(),
+                carbohidratos = receta.carbohidratosTotales(),
+                grasas = receta.grasasTotales()
+            )
         )
     }
 

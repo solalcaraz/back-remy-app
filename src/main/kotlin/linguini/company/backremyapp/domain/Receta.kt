@@ -94,6 +94,8 @@ class Receta(
 
     fun fibrasTotales(): Double = ingredientes.sumOf { it.fibrasEstimadas() }
 
+    fun carbohidratosTotales(): Double = ingredientes.sumOf { it.carbsEstimadas() }
+
     fun restriccionesAlimentariasCumplidas(): Set<RestriccionAlimentaria> {
         if (ingredientes.isEmpty()) return emptySet()
 
