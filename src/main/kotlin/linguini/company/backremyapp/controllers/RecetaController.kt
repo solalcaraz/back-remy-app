@@ -93,6 +93,18 @@ class RecetaController(
         return recomendacionService.sugerenciaDiaria(UUID.fromString(userId))
     }
 
+    @GetMapping("/sugerencias")
+    fun getSugerenciasPorNombre(
+        @RequestParam query: String,
+        @RequestParam(defaultValue = "5") limite: Int
+    ): List<ResumenRecetaDTO> {
+        val userId = SecurityContextHolder.getContext().authentication?.name.toString()
+        val favoritosIds = recetaService.getFavoritosIds(UUID.fromString(userId))
+        val recetas = recetaService.sugerirRecetasPorNombre(query, limite)
+
+        return recetaMapper.toRecetaResumenDTO(recetas, favoritosIds)
+    }
+
     @PostMapping("/favorito/{id}")
     fun agregarFavorito(@PathVariable id: Long, @RequestParam usuarioId: UUID) {
         recetaService.agregarFavorito(usuarioId, id)
