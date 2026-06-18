@@ -97,24 +97,33 @@ class RecomendacionService(
                     receta, usuario, ingredientesDisponibles.nombres, ingredientesDisponibles.nombresInput,
                     favoritosIds, historialIds, costoAproximado, req.puedeComprar, busquedaActiva
                 )
-                RecomendacionRecetaDTO(
-                    receta = recetasResumenMap[receta.id]!!,
-                    puntaje = evaluacion.puntaje,
-                    costoAproximado = costoAproximado,
-                    motivosPositivos = evaluacion.motivosPositivos,
-                    motivosNegativos = evaluacion.motivosNegativos,
-                    ingredientesCoincidentes = ingredientesCoincidentes,
-                    ingredientesFaltantes = ingredientesFaltantes
+                RecomendacionEvaluada(
+                    recomendacion = RecomendacionRecetaDTO(
+                        receta = recetasResumenMap[receta.id]!!,
+                        puntaje = evaluacion.puntaje,
+                        costoAproximado = costoAproximado,
+                        motivosPositivos = evaluacion.motivosPositivos,
+                        motivosNegativos = evaluacion.motivosNegativos,
+                        ingredientesCoincidentes = ingredientesCoincidentes,
+                        ingredientesFaltantes = ingredientesFaltantes
+                    ),
+                    esVarianteDieteticaNoPedida = evaluacion.esVarianteDieteticaNoPedida
                 )
             }
-            .sortedWith(compareByDescending<RecomendacionRecetaDTO> { it.puntaje }.thenBy { it.receta.tiempoEnMinutos })
+            .sortedWith(
+                compareByDescending<RecomendacionEvaluada> { it.recomendacion.puntaje }
+                    .thenBy { it.recomendacion.receta.tiempoEnMinutos }
+            )
+            .map { it.recomendacion }
+            .drop(paginaNormalizada * TAMANIO_PAGINA_RECOMENDACIONES)
+            .take(TAMANIO_PAGINA_RECOMENDACIONES)
 
         return RecomendacionPaginadaDTO(
             data = recomendaciones,
             page = paginaNormalizada,
             size = TAMANIO_PAGINA_RECOMENDACIONES,
             totalItems = recetasPage.totalElements,
-            totalPage = recetasPage.totalPages
+            totalPage = totalPages(recetasPage.totalElements, TAMANIO_PAGINA_RECOMENDACIONES)
         )
     }
 
@@ -158,7 +167,9 @@ class RecomendacionService(
                 )
                 Pair(receta, evaluacion)
             }
-            .sortedByDescending { (_, eval) -> eval.puntaje }
+            .sortedWith(
+                compareByDescending<Pair<Receta, EvaluacionRecomendacion>> { (_, eval) -> eval.puntaje }
+            )
             .take(TOP_SUGERENCIAS_RANDOM)
 
         val (recetaElegida, evaluacion) = candidatasTop.random()
@@ -205,7 +216,9 @@ class RecomendacionService(
         page: Int,
         size: Int
     ): Page<Receta> {
-        val pageable = PageRequest.of(page, size)
+        val cantidadCandidatas = ((page + 1) * size * MULTIPLICADOR_POOL_RECOMENDACIONES)
+            .coerceAtMost(LIMITE_POOL_RECOMENDACIONES)
+        val pageable = PageRequest.of(0, cantidadCandidatas)
         val idsDisponiblesParaQuery = idsParaQuery(ingredientesDisponiblesIds)
         val idsAEvitarParaQuery = idsParaQuery(ingredientesAEvitarIds)
 
@@ -238,6 +251,11 @@ class RecomendacionService(
             .sortedBy { receta -> ordenPorId[receta.id] ?: Int.MAX_VALUE }
 
         return PageImpl(recetas, pageable, candidatasIds.totalElements)
+    }
+
+    private fun totalPages(totalItems: Long, size: Int): Int {
+        if (totalItems == 0L) return 0
+        return ((totalItems + size - 1) / size).toInt()
     }
 
     private fun resolverIngredientesDisponibles(
@@ -362,7 +380,9 @@ class RecomendacionService(
 //        }
 
         // restricciones del user
-        if (cumpleRestricciones) {
+        if (usuario.restriccionesAlimentarias.isEmpty()) {
+            // No se premia una restriccion que el usuario no pidio.
+        } else if (cumpleRestricciones) {
             puntaje += PUNTOS_RESTRICCIONES
             motivosPositivos.add("Cumple tus restricciones alimentarias")
         } else {
@@ -422,9 +442,15 @@ class RecomendacionService(
             motivosPositivos.add("Receta rápida (${receta.tiempoEnMinutos} min)")
 
         // puntaje normalizado y motivos finales
-        val puntajeNormalizado = ((puntaje.toDouble() / MAX_SCORE_TEORICO) * 100).roundToInt().coerceIn(0, 100)
+        val maxScorePerfil = maxScoreTeorico(usuario, peso)
+        val puntajeNormalizado = ((puntaje.toDouble() / maxScorePerfil) * 100).roundToInt().coerceIn(0, 100)
 
-        return EvaluacionRecomendacion(puntajeNormalizado, motivosPositivos, motivosNegativos)
+        return EvaluacionRecomendacion(
+            puntajeNormalizado,
+            motivosPositivos,
+            motivosNegativos,
+            ajusteVariante.esVarianteDieteticaNoPedida
+        )
     }
 
     private fun puntosPorIngredientes(
@@ -457,10 +483,27 @@ class RecomendacionService(
         return (puntosBase - penalizacion).coerceIn(0, PUNTOS_INGREDIENTES)
     }
 
+    private fun maxScoreTeorico(usuario: Usuario, pesoIngredientes: Double): Int {
+        val maxIngredientes = (PUNTOS_INGREDIENTES * pesoIngredientes)
+            .roundToInt()
+            .coerceAtMost(PUNTOS_INGREDIENTES)
+        val maxRestricciones = if (usuario.restriccionesAlimentarias.isEmpty()) 0 else PUNTOS_RESTRICCIONES
+
+        return maxIngredientes +
+            PUNTOS_EXTRA_DESPENSA_COMPLETA +
+            maxRestricciones +
+            puntosPorObjetivo(usuario.objetivo) +
+            PUNTOS_DIFICULTAD +
+            PUNTOS_SIN_INGREDIENTES_A_EVITAR +
+            PUNTOS_COSTO +
+            PUNTOS_RECETA_BASE +
+            PUNTOS_TIEMPO_MAXIMO
+    }
+
     private fun ajustePorVarianteDietetica(receta: Receta, usuario: Usuario): AjusteVarianteDietetica {
         val tags = receta.tags.map { it.lowercase() }.toSet()
         val esVariante = "variante" in tags
-        if (!esVariante) return AjusteVarianteDietetica(PUNTOS_RECETA_BASE, null)
+        if (!esVariante) return AjusteVarianteDietetica(PUNTOS_RECETA_BASE, null, false)
 
         val restriccionesUsuario = usuario.restriccionesAlimentarias.map { it.nombre }.toSet()
         val necesitaVeganoOVegetariano = restriccionesUsuario.any { it == "vegano" || it == "vegetariano" }
@@ -474,32 +517,29 @@ class RecomendacionService(
             esVarianteSinGluten && !necesitaSinGluten
         ).count { it }
 
-        if (penalizaciones == 0) return AjusteVarianteDietetica(0, null)
+        if (penalizaciones == 0) return AjusteVarianteDietetica(0, null, false)
 
         return AjusteVarianteDietetica(
             puntaje = -PENALIZACION_VARIANTE_DIETETICA * penalizaciones,
-            motivoNegativo = "Es una variante dietaria que no coincide con tus restricciones actuales"
+            motivoNegativo = "Es una variante dietaria que no coincide con tus restricciones actuales",
+            esVarianteDieteticaNoPedida = true
         )
     }
 
     private fun puntosPorCosto(costoAproximado: Double, perfilEconomico: PerfilEconomico): Int {
         return when (perfilEconomico) {
             PerfilEconomico.BAJO_PRESUPUESTO -> when {
-                costoAproximado <= 1500.0 -> PUNTOS_COSTO
-                costoAproximado <= 2500.0 -> 6
-                costoAproximado <= 4000.0 -> 2
+                costoAproximado <= LIMITE_COSTO_BAJO_PRESUPUESTO -> PUNTOS_COSTO
+                costoAproximado <= LIMITE_COSTO_INTERMEDIO -> 4
                 else -> 0
             }
             PerfilEconomico.INTERMEDIO -> when {
-                costoAproximado <= 2500.0 -> PUNTOS_COSTO
-                costoAproximado <= 4500.0 -> 6
-                costoAproximado <= 6500.0 -> 3
+                costoAproximado <= LIMITE_COSTO_INTERMEDIO -> PUNTOS_COSTO
                 else -> 0
             }
             PerfilEconomico.FLEXIBLE -> when {
-                costoAproximado <= 5000.0 -> PUNTOS_COSTO
-                costoAproximado <= 8000.0 -> 6
-                else -> 6
+                costoAproximado > LIMITE_COSTO_INTERMEDIO -> PUNTOS_COSTO
+                else -> 8
             }
         }
     }
@@ -509,19 +549,19 @@ class RecomendacionService(
 
         when (perfilEconomico) {
             PerfilEconomico.BAJO_PRESUPUESTO -> when {
-                costoAproximado <= 1500.0 -> motivosPositivos.add("Costo accesible para tu presupuesto ($costo)")
-                costoAproximado <= 2500.0 -> motivosPositivos.add("Costo ajustado a tu presupuesto ($costo)")
+                costoAproximado <= LIMITE_COSTO_BAJO_PRESUPUESTO -> motivosPositivos.add("Costo accesible para tu presupuesto ($costo)")
+                costoAproximado <= LIMITE_COSTO_INTERMEDIO -> motivosNegativos.add("Costo intermedio para tu presupuesto ($costo)")
                 else -> motivosNegativos.add("Costo elevado para tu presupuesto ($costo)")
             }
             PerfilEconomico.INTERMEDIO -> when {
-                costoAproximado <= 2500.0 -> motivosPositivos.add("Buen costo para tu perfil ($costo)")
-                costoAproximado <= 4500.0 -> motivosPositivos.add("Costo moderado para tu perfil ($costo)")
+                costoAproximado <= LIMITE_COSTO_BAJO_PRESUPUESTO -> motivosPositivos.add("Costo bajo para tu perfil ($costo)")
+                costoAproximado <= LIMITE_COSTO_INTERMEDIO -> motivosPositivos.add("Costo moderado para tu perfil ($costo)")
                 else -> motivosNegativos.add("Costo elevado para tu perfil ($costo)")
             }
             PerfilEconomico.FLEXIBLE -> when {
-                costoAproximado <= 5000.0 -> motivosPositivos.add("Costo dentro de tu rango ($costo)")
-                costoAproximado <= 12000.0 -> motivosPositivos.add("Costo razonable para tu perfil flexible ($costo)")
-                else -> motivosNegativos.add("Costo alto incluso para un perfil flexible ($costo)")
+                costoAproximado <= LIMITE_COSTO_BAJO_PRESUPUESTO -> motivosPositivos.add("Costo bajo para tu perfil flexible ($costo)")
+                costoAproximado <= LIMITE_COSTO_INTERMEDIO -> motivosPositivos.add("Costo intermedio para tu perfil flexible ($costo)")
+                else -> motivosPositivos.add("Costo dentro de tu perfil flexible ($costo)")
             }
         }
     }
@@ -578,6 +618,8 @@ class RecomendacionService(
         const val LIMITE_SUGERENCIA_DIARIA = 30
         const val TOP_SUGERENCIAS_RANDOM = 5
         const val TAMANIO_PAGINA_RECOMENDACIONES = 10
+        const val MULTIPLICADOR_POOL_RECOMENDACIONES = 5
+        const val LIMITE_POOL_RECOMENDACIONES = 100
 
         const val PUNTOS_INGREDIENTES = 30
         const val PUNTOS_RESTRICCIONES = 20
@@ -586,12 +628,15 @@ class RecomendacionService(
         const val PUNTOS_SIN_INGREDIENTES_A_EVITAR = 10
         const val PUNTOS_COSTO = 10
         const val PUNTOS_RECETA_BASE = 4
+        const val LIMITE_COSTO_BAJO_PRESUPUESTO = 15000.0
+        const val LIMITE_COSTO_INTERMEDIO = 25000.0
 
         const val PUNTOS_EXTRA_DESPENSA_COMPLETA = 5
         const val PENALIZACION_DIFICULTAD = 5
         const val PENALIZACION_VARIANTE_DIETETICA = 10
         const val MODIFICADOR_FAVORITO = 5
         const val MODIFICADOR_HISTORIAL = 5
+        const val PUNTOS_TIEMPO_MAXIMO = 5
         const val PUNTOS_TIEMPO_RAPIDO = 3
 
         /* con el peso determino que si el user no ingreso ningun ing por input y solo usa los ing comunes declarados en su perfil
@@ -624,19 +669,25 @@ class RecomendacionService(
        receta 1: con 89 puntos -> (89/118) * 100 = 75
        receta 2: con 85 puntos -> (85/118) * 100 = 72
          */
-        const val MAX_SCORE_TEORICO = 118
     }
 }
 
 private data class EvaluacionRecomendacion(
     val puntaje: Int,
     val motivosPositivos: List<String>,
-    val motivosNegativos: List<String>
+    val motivosNegativos: List<String>,
+    val esVarianteDieteticaNoPedida: Boolean
 )
 
 private data class AjusteVarianteDietetica(
     val puntaje: Int,
-    val motivoNegativo: String?
+    val motivoNegativo: String?,
+    val esVarianteDieteticaNoPedida: Boolean
+)
+
+private data class RecomendacionEvaluada(
+    val recomendacion: RecomendacionRecetaDTO,
+    val esVarianteDieteticaNoPedida: Boolean
 )
 
 private data class IngredientesDisponiblesBusqueda(
