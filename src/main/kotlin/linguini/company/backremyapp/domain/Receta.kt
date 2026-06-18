@@ -14,6 +14,7 @@ import jakarta.persistence.OrderBy
 import jakarta.persistence.PrePersist
 import jakarta.persistence.PreUpdate
 import jakarta.persistence.Table
+import java.text.Normalizer
 
 @Entity
 @Table(name = "recetas")
@@ -76,7 +77,10 @@ class Receta(
     fun calcularTiempo(): Int = pasos.sumOf { it.tiempoEstimadoMinutos }
 
     fun calcularDificultad(): NivelCocina {
-        val puntaje = (pasos.size * 2) + (ingredientes.size * 1.5) + (tiempoEnMinutos / 10)
+        val puntaje = (pasos.size * 1.5) +
+            ingredientes.size +
+            (tiempoEnMinutos / 20) +
+            puntajePorTecnicas()
 
         return when {
             puntaje < 15 -> NivelCocina.BASICO
@@ -93,6 +97,14 @@ class Receta(
     fun proteinasTotales(): Double = ingredientes.sumOf { it.proteinasEstimadas() }
 
     fun fibrasTotales(): Double = ingredientes.sumOf { it.fibrasEstimadas() }
+
+    fun caloriasPorPorcion(): Double = caloriasTotales() / porcionesSeguras()
+
+    fun grasasPorPorcion(): Double = grasasTotales() / porcionesSeguras()
+
+    fun proteinasPorPorcion(): Double = proteinasTotales() / porcionesSeguras()
+
+    fun fibrasPorPorcion(): Double = fibrasTotales() / porcionesSeguras()
 
     fun restriccionesAlimentariasCumplidas(): Set<RestriccionAlimentaria> {
         if (ingredientes.isEmpty()) return emptySet()
@@ -155,15 +167,72 @@ class Receta(
     }
 
     fun esCompatibleConObjetivo(objetivo: ObjetivoUsuario): Boolean {
-        val kcal = caloriasTotales()
-        val proteina = proteinasTotales()
+        val proteina = proteinasPorPorcion()
 
         return when (objetivo) {
-            ObjetivoUsuario.BAJAR_PESO -> kcal <= 500
+            ObjetivoUsuario.BAJAR_PESO -> esAdecuadaParaBajarPeso()
             ObjetivoUsuario.GANAR_MASA_MUSCULAR -> proteina >= 25
-            ObjetivoUsuario.COMER_SALUDABLE -> grasasTotales() <= 20 && fibrasTotales() >= 5
+            ObjetivoUsuario.COMER_SALUDABLE -> esAdecuadaParaComerSaludable()
             ObjetivoUsuario.INDIFERENTE -> true
         }
+    }
+
+    private fun esAdecuadaParaBajarPeso(): Boolean {
+        return caloriasPorPorcion() <= MAX_CALORIAS_BAJAR_PESO &&
+            grasasPorPorcion() <= MAX_GRASAS_BAJAR_PESO &&
+            (fibrasPorPorcion() >= MIN_FIBRAS_BAJAR_PESO || proteinasPorPorcion() >= MIN_PROTEINAS_BAJAR_PESO)
+    }
+
+    private fun esAdecuadaParaComerSaludable(): Boolean {
+        return caloriasPorPorcion() <= MAX_CALORIAS_COMER_SALUDABLE &&
+            grasasPorPorcion() <= MAX_GRASAS_COMER_SALUDABLE &&
+            fibrasPorPorcion() >= MIN_FIBRAS_COMER_SALUDABLE &&
+            proteinasPorPorcion() >= MIN_PROTEINAS_COMER_SALUDABLE
+    }
+
+    private fun porcionesSeguras(): Int = porciones.coerceAtLeast(1)
+
+    private fun puntajePorTecnicas(): Int {
+        val texto = textoTecnicoNormalizado()
+
+        return TECNICAS_DIFICULTAD.sumOf { tecnica ->
+            if (tecnica.palabrasClave.any { it in texto }) tecnica.puntos else 0
+        }
+    }
+
+    private fun textoTecnicoNormalizado(): String {
+        val pasosTexto = pasos.joinToString(" ") { paso ->
+            listOfNotNull(paso.titulo, paso.descripcion, paso.detalle, paso.tip).joinToString(" ")
+        }
+        val texto = listOf(nombre, descripcion, tags.joinToString(" "), pasosTexto).joinToString(" ")
+
+        return Normalizer.normalize(texto, Normalizer.Form.NFD)
+            .replace("\\p{M}+".toRegex(), "")
+            .lowercase()
+    }
+
+    private companion object {
+        const val MAX_CALORIAS_BAJAR_PESO = 500
+        const val MAX_GRASAS_BAJAR_PESO = 18
+        const val MIN_FIBRAS_BAJAR_PESO = 4
+        const val MIN_PROTEINAS_BAJAR_PESO = 12
+        const val MAX_CALORIAS_COMER_SALUDABLE = 700
+        const val MAX_GRASAS_COMER_SALUDABLE = 20
+        const val MIN_FIBRAS_COMER_SALUDABLE = 5
+        const val MIN_PROTEINAS_COMER_SALUDABLE = 8
+
+        val TECNICAS_DIFICULTAD = listOf(
+            TecnicaDificultad(16, listOf("wok", "fuego fuerte")),
+            TecnicaDificultad(14, listOf("berenjenas rellenas", "dahl", "falafel", "guiso de lentejas", "locro", "ratatouille")),
+            TecnicaDificultad(12, listOf("sushi", "enrollar firme")),
+            TecnicaDificultad(7, listOf("risotto", "agregar caldo", "absorba antes de agregar")),
+            TecnicaDificultad(4, listOf("masa fermentada", "levar")),
+            TecnicaDificultad(4, listOf("tarta", "empanada", "repulgue", "rellenar tapas", "forrar molde")),
+            TecnicaDificultad(4, listOf("milanesa", "empanar", "rebozar", "freir")),
+            TecnicaDificultad(3, listOf("rellenar", "relleno", "gratinar", "reducir los jugos")),
+            TecnicaDificultad(2, listOf("wok", "saltear por tandas", "fuego fuerte")),
+            TecnicaDificultad(1, listOf("amasar", "hornear", "sofreir", "saltear"))
+        )
     }
 
     fun agregarIngrediente(ingrediente: RecetaIngrediente) {
@@ -176,3 +245,8 @@ class Receta(
         paso.receta = this
     }
 }
+
+private data class TecnicaDificultad(
+    val puntos: Int,
+    val palabrasClave: List<String>
+)
