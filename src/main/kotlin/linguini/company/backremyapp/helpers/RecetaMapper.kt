@@ -2,6 +2,7 @@ package linguini.company.backremyapp.helpers
 
 import linguini.company.backremyapp.domain.Receta
 import linguini.company.backremyapp.domain.TipoIngredienteReceta
+import linguini.company.backremyapp.dto.InfoNutricionalDTO
 import linguini.company.backremyapp.dto.IngredienteRecetaDTO
 import linguini.company.backremyapp.dto.RecetaCompletaDTO
 import linguini.company.backremyapp.dto.ResumenPasoDTO
@@ -35,7 +36,14 @@ class RecetaMapper(
             porciones = receta.porciones,
             dificultad = receta.dificultad.label,
             ingredientes = receta.ingredientes.map {
-                IngredienteRecetaDTO(it.id, it.ingrediente.nombre, it.cantidad, it.unidadMedida.name, tipo = it.tipo.name, null, InfoNutricionalDTO(calorias = it.caloriasEstimadas(), proteinas = it.proteinasEstimadas(), carbohidratos = it.carbsEstimadas(), grasas = it.grasasEstimadas()))
+                IngredienteRecetaDTO(it.id, it.ingrediente.nombre, it.cantidad, it.unidadMedida.name, tipo = it.tipo.name, null,
+                    InfoNutricionalDTO(
+                        calorias = it.caloriasEstimadas(),
+                        proteinas = it.proteinasEstimadas(),
+                        carbohidratos = it.carbsEstimadas(),
+                        grasas = it.grasasEstimadas()
+                    )
+                )
             },
             pasos = receta.pasos.map {
                 ResumenPasoDTO(it.id, it.orden, it.titulo, it.descripcion, it.tiempoEstimadoMinutos)
