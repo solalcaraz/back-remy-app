@@ -96,6 +96,9 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
     @Query("SELECT DISTINCT r FROM Receta r WHERE r.id IN :ids")
     fun findAllWithDetailsByIdIn(@Param("ids") ids: List<Long>): List<Receta>
 
+    @EntityGraph(attributePaths = ["tags"])
+    fun findByNombreContainingIgnoreCaseOrderByNombreAsc(nombre: String, pageable: Pageable): List<Receta>
+
     @Query(
         value = """
             SELECT r.id

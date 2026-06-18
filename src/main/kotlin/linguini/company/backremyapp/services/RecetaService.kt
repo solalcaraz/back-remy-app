@@ -7,6 +7,7 @@ import linguini.company.backremyapp.repositories.FavoritoRecetaRepository
 import linguini.company.backremyapp.repositories.HistorialRecetaRepository
 import linguini.company.backremyapp.repositories.RecetaRepository
 import linguini.company.backremyapp.repositories.UsuarioRepository
+import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.UUID
@@ -61,6 +62,18 @@ class RecetaService (
     fun getFavoritosIds(usuarioId: UUID): Set<Long> {
         verificarUsuarioExiste(usuarioId)
         return favoritoRecetaRepository.findRecetaIdsByUsuarioId(usuarioId)
+    }
+
+    @Transactional(readOnly = true)
+    fun sugerirRecetasPorNombre(query: String, limite: Int): List<Receta> {
+        val texto = query.trim()
+        if (texto.length < 2) return emptyList()
+
+        val limiteNormalizado = limite.coerceIn(1, 8)
+        return recetaRepository.findByNombreContainingIgnoreCaseOrderByNombreAsc(
+            texto,
+            PageRequest.of(0, limiteNormalizado)
+        )
     }
 
     @Transactional
