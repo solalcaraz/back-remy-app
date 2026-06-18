@@ -1,12 +1,20 @@
 package linguini.company.backremyapp.dto
 
+data class InfoNutricionalDTO(
+    val calorias: Double,
+    val proteinas: Double,
+    val carbohidratos: Double,
+    val grasas: Double
+)
+
 data class IngredienteRecetaDTO(
     val id: Long?,
     val nombre: String,
     val cantidad: Double,
     val unidadMedida: String,
     val tipo: String,
-    val reemplazo: BusquedaIngredientesSimilaresDTO? = null
+    val reemplazo: BusquedaIngredientesSimilaresDTO? = null,
+    val infoNutricional: InfoNutricionalDTO? = null
 )
 
 data class ResumenPasoDTO(
@@ -28,7 +36,8 @@ data class RecetaCompletaDTO(
     val tags: Set<String>,
     val restriccionesAlimentarias: Set<String>,
     val imgUrl: String,
-    val favorito: Boolean
+    val favorito: Boolean,
+    val infoNutricional: InfoNutricionalDTO
 )
 
 data class ResumenRecetaDTO(

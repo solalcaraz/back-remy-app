@@ -97,6 +97,8 @@ class Receta(
     fun proteinasTotales(): Double = ingredientes.sumOf { it.proteinasEstimadas() }
 
     fun fibrasTotales(): Double = ingredientes.sumOf { it.fibrasEstimadas() }
+    
+    fun carbohidratosTotales(): Double = ingredientes.sumOf { it.carbsEstimadas() }
 
     fun caloriasPorPorcion(): Double = caloriasTotales() / porcionesSeguras()
 
