@@ -16,7 +16,8 @@ interface RecetaAdapter {
         receta: Receta,
         ingredientesFaltantes: Set<String>,
         ingredientesAEvitar: Set<String>,
-        restriccionesUsuario: Set<String>
+        restriccionesUsuario: Set<String>,
+        favorito: Boolean = false
     ): RecetaCompletaDTO
 
     fun toRecetaResumenDTO(recetas: List<Receta>, favoritosIds: Set<Long>?): List<ResumenRecetaDTO>
@@ -41,7 +42,8 @@ class RecetaMapper(
             },
             tags = receta.tags,
             restriccionesAlimentarias = receta.restriccionesAlimentariasCumplidas().map { it.nombre }.toSet(),
-            imgUrl = receta.imgUrl
+            imgUrl = receta.imgUrl,
+            favorito = false
         )
     }
 
@@ -49,7 +51,8 @@ class RecetaMapper(
         receta: Receta,
         ingredientesFaltantes: Set<String>,
         ingredientesAEvitar: Set<String>,
-        restriccionesUsuario: Set<String>
+        restriccionesUsuario: Set<String>,
+        favorito: Boolean
     ): RecetaCompletaDTO {
         val faltantesNormalizados = normalizarNombres(ingredientesFaltantes)
         val aEvitarNormalizados = normalizarNombres(ingredientesAEvitar)
@@ -95,7 +98,8 @@ class RecetaMapper(
             },
             tags = receta.tags,
             restriccionesAlimentarias = receta.restriccionesAlimentariasCumplidas().map { it.nombre }.toSet(),
-            imgUrl = receta.imgUrl
+            imgUrl = receta.imgUrl,
+            favorito = favorito
         )
     }
 

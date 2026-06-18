@@ -40,12 +40,15 @@ class RecetaController(
 
         val faltantesReales = ingredientesFaltantes?.takeIf { it.isNotEmpty() }
             ?: receta.ingredientesFaltantesPara(usuario).map { it.nombre }.toSet()
+        val favoritosIds = recetaService.getFavoritosIds(usuarioId)
+        val favorito = receta.id?.let { it in favoritosIds } == true
 
         return recetaMapper.toFullDTO(
             receta,
             faltantesReales,
             usuario.ingredientesAEvitar().map { it.nombre }.toSet(),
-            usuario.restriccionesAlimentarias.map { it.nombre }.toSet()
+            usuario.restriccionesAlimentarias.map { it.nombre }.toSet(),
+            favorito
         )
     }
 
