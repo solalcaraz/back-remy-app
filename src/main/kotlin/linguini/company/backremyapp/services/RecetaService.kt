@@ -36,7 +36,8 @@ class RecetaService (
     @Transactional(readOnly = true)
     fun getHistorial(usuarioId: UUID): List<Receta> {
         verificarUsuarioExiste(usuarioId)
-        return historialRecetaRepository.findRecetasByUsuarioId(usuarioId)
+        return historialRecetaRepository.findHistorialWithRecetaTagsByUsuarioId(usuarioId)
+            .map { it.receta }
     }
 
     @Transactional
@@ -52,7 +53,8 @@ class RecetaService (
     @Transactional(readOnly = true)
     fun getFavoritos(usuarioId: UUID): List<Receta> {
         verificarUsuarioExiste(usuarioId)
-        return favoritoRecetaRepository.findRecetasByUsuarioId(usuarioId)
+        return favoritoRecetaRepository.findFavoritosWithRecetaTagsByUsuarioId(usuarioId)
+            .map { it.receta }
     }
 
     @Transactional(readOnly = true)

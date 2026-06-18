@@ -21,6 +21,18 @@ interface FavoritoRecetaRepository : JpaRepository<FavoritoReceta, Long> {
 
     @Query(
         """
+        select distinct f
+        from FavoritoReceta f
+        join fetch f.receta r
+        left join fetch r.tags
+        where f.usuario.id = :usuarioId
+        order by f.fechaAgregado desc
+        """
+    )
+    fun findFavoritosWithRecetaTagsByUsuarioId(@Param("usuarioId") usuarioId: UUID): List<FavoritoReceta>
+
+    @Query(
+        """
         select f.receta.id
         from FavoritoReceta f
         where f.usuario.id = :usuarioId

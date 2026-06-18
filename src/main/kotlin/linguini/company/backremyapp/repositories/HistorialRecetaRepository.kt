@@ -18,4 +18,16 @@ interface HistorialRecetaRepository : JpaRepository<HistorialReceta, Long> {
         """
     )
     fun findRecetasByUsuarioId(@Param("usuarioId") usuarioId: UUID): List<Receta>
+
+    @Query(
+        """
+        select distinct h
+        from HistorialReceta h
+        join fetch h.receta r
+        left join fetch r.tags
+        where h.usuario.id = :usuarioId
+        order by h.fechaInicio desc
+        """
+    )
+    fun findHistorialWithRecetaTagsByUsuarioId(@Param("usuarioId") usuarioId: UUID): List<HistorialReceta>
 }
