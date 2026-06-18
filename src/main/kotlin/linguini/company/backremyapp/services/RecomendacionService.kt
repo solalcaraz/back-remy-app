@@ -81,10 +81,18 @@ class RecomendacionService(
 
         // mapea de una vez todas las recetas y las asocia a un id, mas eficaz q meter el mapeo dentro de un loop
         val recetasResumenMap = recetaMapper.toRecetaResumenDTO(recetas, favoritosIds).associateBy { it.id }
+        val ingredientesDisponiblesNombres = ingredientesDisponibles.nombres.toSet()
 
         val recomendaciones = recetas
             .map { receta ->
                 val costoAproximado = receta.costoTotalCompra
+                val ingredientesReceta = receta.ingredientes.map { it.ingrediente.nombre }
+                val ingredientesCoincidentes = ingredientesReceta
+                    .filter { it.lowercase() in ingredientesDisponiblesNombres }
+                    .toSet()
+                val ingredientesFaltantes = ingredientesReceta
+                    .filter { it !in ingredientesCoincidentes }
+                    .toSet()
                 val evaluacion = evaluarReceta(
                     receta, usuario, ingredientesDisponibles.nombres, ingredientesDisponibles.nombresInput,
                     favoritosIds, historialIds, costoAproximado, req.puedeComprar, busquedaActiva
@@ -95,8 +103,8 @@ class RecomendacionService(
                     costoAproximado = costoAproximado,
                     motivosPositivos = evaluacion.motivosPositivos,
                     motivosNegativos = evaluacion.motivosNegativos,
-                    ingredientesCoincidentes = receta.ingredientesCoincidentesCon(usuario).map { it.nombre }.toSet(),
-                    ingredientesFaltantes = receta.ingredientesFaltantesPara(usuario).map { it.nombre }.toSet()
+                    ingredientesCoincidentes = ingredientesCoincidentes,
+                    ingredientesFaltantes = ingredientesFaltantes
                 )
             }
             .sortedWith(compareByDescending<RecomendacionRecetaDTO> { it.puntaje }.thenBy { it.receta.tiempoEnMinutos })
