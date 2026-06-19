@@ -339,7 +339,7 @@ class RecomendacionService(
         val cumpleRestricciones = receta.cumpleRestricciones(usuario.restriccionesAlimentarias)
 
         val disponiblesSet = ingredientesDisponibles.toSet() // para buscar mas rapido y evitar duplicados en los strings
-        val ingredientesReceta = receta.ingredientes
+        val ingredientesReceta = receta.ingredientes.filter { it.tipo == TipoIngredienteReceta.CORE }
         val totalIngredientes = ingredientesReceta.size
 
         // se comparan los ing contra los ingredinetes totales (perfil del user y req)
