@@ -1,5 +1,6 @@
 package linguini.company.backremyapp.services
 
+import linguini.company.backremyapp.domain.Ingrediente
 import linguini.company.backremyapp.domain.ObjetivoUsuario
 import linguini.company.backremyapp.domain.PerfilEconomico
 import linguini.company.backremyapp.domain.PrecioIngrediente
@@ -24,6 +25,7 @@ import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import kotlin.math.roundToInt
+import java.text.Normalizer
 import java.util.UUID
 
 @Service
@@ -269,7 +271,7 @@ class RecomendacionService(
             ingredientesExtra
                 .map { it.trim() }
                 .filter { it.isNotBlank() }
-                .flatMap { ingredienteRepository.buscarPorNombreQueContieneNormalizado(it) }
+                .flatMap { buscarIngredientesPorTextoNormalizado(it) }
                 .distinctBy { it.id }
         } else {
             emptyList()
@@ -282,6 +284,21 @@ class RecomendacionService(
             .distinct()
 
         return IngredientesDisponiblesBusqueda(ids, nombres, nombresInput)
+    }
+
+    private fun buscarIngredientesPorTextoNormalizado(texto: String): List<Ingrediente> {
+        val query = normalizarTexto(texto)
+        if (query.isBlank()) return emptyList()
+
+        return ingredienteRepository.findAll()
+            .filter { ingrediente -> normalizarTexto(ingrediente.nombre).contains(query) }
+            .sortedBy { it.nombre }
+    }
+
+    private fun normalizarTexto(texto: String): String {
+        return Normalizer.normalize(texto.trim(), Normalizer.Form.NFD)
+            .replace("\\p{M}+".toRegex(), "")
+            .lowercase()
     }
 
     private fun idsParaQuery(ids: List<Long>): List<Long> {
