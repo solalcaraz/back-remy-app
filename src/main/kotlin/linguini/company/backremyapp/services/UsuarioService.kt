@@ -61,17 +61,18 @@ class UsuarioService(
         val ingredientesComunesNombres = usuarioPatch.ingredientesComunes
             ?.map { it.trim() }
             ?.filter { it.isNotBlank() }
-            ?.distinct()
+            ?.distinctBy { normalizarNombreIngrediente(it) }
             ?: emptyList()
 
         val ingredientesAEvitarNombres = usuarioPatch.ingredientesAEvitar
             ?.map { it.trim() }
             ?.filter { it.isNotBlank() }
-            ?.distinct()
+            ?.distinctBy { normalizarNombreIngrediente(it) }
             ?: emptyList()
 
-        val nombresIngredientes = (ingredientesComunesNombres + ingredientesAEvitarNombres).distinct()
-        val nombresIngredientesNormalizados = nombresIngredientes.map { it.lowercase() }
+        val nombresIngredientes = (ingredientesComunesNombres + ingredientesAEvitarNombres)
+            .distinctBy { normalizarNombreIngrediente(it) }
+        val nombresIngredientesNormalizados = nombresIngredientes.map { normalizarNombreIngrediente(it) }
 
         if (nombresIngredientes.isEmpty()) {
             usuario.preferenciasIngredientes.clear()
@@ -81,23 +82,23 @@ class UsuarioService(
         val ingredientes = ingredienteRepository.findByNombreNormalizadoIn(nombresIngredientesNormalizados)
 
         if (ingredientes.size != nombresIngredientes.size) {
-            val encontrados = ingredientes.map { it.nombre.lowercase() }.toSet()
-            val faltantes = nombresIngredientes.filterNot { it.lowercase() in encontrados }
+            val encontrados = ingredientes.map { normalizarNombreIngrediente(it.nombre) }.toSet()
+            val faltantes = nombresIngredientes.filterNot { normalizarNombreIngrediente(it) in encontrados }
 
             throw NotFoundException(
                 "No se encontraron los siguientes ingredientes: ${faltantes.joinToString(", ")}"
             )
         }
 
-        val ingredientesPorNombre = ingredientes.associateBy { it.nombre.lowercase() }
+        val ingredientesPorNombre = ingredientes.associateBy { normalizarNombreIngrediente(it.nombre) }
 
         val comunes = ingredientesComunesNombres.map { nombre ->
-            ingredientesPorNombre[nombre.lowercase()]
+            ingredientesPorNombre[normalizarNombreIngrediente(nombre)]
                 ?: throw NotFoundException("Ingrediente no encontrado: $nombre")
         }
 
         val evitar = ingredientesAEvitarNombres.map { nombre ->
-            ingredientesPorNombre[nombre.lowercase()]
+            ingredientesPorNombre[normalizarNombreIngrediente(nombre)]
                 ?: throw NotFoundException("Ingrediente no encontrado: $nombre")
         }
 
@@ -154,5 +155,9 @@ class UsuarioService(
             "bajo_sodio" -> "bajo_sodio"
             else -> nombre.trim().lowercase().replace(" ", "_")
         }
+    }
+
+    private fun normalizarNombreIngrediente(nombre: String): String {
+        return nombre.trim().lowercase()
     }
 }

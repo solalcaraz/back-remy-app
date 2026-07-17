@@ -1,6 +1,7 @@
 package linguini.company.backremyapp.services
 
 import linguini.company.backremyapp.exceptions.BadRequestException
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 import java.nio.file.Files
@@ -9,9 +10,12 @@ import java.nio.file.StandardCopyOption
 import java.util.UUID
 
 @Service
-class FileStorageService {
+class FileStorageService(
+    @Value("\${app.upload-dir}")
+    private val uploadDirPath: String
+) {
 
-    private val uploadDir = Paths.get("uploads/usuarios")
+    private val uploadDir = Paths.get(uploadDirPath)
 
     fun guardarFotoUsuario(usuarioId: UUID, file: MultipartFile): String {
         if (file.isEmpty) {
