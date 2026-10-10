@@ -492,13 +492,11 @@ tiempo <= 45 -> +3
 tiempo > 45  -> +0
 ```
 
-Si suma el valor rapido usado para motivo (`3`), agrega:
+Si la receta tarda 20 minutos o menos, agrega:
 
 ```text
 "Receta rapida (... min)"
 ```
-
-Nota: hoy `PUNTOS_TIEMPO_MAXIMO = 5`, pero `PUNTOS_TIEMPO_RAPIDO = 3`; el motivo aparece para recetas de hasta 45 minutos porque compara contra 3.
 
 ## Normalizacion del puntaje
 
@@ -525,7 +523,7 @@ maxIngredientes
 + PUNTOS_SIN_INGREDIENTES_A_EVITAR
 + PUNTOS_COSTO
 + PUNTOS_RECETA_BASE
-+ PUNTOS_TIEMPO_MAXIMO
++ PUNTOS_TIEMPO_RAPIDO
 ```
 
 Detalles:

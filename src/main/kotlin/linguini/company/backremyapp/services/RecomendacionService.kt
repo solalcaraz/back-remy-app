@@ -385,7 +385,7 @@ class RecomendacionService(
             motivosNegativos.add("Ya fue cocinada recientemente")
         }
 
-        val puntosTiempo= puntosPorTiempo(receta.tiempoEnMinutos)
+        val puntosTiempo = puntosPorTiempo(receta.tiempoEnMinutos)
         puntaje += puntosTiempo
         if (puntosTiempo == PUNTOS_TIEMPO_RAPIDO)
             motivosPositivos.add("Receta rápida (${receta.tiempoEnMinutos} min)")
@@ -441,7 +441,7 @@ class RecomendacionService(
             PUNTOS_SIN_INGREDIENTES_A_EVITAR +
             PUNTOS_COSTO +
             PUNTOS_RECETA_BASE +
-            PUNTOS_TIEMPO_MAXIMO
+            PUNTOS_TIEMPO_RAPIDO
     }
 
     private fun ajustePorVarianteDietetica(receta: Receta, usuario: Usuario): AjusteVarianteDietetica {
@@ -546,8 +546,8 @@ class RecomendacionService(
 
     private fun puntosPorTiempo(tiempoEnMinutos: Int): Int {
         return when {
-            tiempoEnMinutos <= 20 -> 5
-            tiempoEnMinutos <= 45 -> 3
+            tiempoEnMinutos <= MINUTOS_RECETA_RAPIDA -> PUNTOS_TIEMPO_RAPIDO
+            tiempoEnMinutos <= MINUTOS_RECETA_MEDIA -> PUNTOS_TIEMPO_MEDIO
             else -> 0
         }
     }
@@ -575,8 +575,10 @@ class RecomendacionService(
         const val PENALIZACION_VARIANTE_DIETETICA = 10
         const val MODIFICADOR_FAVORITO = 5
         const val MODIFICADOR_HISTORIAL = 5
-        const val PUNTOS_TIEMPO_MAXIMO = 5
-        const val PUNTOS_TIEMPO_RAPIDO = 3
+        const val PUNTOS_TIEMPO_RAPIDO = 5
+        const val PUNTOS_TIEMPO_MEDIO = 3
+        const val MINUTOS_RECETA_RAPIDA = 20
+        const val MINUTOS_RECETA_MEDIA = 45
 
         // Si el usuario escribe ingredientes en la búsqueda, la coincidencia pesa más que el resto de su perfil;
         // si solo se usa su despensa, pesan más objetivo, restricciones y dificultad.
