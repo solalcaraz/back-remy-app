@@ -40,6 +40,6 @@ app:
     allowed-origins: ${APP_CORS_ALLOWED_ORIGINS:http://localhost:5173}
 
 security:
-  key: ${JWT_SECRET:tu-clave-secreta-super-segura-de-al-menos-256-bits-o-32-caracteres}
+  key: ${JWT_SECRET}
   access-token-expiration: ${JWT_ACCESS_TOKEN_EXPIRATION:600000000}
   refresh-token-expiration: ${JWT_REFRESH_TOKEN_EXPIRATION:604800000}
