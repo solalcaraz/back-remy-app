@@ -287,8 +287,6 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
 
     fun findByNombre(nombre: String): Receta?
 
-    //fun findAllByTiempoEnMinutosLessThan(minutos: Int): List<Receta>
-
     /* busquedaActiva = true y puedeComprar = false,
     entonces solo recetas con TODOS los ingredientes disponibles tanto en despensa como en el input de la busqueda
     no contiene ing a evitar y cumple las restricciones del user

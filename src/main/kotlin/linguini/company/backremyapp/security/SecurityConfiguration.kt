@@ -11,8 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.DefaultSecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
-import linguini.company.backremyapp.security.JwtAuthenticationFilter
-
 
 @Configuration
 @EnableWebSecurity
@@ -26,12 +24,7 @@ class SecurityConfiguration(
         jwtAuthenticationFilter: JwtAuthenticationFilter
     ): DefaultSecurityFilterChain =
         http
-            .csrf {
-                it.disable()
-                /*it.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                it.csrfTokenRequestHandler(SpaCsrfTokenRequestHandler())
-                it.ignoringRequestMatchers("/auth/login", "/auth/register", "/error")*/
-            }
+            .csrf { it.disable() }
             .cors(Customizer.withDefaults())
             .authorizeHttpRequests {
                 // Queremos que cualquier persona se pueda loguear y mostrar errores

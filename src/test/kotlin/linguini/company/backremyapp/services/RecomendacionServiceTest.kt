@@ -10,7 +10,6 @@ import linguini.company.backremyapp.recetaIngredienteFixture
 import linguini.company.backremyapp.repositories.FavoritoRecetaRepository
 import linguini.company.backremyapp.repositories.HistorialRecetaRepository
 import linguini.company.backremyapp.repositories.IngredienteRepository
-import linguini.company.backremyapp.repositories.PrecioIngredienteRepository
 import linguini.company.backremyapp.repositories.RecetaRepository
 import linguini.company.backremyapp.repositories.UsuarioRepository
 import linguini.company.backremyapp.usuarioFixture
@@ -28,7 +27,6 @@ class RecomendacionServiceTest {
     private val usuarioRepository = mock(UsuarioRepository::class.java)
     private val recetaRepository = mock(RecetaRepository::class.java)
     private val ingredienteRepository = mock(IngredienteRepository::class.java)
-    private val precioRepository = mock(PrecioIngredienteRepository::class.java)
     private val favoritoRepository = mock(FavoritoRecetaRepository::class.java)
     private val historialRepository = mock(HistorialRecetaRepository::class.java)
     private val recetaMapper = RecetaMapper(mock(IngredienteService::class.java))
@@ -36,7 +34,6 @@ class RecomendacionServiceTest {
         usuarioRepository,
         recetaRepository,
         ingredienteRepository,
-        precioRepository,
         favoritoRepository,
         historialRepository,
         recetaMapper

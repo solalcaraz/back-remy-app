@@ -3,7 +3,6 @@ package linguini.company.backremyapp.services
 import linguini.company.backremyapp.domain.Ingrediente
 import linguini.company.backremyapp.domain.ObjetivoUsuario
 import linguini.company.backremyapp.domain.PerfilEconomico
-import linguini.company.backremyapp.domain.PrecioIngrediente
 import linguini.company.backremyapp.domain.Receta
 import linguini.company.backremyapp.domain.TipoIngredienteReceta
 import linguini.company.backremyapp.domain.Usuario
@@ -15,7 +14,6 @@ import linguini.company.backremyapp.helpers.RecetaMapper
 import linguini.company.backremyapp.repositories.FavoritoRecetaRepository
 import linguini.company.backremyapp.repositories.HistorialRecetaRepository
 import linguini.company.backremyapp.repositories.IngredienteRepository
-import linguini.company.backremyapp.repositories.PrecioIngredienteRepository
 import linguini.company.backremyapp.repositories.RecetaRepository
 import linguini.company.backremyapp.repositories.UsuarioRepository
 import linguini.company.backremyapp.exceptions.NotFoundException
@@ -33,7 +31,6 @@ class RecomendacionService(
     private val usuarioRepository: UsuarioRepository,
     private val recetaRepository: RecetaRepository,
     private val ingredienteRepository: IngredienteRepository,
-    private val precioIngredienteRepository: PrecioIngredienteRepository,
     private val favoritoRecetaRepository: FavoritoRecetaRepository,
     private val historialRecetaRepository: HistorialRecetaRepository,
     private val recetaMapper: RecetaMapper
@@ -73,8 +70,6 @@ class RecomendacionService(
                 totalPage = recetasPage.totalPages
             )
         }
-
-//        val preciosPorIngredienteId = buscarPreciosPorIngrediente(recetas)
 
         val favoritosIds = favoritoRecetaRepository.findRecetaIdsByUsuarioId(usuarioId)
         val historialIds = historialRecetaRepository.findRecetasByUsuarioId(usuarioId)
@@ -156,7 +151,6 @@ class RecomendacionService(
         val favoritosIds = favoritoRecetaRepository.findRecetaIdsByUsuarioId(usuarioId)
         val historialIds = historialRecetaRepository.findRecetasByUsuarioId(usuarioId)
             .mapNotNull { it.id }.toSet()
-//        val preciosPorIngredienteId = buscarPreciosPorIngrediente(recetas)
 
         // Se puntúan todas, se toman las TOP_N mejor rankeadas y se elige una al azar entre ellas.
         // Así la sugerencia varía en cada visita pero siempre es una receta relevante.
@@ -305,32 +299,6 @@ class RecomendacionService(
         return ids.ifEmpty { listOf(ID_INEXISTENTE) }
     }
 
-    private fun buscarPreciosPorIngrediente(recetas: List<Receta>): Map<Long, PrecioIngrediente> {
-        val ingredientesIds = recetas
-            .flatMap { receta -> receta.ingredientes.mapNotNull { it.ingrediente.id } }
-            .distinct()
-
-        if (ingredientesIds.isEmpty()) return emptyMap()
-
-        return precioIngredienteRepository.findByIngredienteIdIn(ingredientesIds)
-            .mapNotNull { precio -> precio.ingrediente.id?.let { it to precio } }
-            .toMap()
-    }
-
-//    private fun costoAproximado(
-//        receta: Receta,
-//        preciosPorIngredienteId: Map<Long, PrecioIngrediente>
-//    ): Double {
-//        val costo = receta.ingredientes.sumOf { recetaIngrediente ->
-//            val ingredienteId = recetaIngrediente.ingrediente.id ?: return@sumOf 0.0
-//            val precio = preciosPorIngredienteId[ingredienteId] ?: return@sumOf 0.0
-//
-//            recetaIngrediente.costoEstimado(precio)
-//        }
-//
-//        return (costo * 100).roundToInt() / 100.0
-//    }
-
     /* Evaluar receta solamente agrega un puntaje y un array de motivos
     De esta manera podemos ofrecerle al usuario un scoring en base a su configuración
     Y la explicación de por qué a través de los motivos */
@@ -349,8 +317,6 @@ class RecomendacionService(
         val motivosPositivos = mutableListOf<String>()
         val motivosNegativos = mutableListOf<String>()
 
-//        val coincidencias = receta.ingredientesCoincidentesCon(usuario)
-//        val faltantes = receta.ingredientesFaltantesPara(usuario)
         val ingredientesAEvitar = ingredientesAEvitarPresentes(receta, usuario)
         val compatibleConObjetivo = receta.esCompatibleConObjetivo(usuario.objetivo)
         val cumpleRestricciones = receta.cumpleRestricciones(usuario.restriccionesAlimentarias)
@@ -386,15 +352,6 @@ class RecomendacionService(
                 motivosPositivos.add("Tenés todos los ingredientes")
             }
         }
-
-//        if (coincidencias.isNotEmpty()) {
-//            puntaje += puntosPorIngredientes(coincidencias.size, totalIngredientes, faltantes.size, usuario.perfilEconomico)
-//            motivos.add("Usa ${coincidencias.size} ingrediente(s) comun(es) del usuario")
-//        }
-//        if (faltantes.isEmpty() && receta.ingredientes.isNotEmpty()) {
-//            puntaje += PUNTOS_EXTRA_DESPENSA_COMPLETA
-//            motivos.add("El usuario ya tiene todos los ingredientes principales cargados como comunes")
-//        }
 
         // restricciones del user
         if (usuario.restriccionesAlimentarias.isEmpty()) {

@@ -35,10 +35,8 @@ class AuthController(
     }
 
     @PostMapping("/refresh")
-    fun refresh(@RequestBody request: RefreshTokenRequest): RefreshTokenResponse {
-        println(request)
-        return authService.refreshToken(request.token)?.maptoTokenResponse()?: throw ForbiddenException("Refresh token invalido")
-    }
+    fun refresh(@RequestBody request: RefreshTokenRequest): RefreshTokenResponse =
+        authService.refreshToken(request.token)?.maptoTokenResponse() ?: throw ForbiddenException("Refresh token invalido")
 
     private fun String.maptoTokenResponse(): RefreshTokenResponse =
         RefreshTokenResponse(token = this)

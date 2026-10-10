@@ -32,8 +32,6 @@ class RecetaService (
             .orElseThrow { NotFoundException("Usuario no encontrado") }
     }
 
-    //fun findAllByRestriccionesAlimentariasAndDificultad(...)
-
     @Transactional(readOnly = true)
     fun getHistorial(usuarioId: UUID): List<Receta> {
         verificarUsuarioExiste(usuarioId)

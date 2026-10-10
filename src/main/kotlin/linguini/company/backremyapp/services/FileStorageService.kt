@@ -22,10 +22,6 @@ class FileStorageService(
             throw BadRequestException("La imagen no puede estar vacía")
         }
 
-        /*if (file.size > 1 * 1024 * 1024) {
-            throw BadRequestException("La imagen no puede superar los 1MB")
-        }*/
-
         val extension = file.originalFilename
             ?.substringAfterLast('.', "")
             ?.lowercase()

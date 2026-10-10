@@ -65,15 +65,6 @@ class Receta(
         this.dificultad = calcularDificultad()
     }
 
-    val ingredientesCore: List<RecetaIngrediente>
-        get() = ingredientes.filter { it.tipo == TipoIngredienteReceta.CORE }
-
-    val ingredientesReemplazables: List<RecetaIngrediente>
-        get() = ingredientes.filter { it.tipo == TipoIngredienteReceta.REEMPLAZABLE }
-
-    val ingredientesOpcionales: List<RecetaIngrediente>
-        get() = ingredientes.filter { it.tipo == TipoIngredienteReceta.OPCIONAL }
-
     fun calcularTiempo(): Int = pasos.sumOf { it.tiempoEstimadoMinutos }
 
     fun calcularDificultad(): NivelCocina {
@@ -137,17 +128,6 @@ class Receta(
             recetaIngrediente.tipo == TipoIngredienteReceta.CORE &&
                 recetaIngrediente.ingrediente.id in ingredientesAEvitarIds
         }
-    }
-
-    fun ingredientesCoincidentesCon(usuario: Usuario): Set<Ingrediente> {
-        val ingredientesComunesIds = usuario.ingredientesComunes()
-            .mapNotNull { it.id }
-            .toSet()
-
-        return ingredientes
-            .map { it.ingrediente }
-            .filter { it.id in ingredientesComunesIds }
-            .toSet()
     }
 
     fun ingredientesFaltantesPara(usuario: Usuario): Set<Ingrediente> {
