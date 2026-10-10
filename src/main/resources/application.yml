@@ -1,5 +1,9 @@
 server:
   port: 8080
+  error:
+    include-message: always
+    whitelabel:
+      enabled: false
 spring:
   servlet:
     multipart:
@@ -27,11 +31,6 @@ spring:
     out-of-order: true
     create-schemas: false
     locations: classpath:db/migration
-  web:
-    error:
-      include-message: always
-      whitelabel:
-        enabled: false
 app:
   base-url: ${APP_BASE_URL:http://localhost:8080}
   upload-root: ${APP_UPLOAD_ROOT:uploads}
