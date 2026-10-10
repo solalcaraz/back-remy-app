@@ -28,38 +28,8 @@ interface RecetaAdapter {
 class RecetaMapper(
     private val ingredienteService: IngredienteService
 ) : RecetaAdapter {
-    override fun toFullDTO(receta: Receta): RecetaCompletaDTO {
-        return RecetaCompletaDTO(
-            id = receta.id,
-            nombre = receta.nombre,
-            tiempoEnMinutos = receta.tiempoEnMinutos,
-            porciones = receta.porciones,
-            dificultad = receta.dificultad.label,
-            ingredientes = receta.ingredientes.map {
-                IngredienteRecetaDTO(it.id, it.ingrediente.nombre, it.cantidad, it.unidadMedida.name, tipo = it.tipo.name, null,
-                    InfoNutricionalDTO(
-                        calorias = it.caloriasEstimadas(),
-                        proteinas = it.proteinasEstimadas(),
-                        carbohidratos = it.carbsEstimadas(),
-                        grasas = it.grasasEstimadas()
-                    )
-                )
-            },
-            pasos = receta.pasos.map {
-                ResumenPasoDTO(it.id, it.orden, it.titulo, it.descripcion, it.tiempoEstimadoMinutos)
-            },
-            tags = receta.tags,
-            restriccionesAlimentarias = receta.restriccionesAlimentariasCumplidas().map { it.nombre }.toSet(),
-            imgUrl = receta.imgUrl,
-            favorito = false,
-            infoNutricional = InfoNutricionalDTO(
-                calorias = receta.caloriasTotales(),
-                proteinas = receta.proteinasTotales(),
-                carbohidratos = receta.carbohidratosTotales(),
-                grasas = receta.grasasTotales()
-            )
-        )
-    }
+    override fun toFullDTO(receta: Receta): RecetaCompletaDTO =
+        toFullDTO(receta, emptySet(), emptySet(), emptySet(), favorito = false)
 
     override fun toFullDTO(
         receta: Receta,
@@ -142,17 +112,6 @@ class RecetaMapper(
                 favorito
             )
         }
-    }
-
-    private fun normalizarNombres(nombres: Set<String>): Set<String> {
-        return nombres
-            .map { normalizarNombre(it) }
-            .filter { it.isNotBlank() }
-            .toSet()
-    }
-
-    private fun normalizarNombre(nombre: String): String {
-        return nombre.trim().lowercase()
     }
 
     companion object {

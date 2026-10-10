@@ -4,6 +4,8 @@ import linguini.company.backremyapp.domain.CategoriaIngrediene
 import linguini.company.backremyapp.domain.Ingrediente
 import linguini.company.backremyapp.dto.BusquedaIngredientesSimilaresDTO
 import linguini.company.backremyapp.dto.IngredienteSimilarDTO
+import linguini.company.backremyapp.helpers.normalizarNombre
+import linguini.company.backremyapp.helpers.normalizarNombres
 import linguini.company.backremyapp.repositories.IngredienteRepository
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
@@ -103,17 +105,6 @@ class IngredienteService(val ingredienteRepository: IngredienteRepository) {
             restricciones = restriccionesAlimentarias.map { it.nombre }.toSet(),
             score = score
         )
-    }
-
-    private fun normalizarNombres(nombres: Set<String>): Set<String> {
-        return nombres
-            .map { normalizarNombre(it) }
-            .filter { it.isNotBlank() }
-            .toSet()
-    }
-
-    private fun normalizarNombre(nombre: String): String {
-        return nombre.trim().lowercase()
     }
 
     private fun categoriaCompatible(original: CategoriaIngrediene, candidata: CategoriaIngrediene): Boolean {

@@ -16,7 +16,7 @@ import jakarta.persistence.ManyToMany
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 import linguini.company.backremyapp.exceptions.NotFoundException
-import java.text.Normalizer
+import linguini.company.backremyapp.helpers.normalizarTexto
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -139,43 +139,38 @@ class Usuario(
     }
 
     fun cambiarObjetivo(label: String) {
-        val normalizado = normalizarLabel(label)
+        val normalizado = normalizarTexto(label)
         objetivo = when {
             normalizado == "indiferente" -> ObjetivoUsuario.INDIFERENTE
             normalizado.contains("saludable") -> ObjetivoUsuario.COMER_SALUDABLE
             normalizado.contains("bajar") -> ObjetivoUsuario.BAJAR_PESO
             normalizado.contains("ganar") -> ObjetivoUsuario.GANAR_MASA_MUSCULAR
-            else -> ObjetivoUsuario.entries.find { normalizarLabel(it.label) == normalizado }
+            else -> ObjetivoUsuario.entries.find { normalizarTexto(it.label) == normalizado }
         }
             ?: throw IllegalArgumentException("Tipo de objetivo invalido: $label")
     }
 
     fun cambiarNivelCocina(label: String) {
-        val normalizado = normalizarLabel(label)
+        val normalizado = normalizarTexto(label)
         nivelCocina = when {
             normalizado.startsWith("bas") -> NivelCocina.BASICO
             normalizado == "intermedio" -> NivelCocina.INTERMEDIO
             normalizado == "avanzado" -> NivelCocina.AVANZADO
-            else -> NivelCocina.entries.find { normalizarLabel(it.label) == normalizado }
+            else -> NivelCocina.entries.find { normalizarTexto(it.label) == normalizado }
         }
             ?: throw IllegalArgumentException("Tipo de nivel de cocina invalido: $label")
     }
 
     fun cambiarPerfilEconomico(label: String) {
-        val normalizado = normalizarLabel(label)
+        val normalizado = normalizarTexto(label)
         perfilEconomico = when {
             normalizado.contains("bajo") -> PerfilEconomico.BAJO_PRESUPUESTO
             normalizado == "intermedio" -> PerfilEconomico.INTERMEDIO
             normalizado == "flexible" -> PerfilEconomico.FLEXIBLE
-            else -> PerfilEconomico.entries.find { normalizarLabel(it.label) == normalizado }
+            else -> PerfilEconomico.entries.find { normalizarTexto(it.label) == normalizado }
         }
             ?: throw IllegalArgumentException("Tipo de perfil economico invalido: $label")
     }
-
-    private fun normalizarLabel(label: String): String =
-        Normalizer.normalize(label.trim(), Normalizer.Form.NFD)
-            .replace("\\p{M}+".toRegex(), "")
-            .lowercase()
 
     fun agregarFavorito(receta: Receta) {
         if (favoritos.any { it.receta.id == receta.id }) {

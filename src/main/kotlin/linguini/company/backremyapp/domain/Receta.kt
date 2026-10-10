@@ -14,7 +14,7 @@ import jakarta.persistence.OrderBy
 import jakarta.persistence.PrePersist
 import jakarta.persistence.PreUpdate
 import jakarta.persistence.Table
-import java.text.Normalizer
+import linguini.company.backremyapp.helpers.normalizarTexto
 
 @Entity
 @Table(name = "recetas")
@@ -188,9 +188,7 @@ class Receta(
         }
         val texto = listOf(nombre, descripcion, tags.joinToString(" "), pasosTexto).joinToString(" ")
 
-        return Normalizer.normalize(texto, Normalizer.Form.NFD)
-            .replace("\\p{M}+".toRegex(), "")
-            .lowercase()
+        return normalizarTexto(texto)
     }
 
     private companion object {

@@ -6,9 +6,9 @@ import linguini.company.backremyapp.dto.RecomendacionRequest
 import linguini.company.backremyapp.dto.ResumenRecetaDTO
 import linguini.company.backremyapp.dto.SugerenciaDiariaDTO
 import linguini.company.backremyapp.helpers.RecetaMapper
+import linguini.company.backremyapp.security.usuarioAutenticadoId
 import linguini.company.backremyapp.services.RecomendacionService
 import linguini.company.backremyapp.services.RecetaService
-import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -79,18 +79,12 @@ class RecetaController(
         @RequestParam(defaultValue = "0")
         page: Int
     ): RecomendacionPaginadaDTO {
-        val userId = SecurityContextHolder
-            .getContext()
-            .authentication
-            ?.name.toString()
-
-        return recomendacionService.recomendarRecetas(UUID.fromString(userId), req, page)
+        return recomendacionService.recomendarRecetas(usuarioAutenticadoId(), req, page)
     }
 
     @GetMapping("/sugerencia-diaria")
     fun getSugerenciaDiaria(): SugerenciaDiariaDTO {
-        val userId = SecurityContextHolder.getContext().authentication?.name.toString()
-        return recomendacionService.sugerenciaDiaria(UUID.fromString(userId))
+        return recomendacionService.sugerenciaDiaria(usuarioAutenticadoId())
     }
 
     @GetMapping("/sugerencias")
@@ -98,8 +92,7 @@ class RecetaController(
         @RequestParam query: String,
         @RequestParam(defaultValue = "5") limite: Int
     ): List<ResumenRecetaDTO> {
-        val userId = SecurityContextHolder.getContext().authentication?.name.toString()
-        val favoritosIds = recetaService.getFavoritosIds(UUID.fromString(userId))
+        val favoritosIds = recetaService.getFavoritosIds(usuarioAutenticadoId())
         val recetas = recetaService.sugerirRecetasPorNombre(query, limite)
 
         return recetaMapper.toRecetaResumenDTO(recetas, favoritosIds)

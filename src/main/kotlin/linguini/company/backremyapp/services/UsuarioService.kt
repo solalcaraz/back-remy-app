@@ -5,6 +5,7 @@ import linguini.company.backremyapp.dto.FotoPatchResponse
 import linguini.company.backremyapp.dto.UsuarioPatchRequest
 import linguini.company.backremyapp.exceptions.NotFoundException
 import linguini.company.backremyapp.helpers.UsuarioMapper
+import linguini.company.backremyapp.helpers.normalizarNombre
 import linguini.company.backremyapp.repositories.IngredienteRepository
 import linguini.company.backremyapp.repositories.RestriccionAlimentariaRepository
 import linguini.company.backremyapp.repositories.UsuarioRepository
@@ -61,18 +62,18 @@ class UsuarioService(
         val ingredientesComunesNombres = usuarioPatch.ingredientesComunes
             ?.map { it.trim() }
             ?.filter { it.isNotBlank() }
-            ?.distinctBy { normalizarNombreIngrediente(it) }
+            ?.distinctBy { normalizarNombre(it) }
             ?: emptyList()
 
         val ingredientesAEvitarNombres = usuarioPatch.ingredientesAEvitar
             ?.map { it.trim() }
             ?.filter { it.isNotBlank() }
-            ?.distinctBy { normalizarNombreIngrediente(it) }
+            ?.distinctBy { normalizarNombre(it) }
             ?: emptyList()
 
         val nombresIngredientes = (ingredientesComunesNombres + ingredientesAEvitarNombres)
-            .distinctBy { normalizarNombreIngrediente(it) }
-        val nombresIngredientesNormalizados = nombresIngredientes.map { normalizarNombreIngrediente(it) }
+            .distinctBy { normalizarNombre(it) }
+        val nombresIngredientesNormalizados = nombresIngredientes.map { normalizarNombre(it) }
 
         if (nombresIngredientes.isEmpty()) {
             usuario.preferenciasIngredientes.clear()
@@ -82,23 +83,23 @@ class UsuarioService(
         val ingredientes = ingredienteRepository.findByNombreNormalizadoIn(nombresIngredientesNormalizados)
 
         if (ingredientes.size != nombresIngredientes.size) {
-            val encontrados = ingredientes.map { normalizarNombreIngrediente(it.nombre) }.toSet()
-            val faltantes = nombresIngredientes.filterNot { normalizarNombreIngrediente(it) in encontrados }
+            val encontrados = ingredientes.map { normalizarNombre(it.nombre) }.toSet()
+            val faltantes = nombresIngredientes.filterNot { normalizarNombre(it) in encontrados }
 
             throw NotFoundException(
                 "No se encontraron los siguientes ingredientes: ${faltantes.joinToString(", ")}"
             )
         }
 
-        val ingredientesPorNombre = ingredientes.associateBy { normalizarNombreIngrediente(it.nombre) }
+        val ingredientesPorNombre = ingredientes.associateBy { normalizarNombre(it.nombre) }
 
         val comunes = ingredientesComunesNombres.map { nombre ->
-            ingredientesPorNombre[normalizarNombreIngrediente(nombre)]
+            ingredientesPorNombre[normalizarNombre(nombre)]
                 ?: throw NotFoundException("Ingrediente no encontrado: $nombre")
         }
 
         val evitar = ingredientesAEvitarNombres.map { nombre ->
-            ingredientesPorNombre[normalizarNombreIngrediente(nombre)]
+            ingredientesPorNombre[normalizarNombre(nombre)]
                 ?: throw NotFoundException("Ingrediente no encontrado: $nombre")
         }
 
@@ -146,18 +147,6 @@ class UsuarioService(
         usuario.cambiarRestriccionesAlimentarias(restricciones)
     }
 
-    private fun normalizarRestriccionAlimentaria(nombre: String): String {
-        return when (nombre.trim().lowercase().replace(" ", "_")) {
-            "vegetariano" -> "vegetariano"
-            "vegano" -> "vegano"
-            "sin_gluten" -> "sin_gluten"
-            "sin_lactosa" -> "sin_lactosa"
-            "bajo_sodio" -> "bajo_sodio"
-            else -> nombre.trim().lowercase().replace(" ", "_")
-        }
-    }
-
-    private fun normalizarNombreIngrediente(nombre: String): String {
-        return nombre.trim().lowercase()
-    }
+    private fun normalizarRestriccionAlimentaria(nombre: String): String =
+        normalizarNombre(nombre).replace(" ", "_")
 }

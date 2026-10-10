@@ -11,6 +11,7 @@ import linguini.company.backremyapp.dto.RecomendacionPaginadaDTO
 import linguini.company.backremyapp.dto.RecomendacionRequest
 import linguini.company.backremyapp.dto.SugerenciaDiariaDTO
 import linguini.company.backremyapp.helpers.RecetaMapper
+import linguini.company.backremyapp.helpers.normalizarTexto
 import linguini.company.backremyapp.repositories.FavoritoRecetaRepository
 import linguini.company.backremyapp.repositories.HistorialRecetaRepository
 import linguini.company.backremyapp.repositories.IngredienteRepository
@@ -23,7 +24,6 @@ import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import kotlin.math.roundToInt
-import java.text.Normalizer
 import java.util.UUID
 
 @Service
@@ -94,24 +94,20 @@ class RecomendacionService(
                     receta, usuario, ingredientesDisponibles.nombres, ingredientesDisponibles.nombresInput,
                     favoritosIds, historialIds, costoAproximado, req.puedeComprar, busquedaActiva
                 )
-                RecomendacionEvaluada(
-                    recomendacion = RecomendacionRecetaDTO(
-                        receta = recetasResumenMap[receta.id]!!,
-                        puntaje = evaluacion.puntaje,
-                        costoAproximado = costoAproximado,
-                        motivosPositivos = evaluacion.motivosPositivos,
-                        motivosNegativos = evaluacion.motivosNegativos,
-                        ingredientesCoincidentes = ingredientesCoincidentes,
-                        ingredientesFaltantes = ingredientesFaltantes
-                    ),
-                    esVarianteDieteticaNoPedida = evaluacion.esVarianteDieteticaNoPedida
+                RecomendacionRecetaDTO(
+                    receta = recetasResumenMap[receta.id]!!,
+                    puntaje = evaluacion.puntaje,
+                    costoAproximado = costoAproximado,
+                    motivosPositivos = evaluacion.motivosPositivos,
+                    motivosNegativos = evaluacion.motivosNegativos,
+                    ingredientesCoincidentes = ingredientesCoincidentes,
+                    ingredientesFaltantes = ingredientesFaltantes
                 )
             }
             .sortedWith(
-                compareByDescending<RecomendacionEvaluada> { it.recomendacion.puntaje }
-                    .thenBy { it.recomendacion.receta.tiempoEnMinutos }
+                compareByDescending<RecomendacionRecetaDTO> { it.puntaje }
+                    .thenBy { it.receta.tiempoEnMinutos }
             )
-            .map { it.recomendacion }
             .drop(paginaNormalizada * TAMANIO_PAGINA_RECOMENDACIONES)
             .take(TAMANIO_PAGINA_RECOMENDACIONES)
 
@@ -289,12 +285,6 @@ class RecomendacionService(
             .sortedBy { it.nombre }
     }
 
-    private fun normalizarTexto(texto: String): String {
-        return Normalizer.normalize(texto.trim(), Normalizer.Form.NFD)
-            .replace("\\p{M}+".toRegex(), "")
-            .lowercase()
-    }
-
     private fun idsParaQuery(ids: List<Long>): List<Long> {
         return ids.ifEmpty { listOf(ID_INEXISTENTE) }
     }
@@ -419,12 +409,7 @@ class RecomendacionService(
         val maxScorePerfil = maxScoreTeorico(usuario, peso)
         val puntajeNormalizado = ((puntaje.toDouble() / maxScorePerfil) * 100).roundToInt().coerceIn(0, 100)
 
-        return EvaluacionRecomendacion(
-            puntajeNormalizado,
-            motivosPositivos,
-            motivosNegativos,
-            ajusteVariante.esVarianteDieteticaNoPedida
-        )
+        return EvaluacionRecomendacion(puntajeNormalizado, motivosPositivos, motivosNegativos)
     }
 
     private fun puntosPorIngredientes(
@@ -477,7 +462,7 @@ class RecomendacionService(
     private fun ajustePorVarianteDietetica(receta: Receta, usuario: Usuario): AjusteVarianteDietetica {
         val tags = receta.tags.map { it.lowercase() }.toSet()
         val esVariante = "variante" in tags
-        if (!esVariante) return AjusteVarianteDietetica(PUNTOS_RECETA_BASE, null, false)
+        if (!esVariante) return AjusteVarianteDietetica(PUNTOS_RECETA_BASE, null)
 
         val restriccionesUsuario = usuario.restriccionesAlimentarias.map { it.nombre }.toSet()
         val necesitaVeganoOVegetariano = restriccionesUsuario.any { it == "vegano" || it == "vegetariano" }
@@ -491,12 +476,11 @@ class RecomendacionService(
             esVarianteSinGluten && !necesitaSinGluten
         ).count { it }
 
-        if (penalizaciones == 0) return AjusteVarianteDietetica(0, null, false)
+        if (penalizaciones == 0) return AjusteVarianteDietetica(0, null)
 
         return AjusteVarianteDietetica(
             puntaje = -PENALIZACION_VARIANTE_DIETETICA * penalizaciones,
-            motivoNegativo = "Es una variante dietaria que no coincide con tus restricciones actuales",
-            esVarianteDieteticaNoPedida = true
+            motivoNegativo = "Es una variante dietaria que no coincide con tus restricciones actuales"
         )
     }
 
@@ -649,19 +633,12 @@ class RecomendacionService(
 private data class EvaluacionRecomendacion(
     val puntaje: Int,
     val motivosPositivos: List<String>,
-    val motivosNegativos: List<String>,
-    val esVarianteDieteticaNoPedida: Boolean
+    val motivosNegativos: List<String>
 )
 
 private data class AjusteVarianteDietetica(
     val puntaje: Int,
-    val motivoNegativo: String?,
-    val esVarianteDieteticaNoPedida: Boolean
-)
-
-private data class RecomendacionEvaluada(
-    val recomendacion: RecomendacionRecetaDTO,
-    val esVarianteDieteticaNoPedida: Boolean
+    val motivoNegativo: String?
 )
 
 private data class IngredientesDisponiblesBusqueda(
