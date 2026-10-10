@@ -9,7 +9,6 @@ import linguini.company.backremyapp.helpers.RecetaMapper
 import linguini.company.backremyapp.security.usuarioAutenticadoId
 import linguini.company.backremyapp.services.RecomendacionService
 import linguini.company.backremyapp.services.RecetaService
-import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import java.util.UUID
 
 @RestController
 @CrossOrigin("*")
@@ -32,9 +30,9 @@ class RecetaController(
     @GetMapping("/{id}")
     fun getRecetaCompleta(
         @PathVariable id: Long,
-        @RequestParam usuarioId: UUID,
         @RequestParam(required = false) ingredientesFaltantes: Set<String>?
     ): RecetaCompletaDTO {
+        val usuarioId = usuarioAutenticadoId()
         val receta = recetaService.getRecetaCompletaById(id)
         val usuario = recetaService.getPerfilUsuario(usuarioId)
 
@@ -53,7 +51,8 @@ class RecetaController(
     }
 
     @GetMapping("/historial")
-    fun getHistorial(@RequestParam usuarioId: UUID): List<ResumenRecetaDTO> {
+    fun getHistorial(): List<ResumenRecetaDTO> {
+        val usuarioId = usuarioAutenticadoId()
         val recetas = recetaService.getHistorial(usuarioId)
         val favoritosIds = recetaService.getFavoritosIds(usuarioId)
 
@@ -61,12 +60,13 @@ class RecetaController(
     }
 
     @PostMapping("/comenzar/{id}")
-    fun comenzarReceta(@PathVariable id: Long, @RequestParam usuarioId: UUID) {
-        recetaService.comenzarReceta(usuarioId, id)
+    fun comenzarReceta(@PathVariable id: Long) {
+        recetaService.comenzarReceta(usuarioAutenticadoId(), id)
     }
 
     @GetMapping("/favoritos")
-    fun getFavoritos(@RequestParam usuarioId: UUID): List<ResumenRecetaDTO> {
+    fun getFavoritos(): List<ResumenRecetaDTO> {
+        val usuarioId = usuarioAutenticadoId()
         val recetas = recetaService.getFavoritos(usuarioId)
 
         return recetaMapper.toRecetaResumenDTO(recetas, null)
@@ -99,12 +99,12 @@ class RecetaController(
     }
 
     @PostMapping("/favorito/{id}")
-    fun agregarFavorito(@PathVariable id: Long, @RequestParam usuarioId: UUID) {
-        recetaService.agregarFavorito(usuarioId, id)
+    fun agregarFavorito(@PathVariable id: Long) {
+        recetaService.agregarFavorito(usuarioAutenticadoId(), id)
     }
 
     @DeleteMapping("/favorito/{id}")
-    fun eliminarFavorito(@PathVariable id: Long, @RequestParam usuarioId: UUID) {
-        recetaService.eliminarFavorito(usuarioId, id)
+    fun eliminarFavorito(@PathVariable id: Long) {
+        recetaService.eliminarFavorito(usuarioAutenticadoId(), id)
     }
 }
