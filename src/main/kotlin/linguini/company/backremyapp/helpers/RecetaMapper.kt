@@ -40,7 +40,7 @@ class RecetaMapper(
     ): RecetaCompletaDTO {
         val faltantesNormalizados = normalizarNombres(ingredientesFaltantes)
         val aEvitarNormalizados = normalizarNombres(ingredientesAEvitar)
-        // filtra los ingredientes opcionales que esten en a evitar
+        // Un opcional que el usuario evita se oculta; los core y reemplazables se muestran igual.
         val ingredientes = receta.ingredientes
             .filterNot {
                 it.tipo == TipoIngredienteReceta.OPCIONAL &&
@@ -48,7 +48,6 @@ class RecetaMapper(
             }
         val nombresIngredientesReceta = ingredientes.map { it.ingrediente.nombre }.toSet()
 
-        // si es faltante (o a evitar) devuelve las sugerencias
         return RecetaCompletaDTO(
             id = receta.id,
             nombre = receta.nombre,

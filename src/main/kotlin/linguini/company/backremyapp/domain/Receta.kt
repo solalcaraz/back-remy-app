@@ -80,7 +80,6 @@ class Receta(
         }
     }
 
-    // Estos métodos también se podrían agregar al PrePersist y guardar el resultado en columnas
     fun caloriasTotales(): Double = ingredientes.sumOf { it.caloriasEstimadas() }
 
     fun grasasTotales(): Double = ingredientes.sumOf { it.grasasEstimadas() }

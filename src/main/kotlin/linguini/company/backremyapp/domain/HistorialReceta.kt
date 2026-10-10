@@ -12,8 +12,8 @@ import java.time.LocalDateTime
             columnNames = ["usuario_id", "receta_id"]
         )
     ]
-    // lo dejo unico para que aparezca la ultima vez cocinada sino tendria que sacarlo
 )
+// Una fila por usuario y receta: al volver a cocinarla se actualiza la fecha en lugar de duplicar la entrada.
 class HistorialReceta(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

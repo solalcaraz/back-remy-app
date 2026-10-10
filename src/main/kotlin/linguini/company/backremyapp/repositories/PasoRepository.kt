@@ -7,7 +7,6 @@ import org.springframework.data.repository.query.Param
 
 interface PasoRepository : JpaRepository<Paso, Long> {
 
-    /* Trae todos los pasos de una receta ordenados por su campo 'orden' */
     @Query("SELECT p FROM Paso p WHERE p.receta.id = :recetaId ORDER BY p.orden ASC")
     fun findByRecetaIdOrderByOrden(@Param("recetaId") recetaId: Long): List<Paso>
 }

@@ -7,7 +7,6 @@ import org.springframework.data.repository.query.Param
 import java.util.Optional
 import java.util.UUID
 
-/* @Component */
 interface UsuarioRepository : JpaRepository<Usuario, UUID> {
     @EntityGraph(attributePaths = [
         "restriccionesAlimentarias",

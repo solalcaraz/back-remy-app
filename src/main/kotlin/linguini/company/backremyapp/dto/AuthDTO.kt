@@ -11,14 +11,12 @@ data class RegisterRequest(
     val password: String
 )
 
-// Lo que se devuelve al registrarse (datos básicos del usuario, sin tokens)
 data class RegisterResponseDTO(
     val id: java.util.UUID,
     val nombre: String,
     val email: String
 )
 
-// Lo que se devuelve al hacer login
 data class AuthenticationResponse(
     val accessToken: String,
     val refreshToken: String

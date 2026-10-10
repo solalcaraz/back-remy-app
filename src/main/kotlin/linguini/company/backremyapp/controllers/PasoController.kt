@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/paso")
 class PasoController(private val pasoService: PasoService) {
 
-    /* GET /paso/receta/{recetaId}
-       Devuelve todos los pasos de una receta ordenados por 'orden' */
     @GetMapping("/receta/{recetaId}")
     fun getPasosByReceta(@PathVariable recetaId: Long): List<PasoCompletoDTO> {
         return pasoService.getPasosByRecetaId(recetaId).map { paso ->

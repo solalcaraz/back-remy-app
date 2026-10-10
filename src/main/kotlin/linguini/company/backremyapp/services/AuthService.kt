@@ -26,10 +26,7 @@ class AuthService(
     private val jwtProperties: JwtProperties
 ) {
     fun login(request: LoginRequest): AuthenticationResponse {
-        // Delega en Spring Security la verificación de credenciales.
-        // Internamente llama a CustomUserDetailsService.loadUserByUsername
-        // y compara el password con BCrypt.
-        // Si falla lanza una excepción que capturamos para devolver 401.
+        // Spring Security valida email y contraseña con BCrypt; cualquier falla se responde como 401 sin decir cuál de los dos estuvo mal.
         try {
             authManager.authenticate(
                 UsernamePasswordAuthenticationToken(request.email, request.password)

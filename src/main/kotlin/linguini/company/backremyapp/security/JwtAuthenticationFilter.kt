@@ -14,8 +14,6 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 
-/* Esto sería como un middleware de node. Establece como tiene que actuar el security filter
-y delega al siguiente eslabón de la filter chain. */
 @Component
 class JwtAuthenticationFilter(
     private val userDetailsService: CustomUserDetailsService,
@@ -57,7 +55,6 @@ class JwtAuthenticationFilter(
 
             filterChain.doFilter(request, response)
         } catch (e: ExpiredJwtException) {
-            // Captura la excepción de token expirado y devuelve el status code adecuado (401-Unauthorized)
             logger.warn(e.message)
             writeUnauthorizedResponse(response, "Token expired", e.message ?: "El token expiro")
         } catch (e: JwtException) {
@@ -89,8 +86,7 @@ class JwtAuthenticationFilter(
         SecurityContextHolder.getContext().authentication = authToken
     }
 
-    /* Si el token expira, debería poder loguear de nuevo y no recibir 401, por eso salto el filter
-    tanto para login como register como /refresh más adelante */
+    // Con un token vencido el usuario tiene que poder loguearse o refrescarlo, así que /auth/** no pasa por el filtro.
     override fun shouldNotFilter(request: HttpServletRequest): Boolean {
         val path = request.servletPath
         return path.startsWith("/auth/")

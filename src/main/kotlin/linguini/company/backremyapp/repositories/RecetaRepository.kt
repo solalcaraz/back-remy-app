@@ -287,11 +287,7 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
 
     fun findByNombre(nombre: String): Receta?
 
-    /* busquedaActiva = true y puedeComprar = false,
-    entonces solo recetas con TODOS los ingredientes disponibles tanto en despensa como en el input de la busqueda
-    no contiene ing a evitar y cumple las restricciones del user
-    y pageable para no traer recetas sin limite
-     */
+    // Variante por nombre de ingrediente: todos los core disponibles y como máximo 2 reemplazables faltantes.
     @Query("""
         SELECT DISTINCT r FROM Receta r
         WHERE (:tiempoMaximo IS NULL OR r.tiempoEnMinutos <= :tiempoMaximo)
@@ -337,11 +333,7 @@ interface RecetaRepository : JpaRepository<Receta, Long> {
         pageable: Pageable
     ): List<Receta>
 
-    /* busquedaActiva=true y puedeComprar = true
-    entonces recetas que tengan al menos uno de los ingredinetes disponibles
-    se excluyen solamente los ing a evitar y tambien cumple las restricciones alimentarias
-    y pageable para no traer recetas sin limite
-    */
+    // Variante por nombre de ingrediente: alcanza con que la receta use alguno de los disponibles.
     @Query("""
         SELECT DISTINCT r FROM Receta r
         WHERE (:tiempoMaximo IS NULL OR r.tiempoEnMinutos <= :tiempoMaximo)

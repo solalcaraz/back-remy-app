@@ -17,7 +17,7 @@ class RestriccionAlimentaria(
     @Column(nullable = false, unique = true, length = 100)
     var nombre: String
 ) {
-    /* No se que es esto, codex sabe cosas que yo no, lo vemos */
+    // Igualdad por id para que los Set de restricciones reconozcan la misma fila aunque Hibernate la cargue en instancias distintas.
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is RestriccionAlimentaria) return false

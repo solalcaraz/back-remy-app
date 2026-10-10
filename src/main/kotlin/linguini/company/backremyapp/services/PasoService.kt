@@ -14,7 +14,7 @@ class PasoService(
 ) {
     @Transactional(readOnly = true)
     fun getPasosByRecetaId(recetaId: Long): List<Paso> {
-        /* Verificamos que la receta exista antes de buscar sus pasos */
+        // Sin este chequeo, una receta inexistente devolvería una lista vacía en lugar de 404.
         if (!recetaRepository.existsById(recetaId)) {
             throw NotFoundException("Receta no encontrada con id: $recetaId")
         }

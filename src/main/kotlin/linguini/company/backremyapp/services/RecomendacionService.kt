@@ -42,11 +42,9 @@ class RecomendacionService(
 
         val paginaNormalizada = page.coerceAtLeast(0)
 
-        // flag para determinar si se usan ing comunes o tambien del input
         val busquedaActiva = req.ingredientesExtra.isNotEmpty()
         val ingredientesDisponibles = resolverIngredientesDisponibles(usuario, req.ingredientesExtra, busquedaActiva)
 
-        // restricciones, se resuelve en el service con los id q pesan menos y se pasan a la query
         val restriccionesIds = usuario.restriccionesAlimentarias.mapNotNull { it.id }.ifEmpty { null }
         val ingredientesAEvitarIds = idsParaQuery(usuario.ingredientesAEvitar().mapNotNull { it.id })
 
@@ -76,7 +74,6 @@ class RecomendacionService(
             .mapNotNull { it.id }
             .toSet()
 
-        // mapea de una vez todas las recetas y las asocia a un id, mas eficaz q meter el mapeo dentro de un loop
         val recetasResumenMap = recetaMapper.toRecetaResumenDTO(recetas, favoritosIds).associateBy { it.id }
         val ingredientesDisponiblesNombres = ingredientesDisponibles.nombres.toSet()
 
@@ -148,8 +145,7 @@ class RecomendacionService(
         val historialIds = historialRecetaRepository.findRecetasByUsuarioId(usuarioId)
             .mapNotNull { it.id }.toSet()
 
-        // Se puntúan todas, se toman las TOP_N mejor rankeadas y se elige una al azar entre ellas.
-        // Así la sugerencia varía en cada visita pero siempre es una receta relevante.
+        // Se elige al azar entre las mejor puntuadas para que la sugerencia cambie entre visitas sin dejar de ser relevante.
         val candidatasTop = recetas
             .map { receta ->
                 val costo = receta.costoTotalCompra
@@ -215,7 +211,7 @@ class RecomendacionService(
         val idsAEvitarParaQuery = idsParaQuery(ingredientesAEvitarIds)
 
         val candidatasIds = if (puedeComprar) {
-            // basta con que tenga 1 ing core disponible
+            // Alcanza con un ingrediente disponible: el resto se puede comprar.
             recetaRepository.findIdsConAlgunIngredienteDisponible(
                 ingredientesDisponiblesIds = idsDisponiblesParaQuery,
                 ingredientesAEvitarIds = idsAEvitarParaQuery,
@@ -224,7 +220,7 @@ class RecomendacionService(
                 pageable = pageable
             )
         } else {
-            // todos los ingredientes core disponible,  opcionales no se analizan y hasta 5 reemplazables faltantes
+            // Todos los core disponibles y hasta 5 reemplazables faltantes; los opcionales no cuentan.
             recetaRepository.findIdsConIngredientesSuficientes(
                 ingredientesDisponiblesIds = idsDisponiblesParaQuery,
                 ingredientesAEvitarIds = idsAEvitarParaQuery,
@@ -256,7 +252,7 @@ class RecomendacionService(
         busquedaActiva: Boolean
     ): IngredientesDisponiblesBusqueda {
         val ingredientesComunes = usuario.ingredientesComunes()
-        // hago la busqueda asi porque capaz el usuario ingresa un nombre sin clickear en la sugerencia entonces no va a encontrar el ing
+        // Búsqueda por texto parcial y sin tildes: el usuario puede escribir "brocoli" sin elegir la sugerencia exacta.
         val ingredientesInput = if (busquedaActiva) {
             ingredientesExtra
                 .map { it.trim() }
@@ -289,9 +285,7 @@ class RecomendacionService(
         return ids.ifEmpty { listOf(ID_INEXISTENTE) }
     }
 
-    /* Evaluar receta solamente agrega un puntaje y un array de motivos
-    De esta manera podemos ofrecerle al usuario un scoring en base a su configuración
-    Y la explicación de por qué a través de los motivos */
+    // Cada regla suma o resta puntos y deja un motivo, para que el usuario vea por qué la receta quedó en ese lugar.
     private fun evaluarReceta(
         receta: Receta,
         usuario: Usuario,
@@ -311,17 +305,15 @@ class RecomendacionService(
         val compatibleConObjetivo = receta.esCompatibleConObjetivo(usuario.objetivo)
         val cumpleRestricciones = receta.cumpleRestricciones(usuario.restriccionesAlimentarias)
 
-        val disponiblesSet = ingredientesDisponibles.toSet() // para buscar mas rapido y evitar duplicados en los strings
+        val disponiblesSet = ingredientesDisponibles.toSet()
         val ingredientesReceta = receta.ingredientes.filter { it.tipo == TipoIngredienteReceta.CORE }
         val totalIngredientes = ingredientesReceta.size
 
-        // se comparan los ing contra los ingredinetes totales (perfil del user y req)
         val nombresReceta = ingredientesReceta.map { it.ingrediente.nombre.lowercase() }
         val coincidenciasTotales = nombresReceta.count { it in disponiblesSet }
         val coincidenciasRequest = ingredientesExtra.count { it in nombresReceta }
         val faltantes = totalIngredientes - coincidenciasTotales
 
-        // se aplica un peso al puntaje "base"
         val peso = if (busquedaActiva) PESO_INGREDIENTES_BUSQUEDA else PESO_INGREDIENTES_PERFIL
         puntaje += puntosPorIngredientes(
             coincidenciasTotales, totalIngredientes, faltantes, usuario.perfilEconomico, puedeComprar, peso
@@ -343,9 +335,8 @@ class RecomendacionService(
             }
         }
 
-        // restricciones del user
         if (usuario.restriccionesAlimentarias.isEmpty()) {
-            // No se premia una restriccion que el usuario no pidio.
+            // No se premia cumplir una restricción que el usuario no pidió.
         } else if (cumpleRestricciones) {
             puntaje += PUNTOS_RESTRICCIONES
             motivosPositivos.add("Cumple tus restricciones alimentarias")
@@ -358,7 +349,6 @@ class RecomendacionService(
         puntaje += ajusteVariante.puntaje
         ajusteVariante.motivoNegativo?.let { motivosNegativos.add(it) }
 
-        // objetivos del user
         if (compatibleConObjetivo) {
             puntaje += puntosPorObjetivo(usuario.objetivo)
             if (usuario.objetivo != ObjetivoUsuario.INDIFERENTE) motivosPositivos.add("Acompaña tu objetivo actual")
@@ -366,7 +356,6 @@ class RecomendacionService(
             motivosNegativos.add("No acompaña del todo tu objetivo: ${usuario.objetivo.label}")
         }
 
-        // dificultad
         val diferenciaDificultad = receta.dificultad.ordinal - usuario.nivelCocina.ordinal
         if (diferenciaDificultad <= 0) {
             puntaje += PUNTOS_DIFICULTAD
@@ -377,18 +366,15 @@ class RecomendacionService(
         }
 
 
-        // si contiene o no ing a evitar
         if (!receta.contieneIngredienteAEvitar(usuario)) {
             puntaje += PUNTOS_SIN_INGREDIENTES_A_EVITAR
         } else {
             motivosNegativos.add("Contiene ingrediente(s) que preferis evitar: ${ingredientesAEvitar.joinToString(", ")}")
         }
 
-        // costo
         puntaje += puntosPorCosto(costoAproximado, usuario.perfilEconomico)
         motivoCosto(costoAproximado, usuario.perfilEconomico, motivosPositivos, motivosNegativos)
 
-        // modificadores de historial y fav
         if (receta.id?.let { it in favoritosIds } == true) {
             puntaje += MODIFICADOR_FAVORITO
             motivosPositivos.add("Ya esta marcada como favorita")
@@ -399,13 +385,11 @@ class RecomendacionService(
             motivosNegativos.add("Ya fue cocinada recientemente")
         }
 
-        // tiempo
         val puntosTiempo= puntosPorTiempo(receta.tiempoEnMinutos)
         puntaje += puntosTiempo
         if (puntosTiempo == PUNTOS_TIEMPO_RAPIDO)
             motivosPositivos.add("Receta rápida (${receta.tiempoEnMinutos} min)")
 
-        // puntaje normalizado y motivos finales
         val maxScorePerfil = maxScoreTeorico(usuario, peso)
         val puntajeNormalizado = ((puntaje.toDouble() / maxScorePerfil) * 100).roundToInt().coerceIn(0, 100)
 
@@ -418,11 +402,10 @@ class RecomendacionService(
         faltantes: Int,
         perfilEconomico: PerfilEconomico,
         puedeComprar: Boolean,
-        peso: Double // se agrega valor a si hay ingredinetes en el input de busqueda o no
+        peso: Double
     ): Int {
         if (totalIngredientes == 0) return 0
 
-        // se aplica tambien el valor del peso
         val puntosBase = ((coincidencias.toDouble() / totalIngredientes) * PUNTOS_INGREDIENTES * peso).roundToInt()
 
         val penalizacion = if (puedeComprar) {
@@ -442,6 +425,8 @@ class RecomendacionService(
         return (puntosBase - penalizacion).coerceIn(0, PUNTOS_INGREDIENTES)
     }
 
+    // El máximo se calcula por usuario (no suma restricciones si no tiene ninguna): así el 0-100 es comparable
+    // y dos recetas buenas no terminan ambas en 100.
     private fun maxScoreTeorico(usuario: Usuario, pesoIngredientes: Double): Int {
         val maxIngredientes = (PUNTOS_INGREDIENTES * pesoIngredientes)
             .roundToInt()
@@ -551,7 +536,6 @@ class RecomendacionService(
     }
 
     private fun puntosPorObjetivo(objetivo: ObjetivoUsuario): Int {
-        /* Suma puntos basándonos en el objetivo */
         return when (objetivo) {
             ObjetivoUsuario.INDIFERENTE -> 5
             ObjetivoUsuario.COMER_SALUDABLE -> PUNTOS_OBJETIVO
@@ -561,9 +545,6 @@ class RecomendacionService(
     }
 
     private fun puntosPorTiempo(tiempoEnMinutos: Int): Int {
-        /* Esto solo toma en cuenta el tiempo de la receta,
-        si tarda 20 o menos, 10 puntos
-        Si tarda 45 o menos, 5, si no 0*/
         return when {
             tiempoEnMinutos <= 20 -> 5
             tiempoEnMinutos <= 45 -> 3
@@ -597,36 +578,10 @@ class RecomendacionService(
         const val PUNTOS_TIEMPO_MAXIMO = 5
         const val PUNTOS_TIEMPO_RAPIDO = 3
 
-        /* con el peso determino que si el user no ingreso ningun ing por input y solo usa los ing comunes declarados en su perfil
-        entonces vale mas sus preferencias como objetivo, restriccion o dificultad,
-        en cambio, si ingresa ing en el input de busqueda entonces los ingredientes tienen mas peso porque la busqueda se basa en los ing
-        por ej: una receta con 5 ing y el user tiene 4
-        ing en busqueda (peso: 1.2): 4 / 5  * 30 (puntos_ing) * 1.2 -> 29 pts
-        ing comunes, perfil (peso: 0.8): 4 / 5 * 30 * 0.8 -> 19 pts
-        el objetivo es que si el user se tomo el trabajo de ingresar ings en la busqueda entonces deberia tener mas importancia en el resultado
-         */
+        // Si el usuario escribe ingredientes en la búsqueda, la coincidencia pesa más que el resto de su perfil;
+        // si solo se usa su despensa, pesan más objetivo, restricciones y dificultad.
         const val PESO_INGREDIENTES_BUSQUEDA = 1.2
         const val PESO_INGREDIENTES_PERFIL = 0.8
-
-        /* máximo teórico para normalizar correctamente el score = 118, es la suma total de los puntos de una receta perfecta
-           30  ingredientes (coincidencia 100% con peso 1.0, 0 faltantes, 0 penalización)
-            5  bonus despensa completa
-           20  restricciones cumplidas
-           20  objetivo activo cumplido (COMER_SALUDABLE / BAJAR_PESO / GANAR_MASA_MUSCULAR)
-           15  dificultad adecuada
-           10  sin ingredientes a evitar
-           10  costo ideal para el perfil
-            3  receta rápida (≤20 min)
-            5  está en favoritos
-           ───
-           118 (si el objetivo es INDIFERENTE entonces el total seria = 103, detallesssss)
-
-       entonces con esa vara es convertir despues en un puntaje de 0 a 100 sin forzarlo
-       en caso de que hayan dos recetas "buenas" no se colapsan ambas con 100 sino que hay un discriminador "real"
-       ejemplo:
-       receta 1: con 89 puntos -> (89/118) * 100 = 75
-       receta 2: con 85 puntos -> (85/118) * 100 = 72
-         */
     }
 }
 

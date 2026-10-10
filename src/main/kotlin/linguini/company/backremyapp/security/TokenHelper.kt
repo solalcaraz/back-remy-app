@@ -7,9 +7,6 @@ import org.springframework.stereotype.Service
 import java.util.Date
 import java.util.UUID
 
-/* Este TokenHelper nos aporta funciones básicas para la manipulación del token del usuario */
-/* Crearlo, saber si expiró, si es válido, extraer los claims o el email. */
-
 @Service
 class TokenHelper(
     jwtProperties: JwtProperties,
@@ -18,7 +15,6 @@ class TokenHelper(
         jwtProperties.key.toByteArray(),
     )
 
-    //No definimos roles por tipo de usuario como en phm. Dejo USER de forma estatica
     fun generateAccessToken(usuario: Usuario, expirationDate: Date): String =
         generate(
             userId = usuario.id!!,

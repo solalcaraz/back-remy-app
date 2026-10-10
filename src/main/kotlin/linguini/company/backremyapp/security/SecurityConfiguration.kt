@@ -27,16 +27,13 @@ class SecurityConfiguration(
             .csrf { it.disable() }
             .cors(Customizer.withDefaults())
             .authorizeHttpRequests {
-                // Queremos que cualquier persona se pueda loguear y mostrar errores
-                // Importante: no definirlo solo para el method POST
-                // porque CORS requiere que también puedas mandar el OPTIONS para hacer el pre-flight
+                // OPTIONS queda libre para que el navegador pueda hacer el preflight de CORS antes de cada pedido.
                 it.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                     .requestMatchers("/auth/register", "/auth/login", "/error", "/auth/refresh")
-                    .permitAll() // agregar refresh token endpoint
+                    .permitAll()
                     .requestMatchers("/imagenes/**").permitAll()
                     .requestMatchers("/uploads/**").permitAll()
 
-                    //Todo: setear roles en receta
                     .requestMatchers("/paso/**").permitAll()
                     .requestMatchers(HttpMethod.GET, "/receta/sugerencia-diaria").authenticated()
                     .requestMatchers(HttpMethod.GET, "/receta/**").permitAll()
@@ -46,9 +43,6 @@ class SecurityConfiguration(
                     .requestMatchers(HttpMethod.DELETE, "/receta/favorito/**").permitAll()
                     .requestMatchers(HttpMethod.GET, "/ingrediente/**").permitAll()
                     .requestMatchers(HttpMethod.POST, "/ingrediente/**").permitAll()
-                    // Permisos de admin para modificar
-                    // Solo los que pueden reservar (lector) acceden a este endpoint
-                    //---------------------------
                     .anyRequest()
                     .authenticated()
             }
