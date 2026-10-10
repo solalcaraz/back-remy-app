@@ -79,7 +79,7 @@ export JWT_SECRET="una-clave-de-al-menos-32-caracteres"
 ./gradlew bootRun
 ```
 
-La API queda en http://localhost:8080. Usuario de prueba: `diego@maradona.com`, contraseña `admin`. Para la interfaz, ver [front-remy-app](https://github.com/solalcaraz/front-remy-app#cómo-correrlo).
+La API queda en http://localhost:8080. Usuarios de prueba, todos con la contraseña `admin`: `diego@maradona.com` y los tres perfiles de la presentación, `vegano@remy.com`, `bajopeso@remy.com` y `singluten@remy.com`. Para la interfaz, ver [front-remy-app](https://github.com/solalcaraz/front-remy-app#cómo-correrlo).
 
 ## Qué aprendí y qué mejoraría
 
@@ -121,5 +121,3 @@ Este repositorio es un fork de **[reemeerie/back-remy-app](https://github.com/re
 - Junté en un solo lugar las funciones de normalización de texto, que estaban copiadas en seis clases, y la lectura del usuario autenticado, repetida en cada endpoint.
 - Pasé la documentación a `docs/` y los JSON de datos a `data/`, que se empaquetaban dentro del jar sin que la app los usara.
 - Grabé la demo y reescribí este README.
-
-Para comprobar que el comportamiento no cambió, levanté la versión original y la nueva contra una base recién migrada y comparé las respuestas de 62 pedidos a la API: búsquedas con cuatro perfiles distintos, detalle, reemplazos, favoritos, historial, perfil y autenticación. Sin contar el orden de los ingredientes, que cambia entre ejecuciones en las dos versiones, las respuestas son iguales salvo en los errores corregidos. Además recorrí la app completa con Playwright en las dos versiones y comparé el texto de cada pantalla, y los 39 tests pasan.
