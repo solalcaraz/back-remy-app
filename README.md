@@ -69,7 +69,7 @@ Las decisiones que tomé y por qué:
 
 ## Cómo correrlo
 
-Se necesitan Java 21 y Docker. El front tiene sus propios pasos en [front-remy-app](https://github.com/solalcaraz/front-remy-app#cómo-correrlo).
+Se necesitan Java 21 y Docker.
 
 ```bash
 git clone https://github.com/solalcaraz/back-remy-app.git
@@ -79,17 +79,7 @@ export JWT_SECRET="una-clave-de-al-menos-32-caracteres"
 ./gradlew bootRun
 ```
 
-En PowerShell, la variable se define con `$env:JWT_SECRET="una-clave-de-al-menos-32-caracteres"` y el último comando es `.\gradlew.bat bootRun`.
-
-`docker compose` levanta PostgreSQL en el puerto 5434 y pgAdmin en el 1410. Al arrancar, Flyway crea las tablas y carga todos los datos. La API queda en http://localhost:8080. El usuario de prueba es `diego@maradona.com`, con la contraseña `admin`.
-
-Para correr los tests (con la base levantada, porque uno de ellos arranca la aplicación completa):
-
-```bash
-./gradlew test
-```
-
-El resto de la configuración (base de datos, CORS, URL pública y carpeta de fotos) se puede cambiar con las variables de [.env.example](.env.example).
+La API queda en http://localhost:8080. Usuario de prueba: `diego@maradona.com`, contraseña `admin`. Para la interfaz, ver [front-remy-app](https://github.com/solalcaraz/front-remy-app#cómo-correrlo).
 
 ## Qué aprendí y qué mejoraría
 
@@ -98,7 +88,7 @@ El resto de la configuración (base de datos, CORS, URL pública y carpeta de fo
 - A armar un dataset desde cero cuando no hay uno listo: cruzar fuentes, validar los valores contra la API de USDA y convertir el resultado en migraciones para que cualquiera pueda reconstruir la base.
 - A usar embeddings para un problema concreto: comparar ingredientes por lo que son y no por cómo se escriben, guardando los vectores en la misma base que el resto de los datos.
 - A trabajar con Scrum en un equipo de cinco, con sprints y reuniones semanales para mostrar avances. Terminamos con una velocidad promedio de 57 puntos por sprint.
-- Que un error de configuración puede fallar en silencio. La opción para incluir el mensaje en las respuestas de error estaba en una ruta que Spring Boot no lee, y desde abril el login no mostraba por qué fallaba.
+- A pensar el sistema como un producto que se podría vender: qué lo hace valioso para quien lo usa, en qué se diferencia de preguntarle a un LLM y qué lugar le corresponde a la IA dentro de él.
 
 **Qué mejoraría**
 
